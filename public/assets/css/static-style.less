@@ -1,0 +1,166 @@
+@bodyColor: #f3f2f1;
+@headerBackground: #FFFFFF;
+@footerBackground: #F26421;
+@primaryColor: #F26421;
+@boxShadow: 0px 3px 8px #00000029;
+body{
+    background-color: @bodyColor !important;
+}
+.container-fluid, .grid{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.left-container{
+    height:  100vh;
+    & .page-header{
+        padding:  10px 30px !important;
+        & .logo{
+            height: 50px;
+            display: inline-block;
+            & img{
+                height: 100%;
+                display: inline-block;
+            }
+        }
+        & .button{
+            margin-top: 7px !important;
+        }
+    }
+    & .form-content{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: calc(100vh - 180px);
+    }
+
+    & input{
+        box-shadow: @boxShadow !important;
+        border: 2px solid #ffffff !important;
+    }
+
+    & .social-icon{
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        vertical-align: middle;
+        & img{
+            display: inline-block;
+            width: 100%;
+        }
+    }
+    & .footer{
+        & ul{
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            list-style-type: none;
+            text-align: center;
+            & li{
+                display: inline-block;
+                margin-right: 15px;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            & span, a{
+                padding: 15px 0;
+                display: inline-block;
+                color: #000000;
+                font-weight: bold;
+                opacity: 0.5;
+                transition: all 0.3s ease-out;
+            }
+
+            & a:hover{
+                opacity: 0.7;
+                transition: all 0.3s ease-out;
+            }
+        }
+    }
+}
+.btn-primary-outline{
+    border: 2px solid @primaryColor !important;
+    background-color: transparent !important;
+    color: @primaryColor !important;
+    transition: all 0.3s ease-out;
+    &:hover{
+        border: 2px solid @primaryColor !important;
+        background-color: @primaryColor !important;
+        color: #ffffff !important;
+        transition: all 0.3s ease-out;
+    }
+}
+.btn-primary{
+    border: 2px solid @primaryColor !important;
+    background-color: @primaryColor !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease-out;
+    &:hover{
+        border: 2px solid rgba(242, 100, 33, 0.8) !important;
+        background-color: rgba(242, 100, 33, 0.8) !important;
+        transition: all 0.3s ease-out;
+    }
+}
+.right-container{
+    background-color: @primaryColor !important;
+    justify-content: center !important;
+    display: flex !important;
+    vertical-align: middle !important;
+    & img{
+        display: inline-block;
+        width: 70%;
+        margin-left: 15%;
+    }
+}
+.full-height{
+    height: 100vh !important;
+}
+//Index
+
+
+//Responsive
+@media only screen and (max-width: 767px){
+    .ui.grid > .row > [class*="ten wide"].column, .ui.grid > .column.row > [class*="ten wide"].column, .ui.grid > [class*="ten wide"].column, .ui.column.grid > [class*="ten wide"].column {
+        width: 100% !important;
+        float: right !important;
+    }
+    .ui.grid > .row > [class*="six wide"].column, .ui.grid > .column.row > [class*="six wide"].column, .ui.grid > [class*="six wide"].column, .ui.column.grid > [class*="six wide"].column{
+        display: none !important;
+    }
+    .ui.centered.grid > .column:not(.aligned):not(.justified):not(.row){
+        width: 100% !important;
+    }
+    .left-container .page-header{
+        padding: 0 !important;
+    }
+    .ui.form:not(.unstackable) .two.fields:not(.unstackable) > .field.res-middle{
+        width: 50% !important;
+    }
+    .ui.form:not(.unstackable) .two.fields:not(.unstackable) > .field.float-left{
+        float: right !important;
+    }
+    .left-container .form-content{
+        display: inline-block !important;
+        height: auto !important;
+        width: 100% !important;
+    }
+    .ui.form .fields.res-reverse{
+        flex-direction: column-reverse !important;
+        width: calc(100% + 15px) !important;
+        & .float-left{
+            margin-top: 15px !important;
+        }
+    }
+
+    .footer{
+        & li{
+            &:first-child{
+                width: 100% !important;
+                text-align: center !important;
+                display: block !important;
+            }
+
+        }
+    }
+}
+
