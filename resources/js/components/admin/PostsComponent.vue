@@ -20,7 +20,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="post in posts">
+                        <tr v-for="post in posts" :key="post.id">
                             <td data-label="Title"><img class="ui mini image" v-bind:src="post.attachments[0].thumb_url"></td>
                             <td data-label="Creator"><a :href="'/admin/posts?search=' + post.user.username"><img class="ui avatar image mr-1" v-bind:src="post.user.profile_pic"> {{post.user.name}}</a></td>
                             <td data-label="Comments">{{post.short_description ? post.short_description : '-' }}</td>

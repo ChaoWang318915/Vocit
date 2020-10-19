@@ -46,6 +46,11 @@ Route::group(['namespace' => 'API', ], function(){
             PostController::class,
             'updatePost'
         ]);
+    
+        Route::put('/posts/{post}/card', [
+            PostController::class,
+            'addCard'
+        ]);
         Route::post('exchange', [
             PostController::class,
             'exchangePost'

@@ -23,6 +23,7 @@ class GetPostsService
         $parent = Arr::get($data ,'parent');
 
         $posts = Post::where('is_image', 1)->where('is_draft', 0);
+        // $posts = Post::where('is_image', 1)->where('is_draft', 0);
 
         if($type == 'requests'){
             $posts = $posts->where('is_request', 1);

@@ -8,6 +8,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// import Vue from 'vue'
+// import VueRx from 'vue-rx'
+// import VuejsClipper from 'vuejs-clipper'
+// // install vue-rx
+// Vue.use(VueRx)
+// // install vuejs-clipper
+// Vue.use(VuejsClipper)
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

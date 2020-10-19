@@ -1,12 +1,21 @@
+<style scoped>
+img.avatar{
+    width: 4em !important;
+    height: 4em !important;
+    border-radius: 500rem !important;
+ }
+ .logo_title{
+     font-size: 15px;
+ }
+</style>
 <template>
     <div @scroll="handleScroll()">
         <div class="masonry-grid">
             <a :href=" (post.is_request ? ('/post/' + post.id) : ('/exchange/' + post.id))" v-for="post in items" class="ui card grid-item" v-if="post.is_displayable">
                 <div v-if="post.is_request" class="content">
-                    <div class="ui two column grid">
-                        <div class="six wide column"> <time class="mt-1 d-inline-block text-fade">{{post.post_time}}</time></div>
-                        <span class="ten wide column text-right">
-                            Request from <a :href="'/' + post.business.subdomain">{{post.business.name}}</a>
+                    <div class="ui two column grid">                      
+                        <span class="wide text-right">
+                            Request from <a :href="'/' + post.business.subdomain" class="logo_title">{{post.business.name}}</a>
                             <a :href="'/' + post.business.subdomain"><img class="ui avatar image ml-1" v-bind:src="post.business.logo"></a>
                         </span>
                     </div>
@@ -14,13 +23,10 @@
 
                 <div v-else class="content">
                     <div class="ui two column grid">
-                        <div class="ten wide column">
-                            <img class="ui xs avatar image mr-1" v-bind:src="post.user.profile_pic">
-                            <a class="user-popup-btn">{{post.user.username}}</a> exchanged with
+                        <div class="wide">                           
                             <a :href="'/' + post.business.subdomain"><img class="ui xs avatar image ml-1" v-bind:src="post.business.logo"></a>
-                            <a :href="'/' + post.business.subdomain" class="business-popup-btn">{{post.business.name}}</a>
-                        </div>
-                        <div class="six wide column text-center"> <time class="mt-1 d-inline-block text-fade">{{post.post_time}}</time></div>
+                            <a :href="'/' + post.business.subdomain" class="business-popup-btn logo_title">{{post.business.name}}</a>
+                        </div>                        
                     </div>
                 </div>
 
@@ -28,7 +34,11 @@
                     <div class="ui placeholder image-placeholder">
                         <div class="square image"></div>
                     </div>
-                    <img v-bind:src="post.attachments[0].thumb_url" class="ui wireframe image d-none" @load="imageLoaded($event)">
+                    <img v-bind:src="post.attachments[0].lg_url" class="ui wireframe image d-none" @load="imageLoaded($event)">
+<!--                    <template v-show="post.request_type === 2">-->
+<!--                        <img class="business business-logo" :src="post.business.logo" />-->
+<!--                        <p class="business business-name">{{ post.business.name }}</p>-->
+<!--                    </template>-->
                 </div>
 
                 <div v-if="!post.is_request" class="content">
@@ -226,5 +236,32 @@
 </script>
 
 <style scoped>
-
+.business {
+    position: absolute;
+    z-index: 10;
+}
+.business-logo {
+    top: 10px;
+    left: 10px;
+    width: 50px !important;
+    height: 50px !important;
+    border: 2px solid #eee !important;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+.business-name {
+    bottom: 10px;
+    right: 5px;
+    padding: 10px 0 10px 20px;
+    -webkit-border-radius: 4px;
+    font-family: fantasy;
+    font-weight:bold;
+    -moz-border-radius: 4px;
+    /*border-radius: 4px;*/
+    /*border: 2px solid #F26421 ;*/
+    color: #F26421;
+    font-size: 18px;
+    /*background-color: rgba(255, 255, 255, 0.75);*/
+}
 </style>

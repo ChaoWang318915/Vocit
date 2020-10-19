@@ -58,6 +58,11 @@ $(function(){
             .modal('show');
     })
 
+    $(document).on('click', '.upload-for-crop', function(){
+        //upload for corp image
+        $(".crop-image-input").trigger('click');
+    })
+
     $(document).on('click', '.info-modal.modal .approve', function(){
         $(".image-input").trigger('click');
     })

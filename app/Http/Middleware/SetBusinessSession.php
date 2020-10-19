@@ -28,6 +28,7 @@ class SetBusinessSession
                 if($business){
                     $businessId = $business->id;
                 }
+
                 session()->put('active_business', $businessId);
             }
         }

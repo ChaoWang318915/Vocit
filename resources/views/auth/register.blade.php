@@ -16,7 +16,7 @@
                 </div>
                 <div class="ui two column centered grid mt-5 form-content" style=" height: auto !important;">
                     <div class="column">
-                        <h3>Create  Your Account</h3>
+                        <h2>Create  Your Account</h2>
                         <div class="ui red message">
                             <h3>Warning!</h3>
                             <p>This is the sandbox edition as we are in process of signing up businesses for launch.</p>

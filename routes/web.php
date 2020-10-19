@@ -21,6 +21,17 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 |
 */
 
+Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider');
+
+Route::get('/social/facebook/callback', 'Auth\LoginController@handleProviderFacebookCallback');
+
+Route::group(['middleware' => [
+    'auth'
+]], function(){
+    Route::get('/user', 'GraphController@retrieveUserProfile');
+    Route::post('/user', 'GraphController@publishToProfile');
+
+});
 
 Route::group(['namespace' => 'web', 'middleware' => ['auth', 'isSuperadmin']], function (){
     Route::get('/admin', [

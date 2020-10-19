@@ -22,16 +22,14 @@ class Post extends Model implements HasMedia
             ->watermark(public_path('assets/images/logo.png'))
             ->watermarkOpacity(50)
             ->watermarkPosition(Manipulations::POSITION_BOTTOM_RIGHT)
-            ->watermarkHeight(30, Manipulations::UNIT_PIXELS)
-        ;
+            ->watermarkHeight(30, Manipulations::UNIT_PIXELS);
 
         $this->addMediaConversion('lg')
             ->width(1250)
             ->watermark(public_path('assets/images/logo.png'))
             ->watermarkOpacity(50)
             ->watermarkPosition(Manipulations::POSITION_BOTTOM_RIGHT)
-            ->watermarkHeight(30, Manipulations::UNIT_PIXELS)
-        ;
+            ->watermarkHeight(30, Manipulations::UNIT_PIXELS);
     }
 
     protected $fillable = [
@@ -45,7 +43,8 @@ class Post extends Model implements HasMedia
         'is_draft',
         'coupon',
         'is_paid',
-        'expires_in'
+        'expires_in',
+        'request_type',
     ];
 
     protected $with = [
@@ -91,6 +90,7 @@ class Post extends Model implements HasMedia
         $medias = $medias->map(function($media){
             $url = $media->getFullUrl();
             $media->thumb_url = $media->getUrl('thumb');
+            $media->lg_url = $media->getUrl('lg');
             $media->url = $url;
             return $media;
         });
@@ -224,6 +224,11 @@ class Post extends Model implements HasMedia
     function getLgUrlAttribute() {
         $mediaItems = $this->media;
         return isset($mediaItems[0]) && $mediaItems[0]->hasGeneratedConversion('lg') ? $mediaItems[0]->getUrl('lg') : '';
+    }
+
+    function getLgMediaAttribute() {
+        $mediaItems = $this->media;
+        return isset($mediaItems[0]) && $mediaItems[0]->hasGeneratedConversion('lg') ? $mediaItems[0]->file_name : '';
     }
 }
 
