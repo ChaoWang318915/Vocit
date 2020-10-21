@@ -1,11 +1,13 @@
 <template>
     <div>
-        <h3 class="ui header">Active Coupons</h3>
-        <h3 class="ui small red header" v-if="activeCoupons.length === 0">You haven't received any coupouns, share your picture to receive coupons!</h3>
+        <h3 class="ui header">Active Rewards</h3>
+        <h3 class="ui small red header" v-if="activeCoupons.length === 0">
+            Active RewardsYou haven’t received any rewards, share your pictures to receive rewards.
+        </h3>       
         <div class="ui column grid" v-if="activeCoupons.length > 0">
             <div class="column" >
                 <div class="ui stackable three cards">
-                    <a v-bind:href="'post/' +coupon.post.id + '#' + coupon.exchange_id " class="ui card" v-for="coupon in activeCoupons">
+                    <a v-bind:href="'post/' +coupon.post.id + '#' + coupon.exchange_id " class="ui card" v-for="coupon in activeCoupons" :key="coupon.id" >
                         <div class="content">
                             <div class="coupon-container">
                                 <img class="business-logo" v-bind:src="coupon.business.logo">
@@ -27,7 +29,7 @@
             <div class="ui grid" v-if="redeemedCoupons.length > 0">
                 <div class="column">
                     <div class="ui stackable three cards">
-                        <a v-bind:href="'post/' +coupon.post.id + '#' + coupon.exchange_id " class="ui card" v-for="coupon in redeemedCoupons">
+                        <a v-bind:href="'post/' +coupon.post.id + '#' + coupon.exchange_id " class="ui card" v-for="coupon in redeemedCoupons" :key="coupon.id" >
                             <div class="content">
                                 <a class="ui orange right ribbon label">Redeemed</a>
                                 <div class="coupon-container">

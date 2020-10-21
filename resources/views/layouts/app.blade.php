@@ -26,7 +26,7 @@
     <link href="{{ asset('assets/css/style.less') }}" rel="stylesheet/less" type="text/css">
     <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet">
     <script src="{{ asset('assets/js/jquery-3.4.1.min.js') }}"></script>
-
+    <link href="{{ asset('assets/custom/custom.css') }}" rel="stylesheet" type="text/css">
     @if(\Request::route()->getName() != 'viewPost')
         <meta
             name="description"

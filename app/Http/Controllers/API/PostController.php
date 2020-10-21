@@ -261,7 +261,7 @@ class PostController extends BaseController
         $data['is_draft'] = 0;
         $data['is_request'] = 0;
         $post = Post::create($data);
-
+        // dd($hasImages);die;
         if ($hasImages) {
             foreach ($images as $image) {
                 $post->addMedia($image)

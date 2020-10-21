@@ -5,10 +5,10 @@
                 <div class="ui fluid sticky card sticky-card">
                     <div class="content">
                         <img width="100%" :src="imageUrl" />
-                        <clipper-preview
+                        <!-- <clipper-preview
                             class="centered"
                             name="cropSelection"
-                        />
+                        /> -->
                     </div>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                                 <span class="impression-icon"></span>
                             </div>
                         </div>
-                        <div class="w-100 mt-2" v-if="post.request_type == 2">
+                        <!-- <div class="w-100 mt-2" v-if="post.request_type == 2">
                             <div
                                 class="ui btn-primary-outline button upload-for-crop mt-2"
                                 @click="checkIfLoggedIn()"
@@ -214,7 +214,7 @@
                                 class="d-none crop-image-input"
                                 accept="image/x-png,image/gif,image/jpeg"
                             />
-                            <!--                            <clipper-upload v-model="clipperImage" />-->
+                          
                             <clipper-basic
                                 class="mt-2"
                                 :border="clipper.border"
@@ -238,7 +238,7 @@
                                 <i class="save icon"></i>
                                 Save
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -366,17 +366,17 @@ import "vue-toast-notification/dist/theme-default.css";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import VueSocialSharing from "vue-social-sharing";
-import VueRx from "vue-rx";
+// import VueRx from "vue-rx";
 
 // install vue-rx
-Vue.use(VueRx);
+// Vue.use(VueRx);
 
-import {
-    clipperBasic,
-    clipperFixed,
-    clipperPreview,
-    clipperUpload
-} from "vuejs-clipper";
+// import {
+//     clipperBasic,
+//     clipperFixed,
+//     clipperPreview,
+//     clipperUpload
+// } from "vuejs-clipper";
 
 Vue.use(VueSocialSharing);
 Vue.use(VueToast);
@@ -390,12 +390,12 @@ export default {
         "shareUrl",
         "canShare"
     ],
-    components: {
-        clipperBasic,
-        clipperFixed,
-        clipperPreview,
-        clipperUpload
-    },
+    // components: {
+    //     clipperBasic,
+    //     clipperFixed,
+    //     clipperPreview,
+    //     clipperUpload
+    // },
     data() {
         return {
             post: "",
@@ -505,8 +505,7 @@ export default {
                     let file = images[i];
                     formData.append("images[" + i + "]", file);
                 }
-            }
-
+            }         
             formData.append("parent_id", postId ? postId : this.post.id);
             formData.append("origin_post", this.post.id);
             formData.append("is_draft", 0);
@@ -516,18 +515,16 @@ export default {
                 this.parentComment.length > 0
                     ? this.parentComment
                     : this.content
-            );
-
+            );      
             NProgress.start();
             axios
                 .post("/api/exchange", formData)
                 .then(response => {
-                    console.log(response);
+                    // console.log(response);
                     this.content = "";
                     this.parentComment = "";
                     this.filesCount = "";
                     this.images = "";
-
                     $(document)
                         .find(".comment-area")
                         .stop(0)
@@ -536,9 +533,7 @@ export default {
                         .find(".comment-reply-btn")
                         .stop(0)
                         .slideDown("fast");
-
                     this.exchanges = response.data.data.exchanges;
-
                     NProgress.done();
                     Vue.$toast.success(response.data.message);
                 })

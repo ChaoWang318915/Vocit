@@ -44,7 +44,7 @@ class FrontController extends Controller
 
     function getPost($postId)
     {
-        $data['post'] = Post::find($postId);
+        $data['post'] = Post::findorFail($postId);         
         if ($data['post']->is_request) {
             $data['canShare'] = auth()->check() ? (auth()->id() == $data['post']->user_id ? true : false) : false;
         } else {
@@ -54,13 +54,13 @@ class FrontController extends Controller
                 $data['canShare'] = auth()->check() ? (auth()->id() == $data['post']->user_id ? true : false) : false;
             }
         }
-
+        
         return view('post', $data);
     }
 
     function getExchange($exchangeId)
     {
-        $data['post'] = Post::find($exchangeId);
+        $data['post'] = Post::findorFail($exchangeId);
         return view('view-exchange', $data);
     }
 
