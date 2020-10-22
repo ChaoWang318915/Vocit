@@ -58,7 +58,7 @@
         <div class="d-sm-none d-block column text-right" style="vertical-align: middle">
             @if(\Illuminate\Support\Facades\Auth::check())
                 @php $user = auth()->user() @endphp
-                <div class="ui dropdown btn-primary-outline button">
+                <div class="ui dropdown btn-primary-outline menu_btn">
                     <div class="text">
                         <div class="line"></div>
                         <div class="line"></div>
@@ -100,7 +100,7 @@
                     </div>
                 </div>             
             @else                 
-                <div class="ui dropdown btn-primary-outline button">
+                <div class="ui dropdown btn-primary-outline menu_btn">
                     <div class="text">
                         <div class="line"></div>
                         <div class="line"></div>

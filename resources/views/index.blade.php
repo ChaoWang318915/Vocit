@@ -3,7 +3,7 @@
     <link href="{{ asset('assets/css/masonry.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
-    <a href="{{url('/posts/requests')}}" class="ui container-fluid banner" style="z-index: 10;position: fixed">
+    <a href="{{url('/posts/requests')}}" class="ui container-fluid banner">
         <div>
             <h3 class="ui small header text-white">
                 <span style="vertical-align: middle; display: inline-block">Find Requests</span> <i class="circle icon" style="font-size: 5px;display: inline-block; vertical-align: baseline; margin: 0 5px;"></i>
@@ -12,7 +12,7 @@
             </h3>
         </div>
     </a>
-    <div class="ui container mt-5" style="padding-top: 15px;">
+    <div class="ui container">
         <!--Cards-->
         <div class="mt-4">
             <posts-component
