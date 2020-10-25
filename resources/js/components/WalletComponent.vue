@@ -2,7 +2,7 @@
     <div>
         <h3 class="ui header">Active Rewards</h3>
         <h3 class="ui small red header" v-if="activeCoupons.length === 0">
-            Active RewardsYou haven’t received any rewards, share your pictures to receive rewards.
+            You Have No Rewards At This Time. Please Click On A <a :href="'/posts/requests'">Request</a> And Share Your Picture to Receive Rewards
         </h3>       
         <div class="ui column grid" v-if="activeCoupons.length > 0">
             <div class="column" >

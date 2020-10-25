@@ -49911,8 +49911,10 @@ var render = function() {
     _vm.activeCoupons.length === 0
       ? _c("h3", { staticClass: "ui small red header" }, [
           _vm._v(
-            "\n        Active RewardsYou haven’t received any rewards, share your pictures to receive rewards.\n    "
-          )
+            "\n        You Have No Rewards At This Time. Please Click On A "
+          ),
+          _c("a", { attrs: { href: "/posts/requests" } }, [_vm._v("Request")]),
+          _vm._v(" And Share Your Picture to Receive Rewards\n    ")
         ])
       : _vm._e(),
     _vm._v(" "),
