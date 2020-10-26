@@ -181,7 +181,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="https://www.linkedin.com/company/vocitofficial/" class="ui card">
+                    <a  v-show="false"  href="https://www.linkedin.com/company/vocitofficial/" class="ui card">
                         <div class="image">
                             <img src="{{asset('assets/images/team/member03.jpg')}}">
                         </div>

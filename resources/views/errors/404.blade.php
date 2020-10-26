@@ -38,9 +38,8 @@
 </style>
 
 <body>
-    <div class="container">
-        <h1>404</h1>
-        <h2>Not Found</h2>
+    <div class="container">       
+        <h2>Sorry - this Post No longer Exists</h2>
     </div>
 </body>
 

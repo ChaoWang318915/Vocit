@@ -47740,7 +47740,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "w-100 mt-4" }, [
-      _vm._m(0),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: false,
+              expression: "false"
+            }
+          ],
+          staticClass: "ui fluid card"
+        },
+        [_vm._m(0)]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "ui fluid card" }, [
         _c("div", { staticClass: "content" }, [
@@ -47922,53 +47936,50 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ui fluid card" }, [
-      _c("div", { staticClass: "content" }, [
-        _c("div", { staticClass: "ui grid" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "three wide computer column sixteen wide tablet column"
-            },
-            [
-              _c("img", {
-                staticClass: "ui small image",
-                attrs: {
-                  src:
-                    "https://www.hubspot.com/hubfs/Canva%20images/canva-image-10.png"
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "thirteen wide computer column sixteen wide tablet column"
-            },
-            [
-              _c("h3", { staticClass: "ui small header" }, [
-                _vm._v(
-                  "Need a CRM, social media manager, and email manager? Vocit has a hubspot API to make it easy for you to get your received content curated, designed, and shared"
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "ui primary button",
-                  attrs: {
-                    href: "https://www.hubspot.com/products/get-started",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("Get Hubspot")]
+    return _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "ui grid" }, [
+        _c(
+          "div",
+          {
+            staticClass: "three wide computer column sixteen wide tablet column"
+          },
+          [
+            _c("img", {
+              staticClass: "ui small image",
+              attrs: {
+                src:
+                  "https://www.hubspot.com/hubfs/Canva%20images/canva-image-10.png"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "thirteen wide computer column sixteen wide tablet column"
+          },
+          [
+            _c("h3", { staticClass: "ui small header" }, [
+              _vm._v(
+                "Need a CRM, social media manager, and email manager? Vocit has a hubspot API to make it easy for you to get your received content curated, designed, and shared"
               )
-            ]
-          )
-        ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "ui primary button",
+                attrs: {
+                  href: "https://www.hubspot.com/products/get-started",
+                  target: "_blank"
+                }
+              },
+              [_vm._v("Get Hubspot")]
+            )
+          ]
+        )
       ])
     ])
   },

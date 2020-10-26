@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="w-100 mt-4">
-            <div class="ui fluid card">
+            <div class="ui fluid card" v-show="false">
                 <div class="content">
                     <div class="ui grid">
                         <div class="three wide computer column sixteen wide tablet column">
