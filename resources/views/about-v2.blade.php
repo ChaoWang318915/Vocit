@@ -435,7 +435,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="display:none" href="https://www.linkedin.com/company/vocitofficial/" class="ui card">
+                    <a style="display:none !important" href="https://www.linkedin.com/company/vocitofficial/" class="ui card">
                         <div class="image">
                             <img src="{{asset('assets/images/team/member03.jpg')}}">
                         </div>

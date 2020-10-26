@@ -158,7 +158,7 @@
 
         <div class="ui grid mt-5">
             <div class="column">
-                <div class="ui four stackable cards">
+                <div class="ui three stackable cards">
                     <a href="https://www.linkedin.com/company/vocitofficial/" class="ui card">
                         <div class="image">
                             <img src="{{asset('assets/images/team/justinembry.jpg')}}">
@@ -181,7 +181,7 @@
                             </div>
                         </div>
                     </a>
-                    <a  href="https://www.linkedin.com/company/vocitofficial/" class="ui card">
+                    <a style="display:none"  href="https://www.linkedin.com/company/vocitofficial/" class="ui card">
                         <div class="image">
                             <img src="{{asset('assets/images/team/member03.jpg')}}">
                         </div>
