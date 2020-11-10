@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -63,9 +64,7 @@ class LoginController extends Controller
     */
     public function redirectToFacebookProvider()
     {
-        return Socialite::driver('facebook')->scopes([
-            "email", "pages_show_list"
-        ])->redirect();
+        return Socialite::driver('facebook')->redirect();
     }
 
     /**
@@ -76,9 +75,8 @@ class LoginController extends Controller
     public function handleProviderFacebookCallback()
     {
         $auth_user = Socialite::driver('facebook')->user();
-
-        $name = explode(' ', $auth_user->name);
-
+        
+        $name = explode(' ', $auth_user->name);         
         $user = User::updateOrCreate(
             [
                 'email' => $auth_user->email

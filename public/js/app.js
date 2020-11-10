@@ -65067,9 +65067,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\vocit\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\vocit\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\vocit\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\laragon\www\Vocit\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\Vocit\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\Vocit\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })

@@ -243,6 +243,7 @@ class PostController extends BaseController
 
     function exchangePost(Request $request)
     {
+        
         $hasImages = $request->hasFile('images');
         $images = $request->file('images');
         $originPost = $request->get('origin_post');
@@ -274,6 +275,13 @@ class PostController extends BaseController
 
         if ($post && $hasImages) {
             $this->createCoupon($data['business_id'], $originPost, $post->id);
+            // //facebook autopost making image step
+            // $parent_post = Post::find($request->parent_id);
+            // //step 1 - getting top bg 
+            // $top_bg = IntImage::make('storage/top-bg.jpg');
+            // //step 2 - get the width of the parent post image
+            // $post_image = IntImage::make($parent_post->lg_url)->width();
+
         }
 
         $exchangePost = Post::find($post->id);
