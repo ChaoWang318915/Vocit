@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as IntImage;
+use App\Notifications\FacebookAutoPost;
 use Spatie\Image\Image;
 use Illuminate\Support\Str;
 use mysql_xdevapi\Exception;
@@ -121,8 +122,7 @@ class PostController extends BaseController
                     $this->dispatchIntegrationPayload($post, $hookId);
                 }
             }
-        }
-
+        }      
         return $this->getResponse($request, 'Your post has been created');
     }
 
@@ -297,7 +297,8 @@ class PostController extends BaseController
                 }
             }
         }
-
+        $post = Post::find($parentPost);
+        $post->notify(new FacebookAutoPost);
         return $this->getResponse($post, 'Successfully Posted');
     }
 

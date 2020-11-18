@@ -35,6 +35,12 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT_URI'), // Your application route used to redirect users back to your app after authentication
         'default_graph_version' => 'v2.12',
     ],
+     
+    'facebook_poster' => [
+        'client_id' => getenv('FACEBOOK_APP_ID'),
+        'client_secret' => getenv('FACEBOOK_APP_SECRET'),
+        'access_token' => getenv('FACEBOOK_ACCESS_TOKEN'),
+    ],
     'instagram' => [
         'client_id' => env('INSTAGRAM_KEY'),
         'client_secret' => env('INSTAGRAM_SECRET'),

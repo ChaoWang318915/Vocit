@@ -9,12 +9,12 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
-
+use Illuminate\Notifications\Notifiable;
 
 class Post extends Model implements HasMedia
 {
     use HasMediaTrait;
-
+    use Notifiable;
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')

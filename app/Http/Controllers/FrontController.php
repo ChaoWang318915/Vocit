@@ -45,7 +45,9 @@ class FrontController extends Controller
     }
 
     function getPost($postId)
-    {         
+    {             
+        // echo getenv(static::APP_ID_ENV_NAME);
+        // die;    
         $data['post'] = Post::findorFail($postId);         
         if ($data['post']->is_request) {
             $data['canShare'] = auth()->check() ? (auth()->id() == $data['post']->user_id ? true : false) : false;
@@ -55,32 +57,7 @@ class FrontController extends Controller
             } else {
                 $data['canShare'] = auth()->check() ? (auth()->id() == $data['post']->user_id ? true : false) : false;
             }
-        }
-        //  //facebook autopost making image step
-        //  $post = Post::findorFail($postId);          
-        //  //step 1 - getting top bg 
-        //  $top_bg = IntImage::make('storage/top-bg.jpg');   
-        //  $top_mask = IntImage::make('storage/mask.png');    
-        //  //step 2 - get the width of the parent post image and resize the top image
-        //  $post_image = IntImage::make($post->attachments[0]->lg_url);
-        //  $width = $post_image->width();
-        //  $top_bg->resize($width,156);                
-        //  //step 3 - insert logo ,business name
-        //  $logo_image = IntImage::make($post->business->logo)->resize(150,150)->mask($top_mask);
-        //  $business_name = $post->business->name;
-        //  $top_bg->insert($logo_image,'left',30,3);        
-        //  $fonts = ['anydore', 'gladifilthefte', 'momentus', 'roboto-regular'];
-        //  $top_bg->text($business_name, 220, 90, function ($font) use ($fonts) {     
-        //     $index = rand(0, 3);
-        //     $font->file(public_path("fonts/{$fonts[0]}.ttf"));
-        //     $font->size(40);
-        // });           
-        // $merge_image = IntImage::canvas($width,$post_image->height()+156);
-        // $merge_image->insert($top_bg,'top',0,0);
-        // $merge_image->insert($post_image,'top',0,156);
-        // $merge_image->save('storage/post_image.jpg');
-        // echo "done";
-        // die;
+        }        
         return view('post', $data);
     }
 
