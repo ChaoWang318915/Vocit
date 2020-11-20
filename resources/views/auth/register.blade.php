@@ -22,7 +22,7 @@
                             <p>This is the sandbox edition as we are in process of signing up businesses for launch.</p>
                         </div>
 
-                        <form class="ui form" method="POST" action="{{ route('register') }}">
+                        <!-- <form class="ui form" method="POST" action="{{ route('register') }}">
                             @csrf
 
                             <div class="two fields">
@@ -98,10 +98,10 @@
                                 <span>Or sign up with </span>
                                 <a href="{{url('register/google')}}" class="social-icon"><img src="{{asset('assets/images/google.png')}}"></a>
                                 <a href="{{url('register/facebook')}}" class="social-icon"><img src="{{asset('assets/images/facebook.png')}}"></a>
-{{--                                <a href="{{url('register/instagram')}}" class="social-icon"><img src="{{asset('assets/images/instagram.png')}}"></a>--}}
                             </div>
 
-                        </form>
+                        </form> -->
+                        <span><b>Sign Up With</b></span><a href="{{url('register/facebook')}}" class="social-icon"><img src="{{asset('assets/images/facebook.png')}}"></a>
                     </div>
                 </div>
                 <div class="ui two column grid footer">

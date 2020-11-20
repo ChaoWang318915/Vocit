@@ -17,7 +17,7 @@
                 <div class="ui two column centered grid mt-5 form-content left floated">
                     <div class="column">
                         <h3>Sign In to Your Account</h3>
-                        <form class="ui form mt-5" method="POST" action="{{ route('login') }}">
+                        <!-- <form class="ui form mt-5" method="POST" action="{{ route('login') }}">
                             @csrf
 
                             <div class="field @error('email') error @enderror">
@@ -52,14 +52,14 @@
                                     <span>Or Login With </span>
                                     <a href="{{url('login/google')}}" class="social-icon"><img src="{{asset('assets/images/google.png')}}"></a>
                                     <a href="{{url('login/facebook')}}" class="social-icon"><img src="{{asset('assets/images/facebook.png')}}"></a>
-{{--                                    <a href="{{url('login/instagram')}}" class="social-icon"><img src="{{asset('assets/images/instagram.png')}}"></a>--}}
                                 </div>
                                 <div class="six wide field text-right float-right">
                                     <button class="ui fluid button btn-primary" type="submit">SIGN IN</button>
                                 </div>
                             </div>
 
-                        </form>
+                        </form> -->
+                        <span><b>Login With </b></span><a href="{{url('login/facebook')}}" class="social-icon"><img src="{{asset('assets/images/facebook.png')}}"></a>
                     </div>
                 </div>
                 <div class="ui two column grid footer">
