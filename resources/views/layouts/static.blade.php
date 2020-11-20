@@ -24,6 +24,7 @@
     <link href="{{ asset('assets/semantic/semantic.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/static-style.less') }}" rel="stylesheet/less" type="text/css">
     <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/custom/custom.css') }}" rel="stylesheet">
     <script src="{{ asset('assets/js/jquery-3.4.1.min.js') }}"></script>
     @yield('styles')
 </head>

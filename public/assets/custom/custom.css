@@ -16,3 +16,12 @@
          margin-top: 0px !important;
      }
 }
+.facebook {
+    cursor: pointer;
+    padding: 11px 13px 11px 15px;
+    text-align: left;
+    border-radius: 3px;
+    width: 215px;
+    background: #4267b2;
+    color: white;
+}
