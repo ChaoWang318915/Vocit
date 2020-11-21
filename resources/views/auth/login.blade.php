@@ -15,9 +15,9 @@
                     </div>
                 </div>
                 <div class="ui two column centered grid mt-5 form-content floated">
-                    <div class="column text-center">
-                        <!-- <h3>Sign In to Your Account</h3> -->
-                        <!-- <form class="ui form mt-5" method="POST" action="{{ route('login') }}">
+                    <div class="column">
+                        <h3>Sign In to Your Account</h3>
+                        <form class="ui form mt-5" method="POST" action="{{ route('login') }}">
                             @csrf
 
                             <div class="field @error('email') error @enderror">
@@ -58,8 +58,8 @@
                                 </div>
                             </div>
 
-                        </form> -->
-                        <a class="facebook"  href="{{url('login/facebook')}}"><img style="width:9%" src="{{asset('assets/images/facebook.png')}}">&nbsp;&nbsp;Login with Facebook</a>
+                        </form>
+                        <!-- <a class="facebook"  href="{{url('login/facebook')}}"><img style="width:9%" src="{{asset('assets/images/facebook.png')}}">&nbsp;&nbsp;Login with Facebook</a> -->
                     </div>
                 </div>
                 <div class="ui two column grid footer">
