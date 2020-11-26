@@ -4094,6 +4094,9 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    closeSocial: function closeSocial() {
+      console.log("Close");
+    },
     generatePageUrl: function generatePageUrl() {
       if (this.hasMorePage) {
         if (this.pageParams && this.pageParams.type == 'business') {
@@ -48521,7 +48524,8 @@ var render = function() {
                                             ? post.short_description
                                             : post.parent_short_description,
                                           description: post.content
-                                        }
+                                        },
+                                        on: { close: _vm.closeSocial }
                                       },
                                       [
                                         _c(

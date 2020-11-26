@@ -58,7 +58,7 @@ img.avatar{
                                     network="facebook"
                                     v-bind:url="(baseUrl + ((post.is_request ? '/post/' : '/exchange/')) + post.id)"
                                     v-bind:title="(post.is_request ? post.short_description : post.parent_short_description)"
-                                    v-bind:description="post.content"
+                                    v-bind:description="post.content"  @close="closeSocial"
                                 >
                                     <button class="ui round icon share-btn button">
                                         <i class="share icon"></i>
@@ -164,6 +164,9 @@ img.avatar{
             })
         },
         methods: {
+            closeSocial(){
+                console.log("Close")
+            },
             generatePageUrl(){
                 if (this.hasMorePage) {
                     if(this.pageParams && this.pageParams.type == 'business'){

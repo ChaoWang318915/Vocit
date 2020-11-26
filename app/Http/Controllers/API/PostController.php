@@ -46,6 +46,18 @@ class PostController extends BaseController
         return $this->getResponse($posts, 'Posts available');
     }
 
+    
+    function getUserPosts()
+    {                  
+        $posts = Post::where('user_id',auth()->user()->id)->get();
+        $result = array();
+        foreach($posts as $post){
+            $temp['lg_url'] = $post->attachments[0]->lg_url;
+            $result[] = $temp;            
+        }         
+        return $this->getResponse($result, 'Posts available');
+    }
+
     function getPost($postId)
     {
         $post = Post::whereId($postId)->where('is_draft', 0)->first();
@@ -298,7 +310,7 @@ class PostController extends BaseController
             }
         }
         $post = Post::find($parentPost);
-        $post->notify(new FacebookAutoPost);
+        // $post->notify(new FacebookAutoPost);
         return $this->getResponse($post, 'Successfully Posted');
     }
 

@@ -27,11 +27,17 @@ Route::get('/posts', [
     'getPosts'
 ]);
 
+
 Route::group(['namespace' => 'API', ], function(){
     Route::group(['middleware' => ['auth:api']], function() {
         Route::get('/me', [
             UserController::class,
             'me'
+        ]);
+
+        Route::get('/user-posts', [
+            PostController::class,
+            'getUserPosts'
         ]);
 
         Route::post('/posts', [
