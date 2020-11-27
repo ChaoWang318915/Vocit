@@ -523,7 +523,7 @@ export default {
             this.filesCount = this.$refs.file.files.length;
             if (this.images.length > 0) {
                 this.initExchange();
-            }                
+            }                         
         },
         handleCropFilesChange() {
             this.images = this.$refs.file.files[0];
@@ -583,6 +583,7 @@ export default {
                         this.exchanges = response.data.data.exchanges;
                         Vue.$toast.success(response.data.message);
                     }
+                    $('input[type=file]').val(null);   
                     this.images = "";                    
                 })
                 .catch(error => {

@@ -3618,6 +3618,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
           vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
         }
 
+        jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
         _this.images = "";
       })["catch"](function (error) {
         nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
