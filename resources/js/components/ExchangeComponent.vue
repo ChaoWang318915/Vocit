@@ -166,7 +166,7 @@
                                 multiple
                                 max="2"
                             />
-                            <div
+                            <!-- <div
                                 class="share-area d-inline-block"
                                 @click="handleImpression(post.id, 'share')"
                             >
@@ -186,7 +186,7 @@
                                         <i class="share icon"></i>
                                     </button>
                                 </ShareNetwork>
-                            </div>
+                            </div> -->
                             <div
                                 class="ui icon basic round green button like-btn mt-2"
                                 v-bind:class="post.is_liked ? 'clapped' : ''"
@@ -422,6 +422,7 @@ export default {
         };
     },
     mounted() {
+        var parent = this;
         this.post = this.activePost;
         this.imageUrl = this.activePost.attachments[0].lg_url;
         this.business = this.activePost.business;
@@ -451,6 +452,47 @@ export default {
         this.handleImpression(this.post.id);
     },
     methods: {
+        openShareDialog(tmpId, tmpBusiness, origin_post, parent_id) {
+            var parent = this;
+            FB.ui(
+                {
+                    method: 'share',
+                    href: this.shareableUrl,
+                },
+                function(response) {
+                    if (response && !response.error_message) {   
+
+                        setTimeout(
+                            async function() {
+                                let formData = new FormData();   
+                                formData.append("postId", tmpId);
+                                formData.append("origin_post", origin_post);
+                                formData.append("parent_id", parent_id);
+                                formData.append("business_id", tmpBusiness);
+
+                                await axios
+                                    .post("/api/completeExchange", formData)
+                                    .then(response => {                         
+                                        parent.exchanges = response.data.data.exchanges;
+                                        Vue.$toast.success(response.data.message);
+                                    })
+                                    .catch(error => {
+                                        
+                                    });
+                        }, 1000);
+
+                        
+                    } else {
+                        axios.delete('/api/posts/' + tmpId).then(response => {
+                            
+                        }).catch(error => {
+
+                        });
+                        Vue.$toast.success("Posting Canceled.");
+                    }
+                }
+            );
+        },
         handleSaveAd() {
             let formData = new FormData();
             const vm = this;
@@ -479,7 +521,9 @@ export default {
         handleFilesChange() {
             this.images = this.$refs.file.files;
             this.filesCount = this.$refs.file.files.length;
-            this.initExchange();
+            if (this.images.length > 0) {
+                this.initExchange();
+            }                
         },
         handleCropFilesChange() {
             this.images = this.$refs.file.files[0];
@@ -523,8 +567,7 @@ export default {
                     // console.log(response);
                     this.content = "";
                     this.parentComment = "";
-                    this.filesCount = "";
-                    this.images = "";
+                    this.filesCount = "";                    
                     $(document)
                         .find(".comment-area")
                         .stop(0)
@@ -533,9 +576,14 @@ export default {
                         .find(".comment-reply-btn")
                         .stop(0)
                         .slideDown("fast");
-                    this.exchanges = response.data.data.exchanges;
                     NProgress.done();
-                    Vue.$toast.success(response.data.message);
+                    if (this.images.length > 0) {
+                        this.openShareDialog(response.data.data.id, response.data.data.business_id, this.post.id, this.post.id);
+                    }else {
+                        this.exchanges = response.data.data.exchanges;
+                        Vue.$toast.success(response.data.message);
+                    }
+                    this.images = "";                    
                 })
                 .catch(error => {
                     NProgress.done();

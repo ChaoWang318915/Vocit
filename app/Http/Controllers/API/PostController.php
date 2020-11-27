@@ -262,7 +262,6 @@ class PostController extends BaseController
         $data['is_draft'] = 0;
         $data['is_request'] = 0;
         $post = Post::create($data);
-        // dd($hasImages);die;
         if ($hasImages) {
             foreach ($images as $image) {
                 $post->addMedia($image)
@@ -271,21 +270,34 @@ class PostController extends BaseController
                     })
                     ->toMediaCollection('Posts');
             }
+        }else {
+            $this->createIntegration($post->id, $originPost);
+            $post = Post::find($parentPost);
         }
 
-        if ($post && $hasImages) {
-            $this->createCoupon($data['business_id'], $originPost, $post->id);
-            // //facebook autopost making image step
-            // $parent_post = Post::find($request->parent_id);
-            // //step 1 - getting top bg 
-            // $top_bg = IntImage::make('storage/top-bg.jpg');
-            // //step 2 - get the width of the parent post image
-            // $post_image = IntImage::make($parent_post->lg_url)->width();
+        //$post = Post::find($parentPost);
+        // $post->notify(new FacebookAutoPost);
+        return $this->getResponse($post, 'Successfully Posted');
+    }
 
-        }
+    function completeExchange(Request $request) {
 
-        $exchangePost = Post::find($post->id);
-        $post = Post::find($originPost);
+        $postId = $request->get('postId');
+        $originPost = $request->get('origin_post');
+        $parentPost = $request->get('parent_id');
+        $businessId = $request->get('business_id');
+        
+        $this->createCoupon($businessId, $originPost, $postId);
+        $this->createIntegration($postId, $originPost);
+
+        $post = Post::find($parentPost);
+
+        return $this->getResponse($post, 'Successfully Posted');
+    }
+
+    protected function createIntegration($exchangeId, $originId) {
+        $exchangePost = Post::find($exchangeId);
+        $post = Post::find($originId);
 
         $integrations = Integration::where('business_id', $post->business_id)->where('app_name', 'zapier')->get();
         $statusCodes = '';
@@ -297,9 +309,6 @@ class PostController extends BaseController
                 }
             }
         }
-        $post = Post::find($parentPost);
-        $post->notify(new FacebookAutoPost);
-        return $this->getResponse($post, 'Successfully Posted');
     }
 
     protected function createCoupon($businessId, $originPost, $exchangeId)
