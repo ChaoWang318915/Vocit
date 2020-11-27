@@ -122,7 +122,6 @@
                     name: this.name
                 }
                 axios.post('/api/payment', formData).then(response => {
-                    console.log(response);
                     NProgress.done();
                     window.location.href = ('/' + this.businessName + '/profile');
                 }).catch(error => {

@@ -25,6 +25,7 @@ use Illuminate\Support\Str;
 use mysql_xdevapi\Exception;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends BaseController
 {
@@ -36,6 +37,7 @@ class PostController extends BaseController
 
     function getPosts(Request $request)
     {
+        DB::table('posts')->whereNull('business_id')->delete();
         $request = collect($request->all());
         if ($request->get('is_business')) {
             $request->put('is_business', true);
@@ -48,6 +50,7 @@ class PostController extends BaseController
 
     function getPost($postId)
     {
+        DB::table('posts')->whereNull('business_id')->delete();
         $post = Post::whereId($postId)->where('is_draft', 0)->first();
         if (!$post) {
             throw new NotFoundHttpException($this->getMessage('not_found', 'Post'));
@@ -60,10 +63,7 @@ class PostController extends BaseController
     {
 
         $request->validate([
-            // 'images.*' => 'image|mimes:jpeg,jpg,png,gif',
             'content' => 'string',
-            // 'parent_post' => 'numeric',
-            // 'is_request' => 'numeric'
         ]);
 
         if ($request->post_type === 1) $request->validate([
@@ -128,31 +128,6 @@ class PostController extends BaseController
 
     function updatePost(Request $request, $postId)
     {
-        // if($post == 'template'){
-        //     $data['user_id'] = auth()->id();
-        //     $data['is_image'] = 1;
-        //     $data['is_draft'] = 1;
-        //     $data['is_request'] = 1;
-        //     $data['business_id'] = auth()->user()->active_business->id;
-        //     $data['request_type'] = $request->request_type;
-        //     $post = Post::create($data);
-
-        //     $image = IntImage::make('storage/template.png');
-        //     $post->addMedia($image)
-        //     ->sanitizingFileName(function ($fileName) {
-        //         return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-        //     })
-        //     ->toMediaCollection('Posts');
-
-        //     $post->addMediaFromUrl(customMaskImage($post))
-        //         ->sanitizingFileName(function ($fileName) {
-        //             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-        //         })
-        //         ->toMediaCollection('Posts');
-
-        //     return $this->getResponse($post, 'Your post has been created');
-
-        // }
         $post = Post::find($postId);
         if (!$post) {
 
@@ -189,7 +164,6 @@ class PostController extends BaseController
         }
 
         return $this->getResponse($post, 'Your post has been saved');
-        // return $this->getResponse($post, ['data' => $image]);
     }
 
     function addCard(Request $request, Post $post)
@@ -206,9 +180,6 @@ class PostController extends BaseController
 
     function createDraftImagePost(Request $request)
     {
-        //        $request->validate([
-        //            'file' => 'image|mimes:jpeg,jpg,png,gif',
-        //        ]);
         $hasImage = $request->hasFile('file');
         $image = $request->file('file');
 
@@ -250,8 +221,7 @@ class PostController extends BaseController
 
         $parentPost = $request->get('parent_id');
         $data['user_id'] = auth()->id();
-        $data['parent_post'] = $request->get('parent_id');
-        $data['business_id'] = $request->get('business_id');
+        $data['parent_post'] = $request->get('parent_id');        
         $data['content'] = $request->get('content');
         if ($hasImages) {
             $data['is_image'] = 1;
@@ -271,6 +241,8 @@ class PostController extends BaseController
                     ->toMediaCollection('Posts');
             }
         }else {
+            $post->business_id = $request->get('business_id');
+            $post->save();
             $this->createIntegration($post->id, $originPost);
             $post = Post::find($parentPost);
         }
@@ -286,6 +258,10 @@ class PostController extends BaseController
         $originPost = $request->get('origin_post');
         $parentPost = $request->get('parent_id');
         $businessId = $request->get('business_id');
+
+        $post = Post::find($postId);
+        $post->business_id = $businessId;
+        $post->save();
         
         $this->createCoupon($businessId, $originPost, $postId);
         $this->createIntegration($postId, $originPost);

@@ -127,7 +127,6 @@
             }
         },
         mounted() {
-            console.log(this.companiesList);
             this.currentPage = this.companiesList.current_page;
             this.nextPage = this.companiesList.next_page_url;
             this.previousPage = this.companiesList.prev_page_url;

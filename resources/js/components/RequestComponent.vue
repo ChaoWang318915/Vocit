@@ -276,7 +276,6 @@ export default {
 
             if (!this.isValidData()) {
                 this.formError = "Please fill all required fields";
-                // console.log('Please fill all required fields')
                 return false;
             }
 
@@ -313,8 +312,6 @@ export default {
                 is_editing: this.isEditing,
                 request_type: this.request_type
             };
-
-            // console.log(postDetails);
 
             let formData = {
                 card: cardDetails,
@@ -375,7 +372,6 @@ export default {
         filesUploaded($event) {
             if ($event.xhr.status === 201) {
                 let response = JSON.parse($event.xhr.response);
-                console.log(response);
                 this.filesCount = 1;
                 this.postId = response.data.id;
                 if (this.isEditing) {

@@ -40,7 +40,6 @@
 {{--    <script type="text/javascript">--}}
 {{--        let showPopup = "{{\Request::route()->getName() == 'businessWallet'}}";--}}
 {{--        $(function(){--}}
-{{--            console.log('show popup', showPopup);--}}
 {{--            let washere = getCookie('showWarning');--}}
 {{--            if(!washere && showPopup){--}}
 {{--                $('.info-modal.modal')--}}

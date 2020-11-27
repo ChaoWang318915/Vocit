@@ -291,7 +291,7 @@
             let $elem = this;
             $(document).on('click', '.open-camera', function(){
                 navigator.permissions.query({name: 'camera'}).then( permissionStatus => {
-                    console.log(permissionStatus)
+                    
                 })
                 $elem.openCamera = 'auto';
                 $('.qr-code-modal').find('.loader').stop(0).show();
@@ -461,7 +461,7 @@
             handleImpression( postId, action = 'click'){
                 axios.post('/api/impressions', {post_id : postId, action: action})
                     .then(response => {
-                        console.log(response)
+                        
                     }).catch(error => {
                 });
             }
