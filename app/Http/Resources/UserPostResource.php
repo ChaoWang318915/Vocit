@@ -17,7 +17,7 @@ class UserPostResource extends JsonResource
         return [
             'id' => $this->id,
             "content" => $this->content,
-            "lg_url" => env('APP_URL') . $this->lg_url,
+            "lg_url" => $this->lg_url,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
         ];
