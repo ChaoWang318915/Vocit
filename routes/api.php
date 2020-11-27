@@ -57,6 +57,10 @@ Route::group(['namespace' => 'API', ], function(){
             PostController::class,
             'addCard'
         ]);
+        Route::post('completeExchange', [
+            PostController::class,
+            'completeExchange'
+        ]);
         Route::post('exchange', [
             PostController::class,
             'exchangePost'

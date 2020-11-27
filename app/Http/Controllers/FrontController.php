@@ -23,6 +23,7 @@ use Spatie\MediaLibrary\MediaStream;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Intervention\Image\ImageManagerStatic as IntImage;
 use Intervention\Image\Font;
+use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
 {
@@ -34,6 +35,7 @@ class FrontController extends Controller
 
     function getPosts(Request $request)
     {
+        DB::table('posts')->whereNull('business_id')->delete();
         $requestData = collect($request->all());     
         $type = $request->segment(2);      
         $requestData->put('type', $type);
@@ -45,9 +47,8 @@ class FrontController extends Controller
     }
 
     function getPost($postId)
-    {             
-        // echo getenv(static::APP_ID_ENV_NAME);
-        // die;    
+    {               
+        DB::table('posts')->whereNull('business_id')->delete();
         $data['post'] = Post::findorFail($postId);         
         if ($data['post']->is_request) {
             $data['canShare'] = auth()->check() ? (auth()->id() == $data['post']->user_id ? true : false) : false;

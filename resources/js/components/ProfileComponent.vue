@@ -239,7 +239,6 @@
                 this.cropped = output;
             },
             update(val) {
-                console.log(val);
             },
             rotate(rotationAngle) {
                 // Rotates the image

@@ -67,6 +67,11 @@ $(function(){
         $(".image-input").trigger('click');
     })
 
+    $(document).on('click', '.info-modal.modal .reject', function(){
+        $(document).find('.info-modal.modal')
+            .modal('hide');
+    })
+
     $(document).on('click', '.choose-banner-btn', function(){
         $(".banner-input").trigger('click');
     })

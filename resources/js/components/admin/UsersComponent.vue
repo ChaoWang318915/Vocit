@@ -76,7 +76,6 @@
             }
         },
         mounted() {
-            console.log(this.usersList);
             this.currentPage = this.usersList.current_page;
             this.nextPage = this.usersList.next_page_url;
             this.previousPage = this.usersList.prev_page_url;

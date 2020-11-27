@@ -4,11 +4,15 @@
             <div class="sixteen wide tablet ten wide computer column">
                 <div class="ui fluid sticky card sticky-card">
                     <div class="content">
+                        <div class="ui two column grid">
+                            <div class="wide">                           
+                                <a :href="'/' + post.business.subdomain"><img class="ui xs avatar image ml-1" v-bind:src="post.business.logo"></a>
+                                <a :href="'/' + post.business.subdomain" class="business-popup-btn logo_title">{{post.business.name}}</a>
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class="content">
                         <img width="100%" :src="imageUrl" />
-                        <!-- <clipper-preview
-                            class="centered"
-                            name="cropSelection"
-                        /> -->
                     </div>
                 </div>
             </div>
@@ -166,7 +170,7 @@
                                 multiple
                                 max="2"
                             />
-                            <div
+                            <!-- <div
                                 class="share-area d-inline-block"
                                 @click="handleImpression(post.id, 'share')"
                             >
@@ -186,7 +190,7 @@
                                         <i class="share icon"></i>
                                     </button>
                                 </ShareNetwork>
-                            </div>
+                            </div> -->
                             <div
                                 class="ui icon basic round green button like-btn mt-2"
                                 v-bind:class="post.is_liked ? 'clapped' : ''"
@@ -390,12 +394,6 @@ export default {
         "shareUrl",
         "canShare"
     ],
-    // components: {
-    //     clipperBasic,
-    //     clipperFixed,
-    //     clipperPreview,
-    //     clipperUpload
-    // },
     data() {
         return {
             post: "",
@@ -422,6 +420,7 @@ export default {
         };
     },
     mounted() {
+        var parent = this;
         this.post = this.activePost;
         this.imageUrl = this.activePost.attachments[0].lg_url;
         this.business = this.activePost.business;
@@ -429,16 +428,8 @@ export default {
         let locationHash = window.location.hash;
         this.isExchange = this.exchangePost;
         this.isSandboxUser = this.sandboxUser;
-        // console.log(this.post);
-        // console.log(
-        //     "ddd",
-        //     this.post.is_request
-        //         ? this.post.short_description
-        //         : this.post.parent_short_description
-        // );
         if (locationHash) {
             setTimeout(function() {
-                console.log($(locationHash));
                 $("html, body").animate(
                     {
                         scrollTop: parseInt($(locationHash).offset().top) - 95
@@ -451,6 +442,47 @@ export default {
         this.handleImpression(this.post.id);
     },
     methods: {
+        openShareDialog(tmpId) {
+            var parent = this;
+            FB.ui(
+                {
+                    method: 'share',
+                    href: this.shareableUrl,
+                },
+                function(response) {
+                    if (response && !response.error_message) {   
+
+                        setTimeout(
+                            async function() {
+                                let formData = new FormData();   
+                                formData.append("postId", tmpId);
+                                formData.append("origin_post", parent.post.id);
+                                formData.append("parent_id", parent.post.id);
+                                formData.append("business_id", parent.post.business_id);
+
+                                await axios
+                                    .post("/api/completeExchange", formData)
+                                    .then(response => {                         
+                                        parent.exchanges = response.data.data.exchanges;
+                                        Vue.$toast.success(response.data.message);
+                                    })
+                                    .catch(error => {
+                                        
+                                    });
+                        }, 1000);
+
+                        
+                    } else {
+                        axios.delete('/api/posts/' + tmpId).then(response => {
+                            
+                        }).catch(error => {
+
+                        });
+                        Vue.$toast.success("Posting Canceled.");
+                    }
+                }
+            );
+        },
         handleSaveAd() {
             let formData = new FormData();
             const vm = this;
@@ -479,7 +511,9 @@ export default {
         handleFilesChange() {
             this.images = this.$refs.file.files;
             this.filesCount = this.$refs.file.files.length;
-            this.initExchange();
+            if (this.images.length > 0) {
+                this.initExchange();
+            }                         
         },
         handleCropFilesChange() {
             this.images = this.$refs.file.files[0];
@@ -520,11 +554,9 @@ export default {
             axios
                 .post("/api/exchange", formData)
                 .then(response => {
-                    // console.log(response);
                     this.content = "";
                     this.parentComment = "";
-                    this.filesCount = "";
-                    this.images = "";
+                    this.filesCount = "";                    
                     $(document)
                         .find(".comment-area")
                         .stop(0)
@@ -533,9 +565,15 @@ export default {
                         .find(".comment-reply-btn")
                         .stop(0)
                         .slideDown("fast");
-                    this.exchanges = response.data.data.exchanges;
                     NProgress.done();
-                    Vue.$toast.success(response.data.message);
+                    if (this.images.length > 0) {
+                        this.openShareDialog(response.data.data.id);
+                    }else {
+                        this.exchanges = response.data.data.exchanges;
+                        Vue.$toast.success(response.data.message);
+                    }
+                    $('input[type=file]').val(null);   
+                    this.images = "";                    
                 })
                 .catch(error => {
                     NProgress.done();
@@ -601,4 +639,14 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+img.avatar{
+    width: 4em !important;
+    height: 4em !important;
+    border-radius: 500rem !important;
+ }
+ .logo_title{
+     font-size: 15px;
+     font-weight: bold !important;
+     color: #0f0f10 !important;
+ }
 </style>

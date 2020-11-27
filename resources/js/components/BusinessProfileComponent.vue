@@ -179,7 +179,6 @@
             handleFilesChange() {
                 this.images = this.$refs.file1.files;
                 this.filesCount = this.$refs.file1.files.length;
-                console.log(this.filesCount);
             },
             handleBannerChange() {
                 this.banner = this.$refs.file2.files;

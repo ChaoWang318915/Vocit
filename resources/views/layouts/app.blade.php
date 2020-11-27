@@ -125,10 +125,11 @@
 
         <div class="ui mini modal info-modal">
             <div class="content">
-                <p>You are giving the business the right to use this picture for their marketing and research purposes in exchange for a reward or discount. Do you understand?</p>
+                <p>This exchange picture will be uploaded on your facebook post. If you are looking for getting reward, please click Yes. If not, there will be no reward.</p>
             </div>
             <div class="actions">
                 <div class="ui approve green button">Yes</div>
+                <div class="ui reject green button">No</div>
             </div>
         </div>
 
@@ -138,6 +139,17 @@
 <script src="{{ asset('assets/js/less.js') }}" defer></script>
 <script src="{{ asset('assets/semantic/semantic.js') }}" defer></script>
 <script src="{{ asset('assets/js/scripts.js') }}" defer></script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '891941987965583',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v9.0'
+    });
+  };
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript">
     window.addEventListener("load", function() {
         $('#loader').fadeOut('fast');
@@ -146,7 +158,6 @@
 
     {{--let showPopup = "{{\Request::route()->getName() == 'businessWallet'}}";--}}
     {{--$(function(){--}}
-    {{--    console.log('show popup', showPopup);--}}
     {{--    let washere = getCookie('showWarning');--}}
     {{--    if(!washere && showPopup){--}}
     {{--        $('.info-modal.modal')--}}

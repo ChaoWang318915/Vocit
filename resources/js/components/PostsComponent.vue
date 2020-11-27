@@ -11,7 +11,7 @@ img.avatar{
 <template>
     <div @scroll="handleScroll()">
         <div class="masonry-grid">
-            <a :href=" (post.is_request ? ('/post/' + post.id) : ('/exchange/' + post.id))" v-for="post in items" class="ui card grid-item" v-if="post.is_displayable">
+            <a :href=" (post.is_request ? ('/post/' + post.id) : ('/exchange/' + post.id))" v-for="post in items" :key="post.id" class="ui card grid-item">
                 <div v-if="post.is_request" class="content">
                     <div class="ui two column grid">                      
                         <span class="wide text-right">
@@ -35,10 +35,6 @@ img.avatar{
                         <div class="square image"></div>
                     </div>
                     <img v-bind:src="post.attachments[0].lg_url" class="ui wireframe image d-none" @load="imageLoaded($event)">
-<!--                    <template v-show="post.request_type === 2">-->
-<!--                        <img class="business business-logo" :src="post.business.logo" />-->
-<!--                        <p class="business business-name">{{ post.business.name }}</p>-->
-<!--                    </template>-->
                 </div>
 
                 <div v-if="!post.is_request" class="content">
@@ -47,7 +43,7 @@ img.avatar{
                     <div class="ui two column grid comment-section">
                         <div class="ten wide column">
                             <span v-if="!user.id">Login to comment</span>
-                            <span v-if="user.id"><img  class="ui avatar image" v-bind:src="user.profile_pic"> {{user.username}} <span class="text-fade">comment here...</span></span>
+                            <span v-if="user.id"><img  class="ui avatar image" v-bind:src="user.profile_pic"> {{ user.username }} <span class="text-fade">comment here...</span></span>
                         </div>
                         <div class="six wide column text-right">
                             <button class="ui round icon button">
@@ -65,10 +61,6 @@ img.avatar{
                                     </button>
                                 </ShareNetwork>
                             </div>
-
-<!--                            <button class="ui round icon button impression-btn" @click="handleImpression($event, post.id, 'like')">-->
-<!--                                <i v-bind:class="post.is_liked ? 'heart' : 'heart outline'" class="icon"></i>-->
-<!--                            </button>-->
                             <button class="ui round icon impression-btn button" v-bind:class="post.is_liked ? 'clapped' : ''" @click="handleImpression($event, post.id, 'like')">
                                 <span class="likes-count">{{post.likes_count}}</span> <span class="impression-icon"></span>
                             </button>
@@ -105,12 +97,6 @@ img.avatar{
                             <button class="ui round icon impression-btn button" v-bind:class="post.is_liked ? 'clapped' : ''" @click="handleImpression($event, post.id, 'like')">
                                 <span class="likes-count">{{post.likes_count}}</span> <span class="impression-icon"></span>
                             </button>
-<!--                            <button class="ui round icon button impression-btn" @click="handleImpression($event, post.id, 'like')">-->
-<!--                                <i v-bind:class="post.is_liked ? 'heart' : 'heart outline'" class="icon"></i>-->
-<!--                            </button>-->
-<!--                            <button class="ui round icon button impression-btn" @click="handleImpression($event, post.id, 'like')">-->
-<!--                                24 <i v-bind:class="post.is_liked ? 'heart' : 'heart outline'" class="icon"></i>-->
-<!--                            </button>-->
                         </div>
                     </div>
                 </div>
@@ -188,7 +174,7 @@ img.avatar{
 
                 return null;
             },
-            loadNextPosts() {
+            loadNextPosts() {        
                 let url = this.generatePageUrl();
                 if(url){
                     axios.get(url)
@@ -212,7 +198,6 @@ img.avatar{
                 }
             },
             handleScroll() {
-                console.log('scroll');
             },
             imageLoaded($event){
                 $($event.target).removeClass('d-none');
@@ -257,7 +242,7 @@ img.avatar{
     bottom: 10px;
     right: 5px;
     padding: 10px 0 10px 20px;
-    -webkit-border-radius: 4px;
+    border-radius: 4px !important;
     font-family: fantasy;
     font-weight:bold;
     -moz-border-radius: 4px;
