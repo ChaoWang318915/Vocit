@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserPostsCollection;
 use App\Models\Business;
 use App\Models\Coupon;
 use App\Models\Impression;
@@ -12,17 +13,16 @@ use App\Models\Post;
 use App\Models\User;
 use App\Notifications\CouponDistributedNotification;
 use App\Notifications\CouponNotification;
+use App\Notifications\FacebookAutoPost;
 use App\Service\GetPostsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as IntImage;
-use App\Notifications\FacebookAutoPost;
-use Spatie\Image\Image;
 use Illuminate\Support\Str;
-use mysql_xdevapi\Exception;
+use Intervention\Image\ImageManagerStatic as IntImage;
+use Spatie\Image\Image;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Support\Facades\DB;
@@ -46,6 +46,12 @@ class PostController extends BaseController
         $posts = $this->service->getRequests($request);
 
         return $this->getResponse($posts, 'Posts available');
+    }
+
+    
+    function getUserPosts()
+    {                  
+        return new UserPostsCollection(auth()->user()->posts()->paginate());
     }
 
     function getPost($postId)

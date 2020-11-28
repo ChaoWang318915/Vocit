@@ -70,6 +70,7 @@ Route::post('sandbox/signup', [
     FrontController::class,
     'sandboxSignup'
 ]);
+Route::view('zapier', 'zapier');
 Route::view('terms', 'terms');
 Route::view('privacy', 'privacy');
 Route::view('help', 'help');

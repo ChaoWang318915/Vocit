@@ -42,7 +42,7 @@ class FrontController extends Controller
         $data['posts'] = $this->service->getRequests($requestData);
         $data['pageParams'] = [
             'type' => $type
-        ];        
+        ];               
         return view('index', $data);
     }
 
