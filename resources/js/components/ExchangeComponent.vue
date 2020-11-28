@@ -5,7 +5,7 @@
                 <div class="ui fluid sticky card sticky-card">
                     <div class="content">
                         <div class="ui two column grid">
-                            <div class="wide">                           
+                            <div class="wide" v-if="post">                           
                                 <a :href="'/' + post.business.subdomain"><img class="ui xs avatar image ml-1" v-bind:src="post.business.logo"></a>
                                 <a :href="'/' + post.business.subdomain" class="business-popup-btn logo_title">{{post.business.name}}</a>
                             </div>                        
@@ -170,27 +170,6 @@
                                 multiple
                                 max="2"
                             />
-                            <!-- <div
-                                class="share-area d-inline-block"
-                                @click="handleImpression(post.id, 'share')"
-                            >
-                                <ShareNetwork
-                                    network="facebook"
-                                    v-bind:url="shareableUrl"
-                                    v-bind:title="
-                                        post.is_request
-                                            ? post.short_description
-                                            : post.parent_short_description
-                                    "
-                                    v-bind:description="post.content"
-                                >
-                                    <button
-                                        class="ui basic icon orange round button mt-2"
-                                    >
-                                        <i class="share icon"></i>
-                                    </button>
-                                </ShareNetwork>
-                            </div> -->
                             <div
                                 class="ui icon basic round green button like-btn mt-2"
                                 v-bind:class="post.is_liked ? 'clapped' : ''"
@@ -202,47 +181,6 @@
                                 <span class="impression-icon"></span>
                             </div>
                         </div>
-                        <!-- <div class="w-100 mt-2" v-if="post.request_type == 2">
-                            <div
-                                class="ui btn-primary-outline button upload-for-crop mt-2"
-                                @click="checkIfLoggedIn()"
-                            >
-                                <i class="camera icon"></i>
-                                Upload Image
-                            </div>
-                            <input
-                                ref="file"
-                                v-on:change="handleCropFilesChange()"
-                                name="cropImage"
-                                type="file"
-                                class="d-none crop-image-input"
-                                accept="image/x-png,image/gif,image/jpeg"
-                            />
-                          
-                            <clipper-basic
-                                class="mt-2"
-                                :border="clipper.border"
-                                :outline="clipper.outline"
-                                :src="clipper.image"
-                                :ratio="clipper.ratio"
-                                :init-width="clipper.initWidth"
-                                :init-height="clipper.initHeight"
-                                ref="clipper"
-                                preview="cropSelection"
-                            >
-                                <div slot="placeholder">
-                                    Please Add your Ad Logo
-                                </div>
-                            </clipper-basic>
-                            <div
-                                v-if="clipper.image"
-                                @click="handleSaveAd"
-                                class="ui btn-primary-outline button mt-2"
-                            >
-                                <i class="save icon"></i>
-                                Save
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 
@@ -370,17 +308,6 @@ import "vue-toast-notification/dist/theme-default.css";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import VueSocialSharing from "vue-social-sharing";
-// import VueRx from "vue-rx";
-
-// install vue-rx
-// Vue.use(VueRx);
-
-// import {
-//     clipperBasic,
-//     clipperFixed,
-//     clipperPreview,
-//     clipperUpload
-// } from "vuejs-clipper";
 
 Vue.use(VueSocialSharing);
 Vue.use(VueToast);
@@ -392,7 +319,8 @@ export default {
         "exchangePost",
         "sandboxUser",
         "shareUrl",
-        "canShare"
+        "canShare",
+        "baseUrl"
     ],
     data() {
         return {
@@ -447,7 +375,7 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    href: this.shareableUrl,
+                    href: this.baseUrl + tmpId
                 },
                 function(response) {
                     if (response && !response.error_message) {   
@@ -499,7 +427,6 @@ export default {
                     Vue.$toast.success(response.data.message);
                     setTimeout(function() {
                         NProgress.done();
-                        // window.location.reload();
                     }, 2000);
                 })
                 .catch(error => {
@@ -533,6 +460,7 @@ export default {
         },
         initExchange(postId = "") {
             let formData = new FormData();
+            var parent = this;
             let images = this.images;
             if (this.filesCount > 0) {
                 for (var i = 0; i < images.length; i++) {
@@ -567,7 +495,10 @@ export default {
                         .slideDown("fast");
                     NProgress.done();
                     if (this.images.length > 0) {
-                        this.openShareDialog(response.data.data.id);
+                        setTimeout(
+                            async function() {
+                                await parent.openShareDialog(response.data.data.id);
+                        }, 1000);
                     }else {
                         this.exchanges = response.data.data.exchanges;
                         Vue.$toast.success(response.data.message);
