@@ -70,19 +70,12 @@ class SocialAuthController extends Controller
 
                 return redirect()->to(('setpassword?'. $urlPrams));
 
-//                $currentUser = User::create($data);
             }
             else{
                 Auth::loginUsingId($currentUser->id, 1);
                 return redirect(url('/'));
             }
 
-//            if ($currentUser) {
-//                Auth::loginUsingId($currentUser->id, 1);
-//                return redirect(url('/'));
-//            } else {
-//                return redirect()->back()->withErrors(['error', 'Something went wrong, try again later.']);
-//            }
         }
     }
 }

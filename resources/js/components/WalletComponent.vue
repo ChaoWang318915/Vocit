@@ -11,7 +11,6 @@
                         <div class="content">
                             <div class="coupon-container">
                                 <img class="business-logo" v-bind:src="coupon.business.logo">
-                                <!--                            <h2>{{coupon.business.name}}</h2>-->
                                 <h1>{{coupon.post.short_description}}</h1>
                                 <img v-bind:src="coupon.qr_code">
                             </div>
@@ -34,7 +33,6 @@
                                 <a class="ui orange right ribbon label">Redeemed</a>
                                 <div class="coupon-container">
                                     <img class="business-logo" v-bind:src="coupon.business.logo">
-                                    <!--                                <h2>{{coupon.business.name}}</h2>-->
                                     <h1>{{coupon.post.short_description}}</h1>
                                     <img v-bind:src="coupon.qr_code">
                                 </div>

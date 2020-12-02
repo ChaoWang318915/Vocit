@@ -1,17 +1,5 @@
 <template>
     <div>
-<!--        <h3 class="ui header mt-2">Switch Businesses</h3>-->
-<!--        <div class="ui stackable four cards mt-4">-->
-<!--            <a :href="'/'+ business.subdomain + '/switch'" class="ui card" v-for="business in businesses">-->
-<!--                <div class="image">-->
-<!--                    <a class="ui right green corner label">-->
-<!--                        <i class="check icon"></i>-->
-<!--                    </a>-->
-<!--                    <img v-bind:src="business.logo">-->
-<!--                </div>-->
-<!--            </a>-->
-<!--        </div>-->
-
         <h3 class="ui header mt-4" v-if="(role === 'admin')">Associates – Access to Business Account</h3>
         <div class="ui fluid card mt-4" v-if="(role === 'admin')">
             <div class="content">
@@ -22,7 +10,7 @@
             </div>
             <table class="ui padded striped table">
                 <tbody>
-                <tr v-for="member in members">
+                <tr v-for="(member, index) in members" :key="index">
                     <td class="middle aligned">
                         <img class="ui avatar d-inline-block" v-bind:src="member.user.profile_pic">
                     </td>
@@ -32,7 +20,6 @@
                     <td class="middle aligned text-right">
                         <label class="ui orange label" v-if="!member.is_joined">Invited</label>
                         <label class="ui green label" v-if="member.is_joined">Active</label>
-                        <!--                            <button class="ui red button d-inline-block" v-if="member.is_joined" @click="suspendUser()">Suspend</button>-->
                     </td>
                     <td>
                         <div class="ui button compact red" @click="removeUser(member.user_id)" v-if="role === 'admin'">Remove</div>
@@ -44,7 +31,6 @@
                                 <div class="item" @click="changeRole(member.user_id, 'redeeming')">Redeeming</div>
                             </div>
                         </div>
-<!--                        <button class="ui compact button">Change Role</button>-->
                     </td>
                 </tr>
                 </tbody>

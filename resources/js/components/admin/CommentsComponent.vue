@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="comment in comments">
+                    <tr v-for="(comment, index) in comments" :key="index">
                         <td data-label=""><img class="ui md avatar" v-bind:src="comment.user.profile_pic"> {{comment.user.username}}</td>
                         <td data-label="Name">{{comment.content}}</td>
                         <td data-label="Member Since">{{comment.post_time}}</td>

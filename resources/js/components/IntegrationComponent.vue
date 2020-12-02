@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <div class="ui grid mt-2"  v-if="integrations.length > 0" v-for="integration in integrations">
+                    <div class="ui grid mt-2"  v-if="integrations.length > 0" v-for="(integration, index) in integrations" :key="index">
                         <div class="three wide computer column sixteen wide tablet column">
                             {{integration.name}}
                         </div>

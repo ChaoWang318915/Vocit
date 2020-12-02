@@ -59,7 +59,6 @@
                             </div>
 
                         </form>
-                        <!-- <a class="facebook"  href="{{url('login/facebook')}}"><img style="width:9%" src="{{asset('assets/images/facebook.png')}}">&nbsp;&nbsp;Login with Facebook</a> -->
                     </div>
                 </div>
                 <div class="ui two column grid footer">

@@ -18,23 +18,6 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="profile-image position-relative">-->
-<!--                <img v-bind:src="businessLogo">-->
-<!--            </div>-->
-<!--            <div class="mt-4" v-show="!editInformation">-->
-<!--                <div class="ui header"></div>-->
-<!--                <p>{{businessName}} <a class="ml-3 text-success tooltip-element" :href="'/' + businessDomain" data-content="View Business Page"><i class="icon external"></i></a></p>-->
-<!--                <p>Business Email: {{businessEmail}}</p>-->
-<!--                <p>Business Phone: {{businessPhone}}</p>-->
-<!--                <p v-if="businessState">Business State: {{businessState}}</p>-->
-<!--                <p v-if="businessZip">Business ZIP:{{businessZip}}</p>-->
-<!--                <p>Business Address: {{businessAddress}}</p>-->
-<!--                <p v-if="businessEIN">EIN: {{businessEIN}}</p>-->
-<!--                <p v-if="!businessEIN">Contact Person: {{contactPerson}}</p>-->
-<!--                <p v-if="!businessEIN">Contact Email: {{contactEmail}}</p>-->
-<!--                <p v-if="!businessEIN">Contact Phone: {{contactPhone}}</p>-->
-<!--                <button class="ui btn-primary button" @click="initInfoEdit()" v-if="(role === 'admin')">Edit Information</button>-->
-<!--            </div>-->
             <div class="mt-4 w-100" v-show="editInformation" v-if="role === 'admin'">
                 <div class="ui fluid form">
                     <h3>Dedicated Business Page Information</h3>

@@ -13,7 +13,6 @@
                     <p>{{business.requests_count}} Requests & {{business.exchanges_count}} Exchanges</p>
                 </div>
                 <div class="sixteen wide tablet six wide computer column">
-<!--                    <button class="ui green button">Request to Join</button>-->
                 </div>
             </div>
         </div>

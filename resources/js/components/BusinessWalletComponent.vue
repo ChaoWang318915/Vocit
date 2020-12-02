@@ -18,7 +18,7 @@
                 <div class="ui fluid card">
                     <table class="ui padded fixed striped table" v-if="activeRequests.length > 0">
                         <tbody>
-                        <tr v-for="(request, index) in activeRequests" v-bind:class="'request-' + request.id">
+                        <tr v-for="(request, index) in activeRequests" :key="index" v-bind:class="'request-' + request.id">
                             <td class="middle aligned">
                                 <a :href="'/post/' + request.id">
                                     <img class="ui small image d-inline-block" v-bind:src="request.attachments[0].thumb_url">
@@ -59,7 +59,7 @@
                             </td>
                             <td class="middle aligned text-right" style="overflow: visible">
 
-                                <div class="ui icon top right pointing dropdown button" v-if="">
+                                <div class="ui icon top right pointing dropdown button">
                                     <i class="ellipsis vertical icon"></i>
                                     <div class="menu">
                                         <div class="item" data-content="Renew" v-bind:class="request.is_expired ? '' : 'disabled'"><i class="history icon"></i> Renew</div>
@@ -111,7 +111,7 @@
                 <div class="ui fluid card" id="exchanges">
                     <table class="ui padded fixed striped table" v-if="exchanges.length > 0">
                         <tbody>
-                        <tr v-for="exchange in exchanges">
+                        <tr v-for="(exchange, index) in exchanges" :key="index">
                             <td class="middle aligned">
                                 <a :href="'/exchange/' + exchange.id">
                                     <img class="ui small image d-inline-block" v-bind:src="exchange.attachments[0].thumb_url">
@@ -181,7 +181,7 @@
                 <div class="content">
                     <table class="ui padded striped table" v-if="coupons.length > 0">
                         <tbody>
-                        <tr v-for="coupon in coupons">
+                        <tr v-for="(coupon, index) in coupons" :key="index">
                             <td class="middle aligned">
                                 <a :href="'/exchange/' + coupon.id">
                                     <img class="ui small image d-inline-block" v-bind:src="coupon.attachments[0].thumb_url">

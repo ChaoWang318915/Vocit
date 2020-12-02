@@ -33,12 +33,6 @@ class UserController extends BaseController
             throw  new NotFoundHttpException('User not found');
         }
 
-//        $request->validate([
-//            'first_name' => 'string|required',
-//            'last_name' => 'string|required',
-//            'email' => 'email|required',
-//        ]);
-
         $data = $request->all();
 
         if($request->has('image')){

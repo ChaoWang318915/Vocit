@@ -417,7 +417,6 @@ export default {
             const canvas = this.$refs.clipper.clip();
             const overlay_image = canvas.toDataURL("image/png", 1);
 
-            // formData.append("dimensions", dimensions);
             formData.append("overlay_image", overlay_image);
             formData.append("_method", "PUT");
             NProgress.start();

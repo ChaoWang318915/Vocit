@@ -77,7 +77,6 @@ Route::view('help', 'help');
 Route::view('about', 'welcome');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('hubspot/contact', function() {
-//    $hubSpot = SevenShores\Hubspot\Factory::create(env('HUBSPOT_API_KEY'));
     $arr = array(
         'properties' => array(
             array(
@@ -119,7 +118,6 @@ Route::group([], function(){
     Route::get('test', function(){
         $post = \App\Models\Post::find('4');
         $post_json = json_encode($post);
-//        $endpoint = 'https://hooks.zapier.com/hooks/catch/7991217/okb3576';
         $endpoint = 'https://hooks.zapier.com/hooks/catch/7991217/ok431qj/';
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_POST, true);
@@ -166,11 +164,6 @@ Route::group([], function(){
         FrontController::class,
         'getExchange'
     ])->name('viewPost');
-//Route::get('impersonate/account', function(\Illuminate\Http\Request $request){
-//    $userId = $request->get('user');
-//    Auth::loginUsingId($userId);
-//    return redirect('/');
-//});
 
     Route::get('account/suspended', function(){
         return view('permission-partial');
@@ -255,7 +248,6 @@ Route::group([], function(){
     ]);
 });
 
-//Route::view('/', 'welcome');
 
 
 

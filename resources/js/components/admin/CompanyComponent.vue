@@ -41,7 +41,6 @@
                 <h3 class="ui small header">Companies</h3>
                 <div class="ui fluid card">
                     <div class="content">
-<!--                        <button class="ui basic green button right floated" @click="companyForm()"><i class="plus icon"></i> New</button>-->
                         <div class="ui icon input right floated mr-2">
                             <input type="text" placeholder="Search..." v-on:keyup.enter="searchCompany($event.target.value)">
                             <i class="search icon"></i>
@@ -53,7 +52,6 @@
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
-<!--                            <th>Phone</th>-->
                             <th>Address</th>
                             <th>EIN</th>
                             <th>Contact Email</th>
@@ -61,17 +59,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="company in companies">
+                        <tr v-for="(company, index) in companies" :key="index">
                             <td class="middle aligned"><img class="ui mini image" v-bind:src="company.logo"></td>
                             <td class="middle aligned" data-label="Name"><a :href="'/' + company.subdomain">{{company.name}}</a> </td>
                             <td class="middle aligned" data-label="Email">{{company.email}}</td>
-<!--                            <td class="middle aligned" data-label="Email">{{company.phone ? company.phone : '-'}}</td>-->
                             <td class="middle aligned" data-label="Email">{{company.address}}</td>
                             <td class="middle aligned" data-label="Email">{{company.ein ? company.ein : '-'}}</td>
                             <td class="middle aligned" data-label="Email">{{company.contact_email ? company.contact_email : '-'}}</td>
                             <td class="middle aligned" data-label="Email">
-<!--                                <button class="ui red button" v-if="!user.is_suspended" @click="suspendBusiness(company.id, 1)">Suspend</button>-->
-<!--                                <button class="ui green button" v-if="user.is_suspended" @click="restoreBusiness(company.id, 0)">Restore</button>-->
                                 <button class="ui red button" @click="deleteBusiness(company.id)">Delete</button>
                             </td>
                         </tr>

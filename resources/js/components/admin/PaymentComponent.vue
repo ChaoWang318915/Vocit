@@ -14,7 +14,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="payment in payments">
+                        <tr v-for="(payment, index) in payments" :key="index">
                             <td class="middle aligned">
                                 <img class="ui mini image" v-bind:src="payment.business.logo">
                             </td>

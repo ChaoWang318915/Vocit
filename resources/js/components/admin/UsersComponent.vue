@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="user in users">
+                    <tr v-for="(user, index) in users" :key="index">
                         <td data-label=""><img class="ui md avatar" v-bind:src="user.profile_pic"></td>
                         <td data-label="Name">{{user.name}}</td>
                         <td data-label="Email">{{user.email}}</td>

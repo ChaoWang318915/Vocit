@@ -101,7 +101,6 @@
                             </div>
 
                         </form>
-                        <!-- <a class="facebook"  href="{{url('register/facebook')}}"><img style="width:9%" src="{{asset('assets/images/facebook.png')}}">&nbsp;&nbsp;Sign Up with Facebook</a>                          -->
                     </div>
                 </div>
                 <div class="ui two column grid footer">

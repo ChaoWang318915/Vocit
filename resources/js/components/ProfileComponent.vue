@@ -37,11 +37,6 @@
                     <label>Phone</label>
                     <input type="text" v-model="phone" placeholder="Phone" required>
                 </div>
-<!--                <div class="field">-->
-<!--                    <button class="ui green compact button choose-images-btn">Choose Profile Picture</button>-->
-<!--                    <span v-show="filesCount > 0">{{filesCount}} image selected</span>-->
-<!--                    <input type="file" ref="file" v-on:change="handleFilesChange()" class="d-none image-input" accept="image/x-png,image/gif,image/jpeg">-->
-<!--                </div>-->
                 <div class="field mt-4" v-show="formError">
                     <label class="ui small header red">{{formError}}</label>
                 </div>
@@ -208,8 +203,6 @@
                 $('.cropper-modal').modal('show');
             },
             crop() {
-                // Options can be updated.
-                // Current option will return a base64 version of the uploaded image with a size of 600px X 450px.
                 let options = {
                     type: 'base64',
                     size: { width: 250, height: 250 },

@@ -121,10 +121,6 @@
                                         data-content="If you dont set any coupon value a 4 digit value will be set"
                                     />
                                 </div>
-                                <!--                                <div class="field">-->
-                                <!--                                    <label>Expires In</label>-->
-                                <!--                                    <input class="coupon-input popup-element" v-model="expiresIn" type="text" placeholder="Days" maxlength="2">-->
-                                <!--                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -319,27 +315,6 @@ export default {
             };
 
             NProgress.start();
-            // if(!this.postId && !this.isEditing){
-            //     axios.post('/api/posts', formData).then(response => {
-            //         NProgress.done();
-            //         Vue.$toast.success(response.data.message);
-            //         let $this = this;
-
-            //         if(choosePayment){
-            //             window.location.href = '/payment?post=' + response.data.data.id + '&package=' + this.choosenPlan
-            //         }
-            //         else{
-            //             setTimeout(() => {
-            //                 window.location.href = '/'
-            //             }, 1000)
-            //         }
-            //     }).catch(error => {
-            //         NProgress.done();
-            //         let response = error.response;
-            //         this.formError = response.data.message
-            //     });
-            // }
-            // else{
             const request = this.postId
                 ? { method: "put", url: `/api/posts/${this.postId}` }
                 : { method: "post", url: `/api/posts` };
