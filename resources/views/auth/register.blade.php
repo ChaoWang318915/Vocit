@@ -97,11 +97,11 @@
                             <div class="field mt-4">
                                 <span>Or sign up with </span>
                                 <a href="{{url('register/google')}}" class="social-icon"><img src="{{asset('assets/images/google.png')}}"></a>
-                                <a href="{{url('register/facebook')}}" class="social-icon"><img src="{{asset('assets/images/facebook.png')}}"></a>
+                                <a href="{{url('login/facebook')}}" class="social-icon"><img src="{{asset('assets/images/facebook.png')}}"></a>
                             </div>
 
                         </form>
-                        <!-- <a class="facebook"  href="{{url('register/facebook')}}"><img style="width:9%" src="{{asset('assets/images/facebook.png')}}">&nbsp;&nbsp;Sign Up with Facebook</a>                          -->
+                        <!-- <a class="facebook"  href="{{url('login/facebook')}}"><img style="width:9%" src="{{asset('assets/images/facebook.png')}}">&nbsp;&nbsp;Sign Up with Facebook</a>                          -->
                     </div>
                 </div>
                 <div class="ui two column grid footer">

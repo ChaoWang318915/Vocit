@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 
 class LoginController extends Controller
 {
@@ -74,21 +75,39 @@ class LoginController extends Controller
      */
     public function handleProviderFacebookCallback()
     {
-        $auth_user = Socialite::driver('facebook')->user();
-        
-        $name = explode(' ', $auth_user->name);         
-        $user = User::updateOrCreate(
-            [
-                'email' => $auth_user->email
-            ],
-            [
-                'api_token'     => $auth_user->token,
-                'first_name'    => $name[0],
-                'last_name'     => $name[1],
-                'username'      => $auth_user->email
-            ]
-        );
-
+        $auth_user = Socialite::driver('facebook')->user();     
+        $name = explode(' ', $auth_user->name);   
+        $c_user = User::where('facebook_id',$auth_user->id)->first();
+        if(empty($c_user)){
+        	$user = User::updateOrCreate(
+	            [
+	                'email' => $auth_user->email
+	            ],
+	            [
+	                'api_token'     => $auth_user->token,
+	                'first_name'    => $name[0],
+	                'last_name'     => $name[1],
+	                'username'      => $auth_user->email,
+	                'facebook_id'   => $auth_user->id
+	            ]
+	        );
+        	if(!empty($user->email))
+				$user->notify(new WelcomeNotification());
+        }
+        else{
+        	$user = User::updateOrCreate(
+	            [
+	                'email' => $auth_user->email
+	            ],
+	            [
+	                'api_token'     => $auth_user->token,
+	                'first_name'    => $name[0],
+	                'last_name'     => $name[1],
+	                'username'      => $auth_user->email,
+	                'facebook_id'   => $auth_user->id
+	            ]
+	        );
+        }      
         Auth::login($user, true);
         return redirect()->to($this->redirectTo); // Redirect to a secure page
     }

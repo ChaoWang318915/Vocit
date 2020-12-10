@@ -28,7 +28,8 @@ class User extends Authenticatable
         'is_business_account',
         'api_token',
         'is_blocked',
-        'sandbox_user'
+        'sandbox_user',
+        'facebook_id',
     ];
 
     /**
