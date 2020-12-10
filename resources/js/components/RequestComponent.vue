@@ -381,17 +381,17 @@ export default {
             $(".action-button").removeClass("disabled");
         },
         checkShortDescriptionLimit($this) {
-            this.shortDescLimit = this.shortDescription.length;
+            // this.shortDescLimit = this.shortDescription.length;
 
-            if (120 - this.shortDescription.length === 0) {
-                $this.preventDefault();
-            }
+            // if (120 - this.shortDescription.length === 0) {
+            //     $this.preventDefault();
+            // }
         },
         checkLongDescriptionLimit($this) {
-            this.longDescLimit = this.content.length;
-            if (400 - this.content.length === 0) {
-                $this.preventDefault();
-            }
+            // this.longDescLimit = this.content.length;
+            // if (400 - this.content.length === 0) {
+            //     $this.preventDefault();
+            // }
         },
         disbalePostButton(file, xhr, formData) {
             formData.append("request_type", this.request_type);

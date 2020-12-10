@@ -153,8 +153,7 @@ class FrontController extends Controller
         $data['coupons'] = Coupon::with(['business', 'post'])
             ->where('user_id', $userId)
             ->orderBy('created_at', 'desc')
-            ->get();
-
+            ->get();        
         return view('wallet', $data);
     }
 
@@ -252,12 +251,17 @@ class FrontController extends Controller
         $post = $coupon->post;
 
         $code = $coupon->coupon;
-        $image = asset('storage/coupons/' . $code . '.png');
+        $image = $coupon->qr_code;
 
         $mpdf = new mPDF(['tempDir' => storage_path() . '/tmp']);
 
         $html = '<div style="text-align: center">';
-        $html .= '<img height="50" src="' . $business->logo . '" alt="">';
+        $html .= '<img style="margin: 0px 15px 15px 0px;" height="100" src="' . $business->logo . '" alt="">';
+        $html .= '<div><b>'.$business->name.'</b>'.
+                    ', '.$business->phone.
+                    ', '.$business->address.'</div>';
+        $html .= '</div>';
+        $html .= '<div style="text-align: center">';
         $html .= '<h1>' . $post->short_description . '</h1>';
         $html .= '<img src="' . $image . '" alt="">';
         $html .= '<p>' . $post->content . '</p>';

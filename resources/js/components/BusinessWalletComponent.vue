@@ -4,8 +4,7 @@
             <div v-if="(accessRole !== 'redeeming')">
                 <div class="ui two column grid mt-5">
                     <div class="sixteen wide tablet eight wide computer column middle aligned">
-                        <h3 class="ui header mt-3 request-header mb-1">Active Requests </h3>
-                        <p>Posts will be visible in main page after 5 minutes of creation </p>
+                        <h3 class="ui header mt-3 request-header mb-1">Active Request Posts</h3>
                     </div>
                     <div class="sixteen wide tablet eight wide computer column text-right res-text-left middle aligned">
                         <div class="ui white buttons shadow requests-filter">
@@ -92,12 +91,12 @@
             <div v-if="role !== 'marketing'">
                 <div class="ui two column grid mt-4">
                     <div class="sixteen wide tablet four wide computer column">
-                        <h3 class="ui header mt-3 exchange-header">Active Exchanges</h3>
+                        <h3 class="ui header mt-3 exchange-header">Active Reward Coupons</h3>
                     </div>
                     <div class="sixteen wide tablet twelve wide computer column text-right res-text-left">
                         <div class="ui white buttons shadow exchanges-filter">
                             <button class="ui active button" @click="getExchanges('active')" data-value="active">Active</button>
-                            <button class="ui button" @click="getExchanges('redeemed')" data-value="redeemed">Redeemed</button>
+                            <button class="ui button" @click="getExchanges('redeemed')" data-value="redeemed">Accept Coupon</button>
                         </div>
                         <div class="ui icon white button open-camera shadow ml-2 mr-2">
                             <i class="qrcode icon"></i>

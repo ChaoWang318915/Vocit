@@ -1,7 +1,8 @@
 <template>
     <div>
-        <h3>Join as Business to upload requests</h3>
-        <div class="ui form mt-5">
+        <h3>Create a Business Account</h3>
+        <span>Start Receiving User Generated Content with a Free Business Account</span>
+        <div class="ui form mt-3">
 
             <div class="field">
                 <input type="text" v-model="businessName"  placeholder="Business Name (required)" required>

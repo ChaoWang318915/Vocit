@@ -125,12 +125,13 @@
 
         <div class="ui mini modal info-modal">
             <div class="content">
-                <p>This exchange picture will be uploaded on your facebook post. If you are looking for getting reward, please click Yes. If not, there will be no reward.</p>
+                <p>You are giving the marketing rights of your picture to said business. This picture will also get posted on Voict Home Page and your facebook page.You must agree to this to get started reward. Do you agree ?</p>
             </div>
             <div class="actions">
                 <div class="ui approve green button">Yes</div>
-                <div class="ui reject green button">No</div>
-            </div>
+                <div class="ui reject green button">No</div> 
+                <a class="ui orange button" href="/terms">Learn more</a>              
+            </div>            
         </div>
 
     </main>

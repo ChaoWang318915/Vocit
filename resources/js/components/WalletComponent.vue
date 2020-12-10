@@ -16,7 +16,7 @@
                                 <img v-bind:src="coupon.qr_code">
                             </div>
                         </div>
-                        <a :href="'/coupons/' + coupon.id + '/pdf'" class="ui bottom attached button">
+                        <a target="_blank" :href="'/coupons/' + coupon.id + '/pdf'" class="ui bottom attached button">
                             <i class="download icon"></i>
                             Download Pdf
                         </a>
