@@ -40,7 +40,7 @@
                         <!--                            <button class="ui red button d-inline-block" v-if="member.is_joined" @click="suspendUser()">Suspend</button>-->
                     </td>
                     <td>
-                        <div class="ui button compact red" @click="removeUser(member.user_id)" v-if="role === 'admin'">Remove</div>
+                        <div class="ui button compact red" @click="removeUser(member.id)" v-if="role === 'admin'">Remove</div>
                         <div class="ui icon top left dropdown pointing compact button mt-2">
                             Change Role
                             <div class="menu">

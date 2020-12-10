@@ -174,25 +174,13 @@ class UserController extends BaseController
         return $this->getResponse(true, 'User has been deleted');
     }
 
-    function removeMember($userId) {
-        $business = auth()->user()->active_business ;
-        $businessId = $business ? $business->id : '';
-
-        if(auth()->id() == $userId){
-            throw  new BadRequestHttpException('You can\'t remove yourself');
-        }
-
-        $businessMember = BusinessMember::where('business_id', $businessId)
-            ->where('user_id', $userId)
-            ->first();
-
-        if($businessMember){
-            $businessMember->delete();
-        }
-
-
+    function removeMember($id) {        
+        $businessMember = BusinessMember::find($id);
+        if($businessMember->role == 'admin'){
+            throw  new BadRequestHttpException('You can not delete an admin account.If you want to delete an admin account please email Vocit at justintheceo@vocit.io');
+        }        
+        $businessMember->delete();
         $members = BusinessMember::where('business_id', $businessId)->with(['user'])->get();
-
         return $this->getResponse($members, 'User has been removed');
     }
 

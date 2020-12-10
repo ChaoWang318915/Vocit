@@ -122,13 +122,13 @@ class FrontController extends Controller
         $data['has_subscription'] = $subscription ? true : false;
         $data['post_limit'] = $business->post_limit;
         $data['integrations'] = Integration::where('business_id', $business->id)->get();
-        $data['apiKey'] = 'Bearer ' . auth()->user()->api_token;
+        $data['apiKey'] = 'Bearer ' . auth()->user()->api_token;     
         return view('business', $data);
     }
 
     function profile()
     {
-        $data['user'] = auth()->user();
+        $data['user'] = auth()->user();       
         return view('profile', $data);
     }
 

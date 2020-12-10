@@ -50259,7 +50259,7 @@ var render = function() {
                             staticClass: "ui button compact red",
                             on: {
                               click: function($event) {
-                                return _vm.removeUser(member.user_id)
+                                return _vm.removeUser(member.id)
                               }
                             }
                           },
