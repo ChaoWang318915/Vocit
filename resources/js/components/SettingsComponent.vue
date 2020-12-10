@@ -16,13 +16,18 @@
         <div class="ui fluid card mt-4" v-if="(role === 'admin')">
             <div class="content">
                 <div class="ui action input right floated">
+                    <select class="ui dropdown quantity-select" v-model="type">
+                        <option value="1">Admin</option>
+                        <option value="2">Marketing</option>
+                        <option value="3">Redeeming</option>                        
+                    </select>
                     <input class="shadow-none bg-gray" type="text" placeholder="Email Address" v-model="inviteEmail">
                     <button class="ui green button" @click="inviteUser()">Invite</button>
                 </div>
             </div>
             <table class="ui padded striped table">
                 <tbody>
-                <tr v-for="member in members">
+                <tr v-for="member in members" :key="member.id">
                     <td class="middle aligned">
                         <img class="ui avatar d-inline-block" v-bind:src="member.user.profile_pic">
                     </td>
@@ -76,7 +81,9 @@
                members : '',
                inviteEmail: '',
                businesses: '',
-               role: ''
+               role: '',
+               type:1,
+
            }
         },
         mounted() {
@@ -84,14 +91,15 @@
            this.businesses = this.associatedBusiness;
            this.role = this.accessRole
         },
-        methods: {
+        methods: {          
             inviteUser() {
                 if(this.inviteEmail.length === 0){
                     Vue.$toast.error('Enter valid email address');
                     return false;
                 }
                 let formData = {
-                    email: this.inviteEmail
+                    email: this.inviteEmail,
+                    role:this.type
                 }
                 NProgress.start();
                 axios.post('/api/business/invite', formData).then(response => {

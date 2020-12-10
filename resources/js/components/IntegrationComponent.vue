@@ -21,15 +21,15 @@
                             <img class="ui small image" src="https://jumpseller.com/images/support/zapier/logo.png">
                         </div>
                         <div class="thirteen wide computer column sixteen wide tablet column">
-                            <h3 class="ui small header">Connect your apps with Vocit to automate your content upload process. To get started please contact <a class="link" href="mailto:justin.vocit@gmail.com
+                            <h3 class="ui small header">Connect your apps with Vocit to automate your content upload process.<br> To get started please contact <a class="link" href="mailto:justin.vocit@gmail.com
 ">Our Admin</a></h3>
                             <p>Zapier API Key: {{this.apiKey}}</p>
-                            <button class="ui primary button add-connection mt-3">Add Connection</button>
+                            <!-- <button class="ui primary button add-connection mt-3">Add Connection</button> -->
                         </div>
                     </div>
                 </div>
-                <div class="content">
-                    <div class="ui grid mt-2"  v-if="integrations.length > 0" v-for="integration in integrations">
+                <!-- <div class="content">
+                    <div class="ui grid mt-2"  v-for="integration in integrations" :key="integration.id">
                         <div class="three wide computer column sixteen wide tablet column">
                             {{integration.name}}
                         </div>
@@ -43,7 +43,7 @@
                     <div class="ui grid mt-2" v-if="integrations.length === 0">
                         <h2>No Connections Found</h2>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="ui modal connection-modal">

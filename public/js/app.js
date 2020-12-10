@@ -4928,6 +4928,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -4948,7 +4953,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuejs_dialog__WEBPACK_IMPORTED_MO
       members: '',
       inviteEmail: '',
       businesses: '',
-      role: ''
+      role: '',
+      type: 1
     };
   },
   mounted: function mounted() {
@@ -4966,7 +4972,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuejs_dialog__WEBPACK_IMPORTED_MO
       }
 
       var formData = {
-        email: this.inviteEmail
+        email: this.inviteEmail,
+        role: this.type
       };
       nprogress__WEBPACK_IMPORTED_MODULE_4___default.a.start();
       axios.post('/api/business/invite', formData).then(function (response) {
@@ -48491,90 +48498,11 @@ var render = function() {
               [
                 _vm._m(2),
                 _vm._v(" "),
-                _c("p", [_vm._v("Zapier API Key: " + _vm._s(this.apiKey))]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "ui primary button add-connection mt-3" },
-                  [_vm._v("Add Connection")]
-                )
+                _c("p", [_vm._v("Zapier API Key: " + _vm._s(this.apiKey))])
               ]
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "content" },
-          [
-            _vm._l(_vm.integrations, function(integration) {
-              return _vm.integrations.length > 0
-                ? _c("div", { staticClass: "ui grid mt-2" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "three wide computer column sixteen wide tablet column"
-                      },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(integration.name) +
-                            "\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "ten wide computer column sixteen wide tablet column"
-                      },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(integration.key) +
-                            "\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "three wide computer column sixteen wide tablet column text-right"
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "ui red button",
-                            on: {
-                              click: function($event) {
-                                return _vm.handleDeleteConnection(
-                                  integration.id
-                                )
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "close icon" })]
-                        )
-                      ]
-                    )
-                  ])
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm.integrations.length === 0
-              ? _c("div", { staticClass: "ui grid mt-2" }, [
-                  _c("h2", [_vm._v("No Connections Found")])
-                ])
-              : _vm._e()
-          ],
-          2
-        )
+        ])
       ])
     ]),
     _vm._v(" "),
@@ -48727,8 +48655,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "ui small header" }, [
       _vm._v(
-        "Connect your apps with Vocit to automate your content upload process. To get started please contact "
+        "Connect your apps with Vocit to automate your content upload process."
       ),
+      _c("br"),
+      _vm._v(" To get started please contact "),
       _c(
         "a",
         {
@@ -50192,6 +50122,45 @@ var render = function() {
       ? _c("div", { staticClass: "ui fluid card mt-4" }, [
           _c("div", { staticClass: "content" }, [
             _c("div", { staticClass: "ui action input right floated" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.type,
+                      expression: "type"
+                    }
+                  ],
+                  staticClass: "ui dropdown quantity-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.type = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("Admin")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [
+                    _vm._v("Marketing")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [_vm._v("Redeeming")])
+                ]
+              ),
+              _vm._v(" "),
               _c("input", {
                 directives: [
                   {
@@ -50233,7 +50202,7 @@ var render = function() {
             _c(
               "tbody",
               _vm._l(_vm.members, function(member) {
-                return _c("tr", [
+                return _c("tr", { key: member.id }, [
                   _c("td", { staticClass: "middle aligned" }, [
                     _c("img", {
                       staticClass: "ui avatar d-inline-block",
