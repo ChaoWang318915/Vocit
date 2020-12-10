@@ -4954,7 +4954,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuejs_dialog__WEBPACK_IMPORTED_MO
       inviteEmail: '',
       businesses: '',
       role: '',
-      type: 1
+      type: 'marketing'
     };
   },
   mounted: function mounted() {
@@ -50151,13 +50151,17 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("Admin")]),
+                  _c("option", { attrs: { value: "admin" } }, [
+                    _vm._v("Admin")
+                  ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "2" } }, [
+                  _c("option", { attrs: { value: "marketing" } }, [
                     _vm._v("Marketing")
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "3" } }, [_vm._v("Redeeming")])
+                  _c("option", { attrs: { value: "redeeming" } }, [
+                    _vm._v("Redeeming")
+                  ])
                 ]
               ),
               _vm._v(" "),

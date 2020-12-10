@@ -17,9 +17,9 @@
             <div class="content">
                 <div class="ui action input right floated">
                     <select class="ui dropdown quantity-select" v-model="type">
-                        <option value="1">Admin</option>
-                        <option value="2">Marketing</option>
-                        <option value="3">Redeeming</option>                        
+                        <option value="admin">Admin</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="redeeming">Redeeming</option>                        
                     </select>
                     <input class="shadow-none bg-gray" type="text" placeholder="Email Address" v-model="inviteEmail">
                     <button class="ui green button" @click="inviteUser()">Invite</button>
@@ -82,7 +82,7 @@
                inviteEmail: '',
                businesses: '',
                role: '',
-               type:1,
+               type:'marketing',
 
            }
         },

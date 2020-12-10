@@ -109,7 +109,7 @@ class UserController extends BaseController
                 'user_id' => $user->id,
                 'business_id' => $businessId,
                 'is_joined' => 0,
-                'role' => 'marketing'
+                'role' => $request->role
             ]);
         }
 
@@ -121,8 +121,6 @@ class UserController extends BaseController
         $notifiableUser = new User();
         $notifiableUser->email = $email;
         $notifiableUser->notify(new BusinessMemberNotification($user->id, $businessId));
-
-
         $members = BusinessMember::where('business_id', $businessId)->with(['user'])->get();
         return $this->getResponse($members, 'User has been invited');
     }
