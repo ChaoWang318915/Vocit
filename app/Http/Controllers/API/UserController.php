@@ -175,7 +175,8 @@ class UserController extends BaseController
     }
 
     function removeMember($id) {        
-        $businessMember = BusinessMember::find($id);
+        $businessMember = BusinessMember::find($id);         
+        $businessId =  $businessMember->business_id;         
         if($businessMember->role == 'admin'){
             throw  new BadRequestHttpException('You can not delete an admin account.If you want to delete an admin account please email Vocit at justintheceo@vocit.io');
         }        
