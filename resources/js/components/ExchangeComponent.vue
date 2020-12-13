@@ -84,9 +84,9 @@
                         <p
                             v-if="!isExchange"
                             class="w-100 d-block header-bottom position-relative float-left"
-                            style="white-space: pre-line; margin-top: -15px !important;"
-                        >
-                            {{ post.content }}
+                            style="white-space: pre-line;"
+                        v-html="post.content">
+                            
                         </p>
                         <label
                             v-if="!isExchange"

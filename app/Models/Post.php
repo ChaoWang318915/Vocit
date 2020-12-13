@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use DateTime;
+use App\Models\Business;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -45,6 +46,7 @@ class Post extends Model implements HasMedia
         'is_paid',
         'expires_in',
         'request_type',
+        'is_auto'
     ];
 
     protected $with = [
@@ -61,6 +63,7 @@ class Post extends Model implements HasMedia
         'post_time_small',
         'comments_count',
         'parent_short_description',
+        'parent_business_name',
         'expiry_time',
         'expire_percentage',
         'expire_color',
@@ -136,6 +139,20 @@ class Post extends Model implements HasMedia
 
         return null;
     }
+
+    function getParentBusinessNameAttribute() {
+        if(!$this->is_request){
+            $post = Post::find($this->parent_post);
+            if($post){
+                $business = Business::find($post->business_id);
+                if($business) return $business->name;
+                else null;
+            }
+        }
+
+        return null;
+    }
+
 
     function getExpiryTimeAttribute() {
         if($this->expires_in){

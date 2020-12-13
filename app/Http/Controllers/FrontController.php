@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Mpdf\Mpdf;
+use Carbon\Carbon;
 use Spatie\MediaLibrary\MediaStream;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Intervention\Image\ImageManagerStatic as IntImage;
@@ -34,7 +35,7 @@ class FrontController extends Controller
     }
 
     function getPosts(Request $request)
-    {
+    {        
         DB::table('posts')->whereNull('business_id')->delete();
         $requestData = collect($request->all());     
         $type = $request->segment(2);      
@@ -58,13 +59,13 @@ class FrontController extends Controller
             } else {
                 $data['canShare'] = auth()->check() ? (auth()->id() == $data['post']->user_id ? true : false) : false;
             }
-        }        
+        }            
         return view('post', $data);
     }
 
     function getExchange($exchangeId)
     {
-        $data['post'] = Post::findorFail($exchangeId);        
+        $data['post'] = Post::findorFail($exchangeId);            
         return view('view-exchange', $data);
     }
 

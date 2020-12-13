@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\Post;
+use App\Models\Business;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
@@ -22,6 +23,18 @@ class GetPostsService
         $search = Arr::get($data ,'search');
         $parent = Arr::get($data ,'parent');
 
+        if(Post::whereDate('expires_in','<',Carbon::now())->where('is_auto',1)->get()->count() != 0){ 
+            $posts = Post::whereDate('expires_in','<',Carbon::now())->where('is_auto',1)->get();
+            foreach($posts as $post){                       
+                $business = Business::find($post->business_id);    
+                if($business->post_limit == 0) $business->post_limit = 0;
+                else $business->post_limit = $business->post_limit -1 ;
+                $business->save();
+                $post->created_at = Carbon::now();
+                $post->expires_in = Carbon::now()->addDays(30);         
+                $post->save();   
+            }
+        }
         $posts = Post::where('is_image', 1)->where('is_draft', 0);
         // $posts = Post::where('is_image', 1)->where('is_draft', 0);
 

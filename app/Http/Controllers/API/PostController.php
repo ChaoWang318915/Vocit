@@ -60,8 +60,7 @@ class PostController extends BaseController
         $post = Post::whereId($postId)->where('is_draft', 0)->first();
         if (!$post) {
             throw new NotFoundHttpException($this->getMessage('not_found', 'Post'));
-        }
-
+        }        
         return $this->getResponse($post);
     }
 
@@ -80,6 +79,7 @@ class PostController extends BaseController
         $data['is_image'] = 0;
         $data['is_draft'] = 0;
         $data['is_request'] = 1;
+        $data['is_auto'] = $request->post['is_auto'];
         $data['business_id'] = auth()->user()->active_business->id;
         $data['content'] = $request->post['content'];
         $data['request_type'] = $request->post['request_type'];

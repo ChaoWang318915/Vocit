@@ -108,7 +108,7 @@
                                     left</span
                                 >
                             </div>
-                            <div class="two fields">
+                           <!-- <div class="fields two"> -->
                                 <div class="field middle aligned">
                                     <label>Coupon</label>
                                     <input
@@ -120,12 +120,11 @@
                                         maxlength="4"
                                         data-content="If you dont set any coupon value a 4 digit value will be set"
                                     />
+                                </div>  
+                           <!-- </div>                               -->
+                                <div class="field">
+                                    <label> <input class="coupon-input popup-element" v-model="isAuto" type="checkbox"> Auto Renew</label>                                    
                                 </div>
-                                <!--                                <div class="field">-->
-                                <!--                                    <label>Expires In</label>-->
-                                <!--                                    <input class="coupon-input popup-element" v-model="expiresIn" type="text" placeholder="Days" maxlength="2">-->
-                                <!--                                </div>-->
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -190,6 +189,7 @@ export default {
             isEditing: false,
             role: "",
             expiresIn: 30,
+            isAuto:1,
             isDraft: 0,
             request_type: 1,
             hasActivePayment: true,
@@ -307,6 +307,7 @@ export default {
                 coupon: this.coupon,
                 content: this.content,
                 expires_in: this.expiresIn,
+                is_auto: this.isAuto,
                 short_description: this.shortDescription,
                 is_draft: choosePayment ? 1 : 0,
                 is_editing: this.isEditing,

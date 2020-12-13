@@ -4606,7 +4606,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -4640,6 +4639,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_toast_notification__WEBPACK_I
       isEditing: false,
       role: "",
       expiresIn: 30,
+      isAuto: 1,
       isDraft: 0,
       request_type: 1,
       hasActivePayment: true,
@@ -4754,6 +4754,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_toast_notification__WEBPACK_I
         coupon: this.coupon,
         content: this.content,
         expires_in: this.expiresIn,
+        is_auto: this.isAuto,
         short_description: this.shortDescription,
         is_draft: choosePayment ? 1 : 0,
         is_editing: this.isEditing,
@@ -48005,24 +48006,12 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               !_vm.isExchange
-                ? _c(
-                    "p",
-                    {
-                      staticClass:
-                        "w-100 d-block header-bottom position-relative float-left",
-                      staticStyle: {
-                        "white-space": "pre-line",
-                        "margin-top": "-15px !important"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(_vm.post.content) +
-                          "\n                    "
-                      )
-                    ]
-                  )
+                ? _c("p", {
+                    staticClass:
+                      "w-100 d-block header-bottom position-relative float-left",
+                    staticStyle: { "white-space": "pre-line" },
+                    domProps: { innerHTML: _vm._s(_vm.post.content) }
+                  })
                 : _vm._e(),
               _vm._v(" "),
               !_vm.isExchange
@@ -50016,38 +50005,80 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "two fields" }, [
-                      _c("div", { staticClass: "field middle aligned" }, [
-                        _c("label", [_vm._v("Coupon")]),
-                        _vm._v(" "),
+                    _c("div", { staticClass: "field middle aligned" }, [
+                      _c("label", [_vm._v("Coupon")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.coupon,
+                            expression: "coupon"
+                          }
+                        ],
+                        staticClass: "coupon-input popup-element",
+                        attrs: {
+                          minlength: "4",
+                          type: "text",
+                          placeholder: "Enter 4 digit coupon code",
+                          maxlength: "4",
+                          "data-content":
+                            "If you dont set any coupon value a 4 digit value will be set"
+                        },
+                        domProps: { value: _vm.coupon },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.coupon = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "field" }, [
+                      _c("label", [
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.coupon,
-                              expression: "coupon"
+                              value: _vm.isAuto,
+                              expression: "isAuto"
                             }
                           ],
                           staticClass: "coupon-input popup-element",
-                          attrs: {
-                            minlength: "4",
-                            type: "text",
-                            placeholder: "Enter 4 digit coupon code",
-                            maxlength: "4",
-                            "data-content":
-                              "If you dont set any coupon value a 4 digit value will be set"
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(_vm.isAuto)
+                              ? _vm._i(_vm.isAuto, null) > -1
+                              : _vm.isAuto
                           },
-                          domProps: { value: _vm.coupon },
                           on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                            change: function($event) {
+                              var $$a = _vm.isAuto,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.isAuto = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.isAuto = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.isAuto = $$c
                               }
-                              _vm.coupon = $event.target.value
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" Auto Renew")
                       ])
                     ])
                   ])
