@@ -238,14 +238,45 @@ class PostController extends BaseController
         $data['is_draft'] = 0;
         $data['is_request'] = 0;
         $post = Post::create($data);
-        if ($hasImages) {
-            foreach ($images as $image) {
-                $post->addMedia($image)
-                    ->sanitizingFileName(function ($fileName) {
-                        return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-                    })
-                    ->toMediaCollection('Posts');
-            }
+        if ($hasImages) {            
+            $parent_post = Post::find($parentPost);
+
+            /**** 
+                Start to Make New image with business title and logo
+            *****/
+            $fileName = $images[0]->getClientOriginalName(); 
+            $s3file = IntImage::make($images[0]);            
+            //step 1 - getting top bg 
+            $top_bg = IntImage::make('storage/top-bg.jpg');   
+            $top_mask = IntImage::make('storage/mask.png');    
+            //step 2 - get the width of the parent post image and resize the top image
+            $width = $s3file->width();
+            $top_bg->resize($width,156);
+            //step 3 - insert logo ,business name
+            $logo_image = IntImage::make($parent_post->business->logo)->resize(150,150)->mask($top_mask);
+            $business_name = $parent_post->business->name;
+            $top_bg->insert($logo_image,'left',30,3);        
+            $fonts = ['anydore', 'gladifilthefte', 'momentus', 'roboto-regular'];
+            $top_bg->text($business_name, 220, 90, function ($font) use ($fonts) {     
+                $index = rand(0, 3);
+                $font->file(public_path("fonts/{$fonts[0]}.ttf"));
+                $font->size(40);
+            });           
+            $merge_image = IntImage::canvas($width,$s3file->height()+156);
+            $merge_image->insert($top_bg,'top',0,0);
+            $merge_image->insert($s3file,'top',0,156);
+            $merge_image->save('storage/facebook/'.$fileName);
+            // End of new image maker
+
+            /**** 
+                Save new made image on S3 storage
+            *****/
+            $contents = Storage::disk('public')->get('facebook/'.$fileName);            
+            $path = 'facebook/' . time() . '/' . $fileName;
+            Storage::disk('s3')->put($path, $contents);
+            $url = Storage::disk('s3')->url($path);
+            // End of saving
+
         }else {
             $post->business_id = $request->get('business_id');
             $post->save();
@@ -253,40 +284,14 @@ class PostController extends BaseController
             $post = Post::find($parentPost);
         }
 
-
-        // $parent_post = Post::find($parentPost);
-        // //customer code
-        // $fileName = $post->media()->first()->file_name;
-        // $pathToGetPut = "posts/{$post->id}";
-        // $s3file = IntImage::make(Storage::disk('s3')->get("{$pathToGetPut}/{$fileName}"));
-        //  //step 1 - getting top bg 
-        //  $top_bg = IntImage::make('storage/top-bg.jpg');   
-        //  $top_mask = IntImage::make('storage/mask.png');    
-        //  //step 2 - get the width of the parent post image and resize the top image
-        //  $width = $s3file->width();
-        //  $top_bg->resize($width,156);                
-        //  //step 3 - insert logo ,business name
-        //  $logo_image = IntImage::make($parent_post->business->logo)->resize(150,150)->mask($top_mask);
-        //  $business_name = $parent_post->business->name;
-        //  $top_bg->insert($logo_image,'left',30,3);        
-        //  $fonts = ['anydore', 'gladifilthefte', 'momentus', 'roboto-regular'];
-        //  $top_bg->text($business_name, 220, 90, function ($font) use ($fonts) {     
-        //     $index = rand(0, 3);
-        //     $font->file(public_path("fonts/{$fonts[0]}.ttf"));
-        //     $font->size(40);
-        // });           
-        // $merge_image = IntImage::canvas($width,$s3file->height()+156);
-        // $merge_image->insert($top_bg,'top',0,0);
-        // $merge_image->insert($s3file,'top',0,156);
-        // $merge_image->save('storage/facebook/'.$fileName);
-        // // $s3file->save("storage/facebook/{$fileName}");
-        // $post->clearMediaCollection('Posts');
-        // $post->addMediaFromUrl(url("storage/facebook/{$fileName}"))
-        //     ->sanitizingFileName(function ($fileName) {
-        //         return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-        //     })
-        //     ->toMediaCollection('Posts');
-        return $this->getResponse($post, 'Successfully Posted');
+        if ($hasImages) {
+            return response()->json([
+                'post' => $post,
+                'fb_image' => $url,
+            ]);
+        }else {
+            return $this->getResponse($post, 'Successfully Posted');
+        }        
     }
 
     function completeExchange(Request $request) {
@@ -295,9 +300,20 @@ class PostController extends BaseController
         $originPost = $request->get('origin_post');
         $parentPost = $request->get('parent_id');
         $businessId = $request->get('business_id');
+        $hasImages = $request->hasFile('images');
+        $images = $request->file('images');                
 
         $post = Post::find($postId);
         $post->business_id = $businessId;
+        if ($hasImages) {
+            foreach ($images as $image) {
+                $post->addMedia($image)
+                    ->sanitizingFileName(function ($fileName) {
+                        return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+                    })
+                    ->toMediaCollection('Posts');
+            }
+        }
         $post->save();
         
         $this->createCoupon($businessId, $originPost, $postId);

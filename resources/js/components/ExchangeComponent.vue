@@ -370,12 +370,12 @@ export default {
         this.handleImpression(this.post.id);
     },
     methods: {
-        openShareDialog(tmpId) {
+        openShareDialog(tmpId, fb_image) {
             var parent = this;
             FB.ui(
                 {
                     method: 'share',
-                    href: this.baseUrl + tmpId
+                    href: fb_image
                 },
                 function(response) {
                     if (response && !response.error_message) {   
@@ -383,6 +383,11 @@ export default {
                         setTimeout(
                             async function() {
                                 let formData = new FormData();   
+                                let images = parent.images;
+                                for (var i = 0; i < images.length; i++) {
+                                    let file = images[i];
+                                    formData.append("images[" + i + "]", file);
+                                }
                                 formData.append("postId", tmpId);
                                 formData.append("origin_post", parent.post.id);
                                 formData.append("parent_id", parent.post.id);
@@ -397,6 +402,8 @@ export default {
                                     .catch(error => {
                                         
                                     });
+                                $('input[type=file]').val(null);   
+                                parent.images = "";  
                         }, 1000);
 
                         
@@ -406,6 +413,8 @@ export default {
                         }).catch(error => {
 
                         });
+                        $('input[type=file]').val(null);   
+                        parent.images = "";  
                         Vue.$toast.success("Posting Canceled.");
                     }
                 }
@@ -458,7 +467,7 @@ export default {
 
             this.initExchange(postId);
         },
-        initExchange(postId = "") {
+        async initExchange(postId = "") {
             let formData = new FormData();
             var parent = this;
             let images = this.images;
@@ -479,38 +488,31 @@ export default {
                     : this.content
             );      
             NProgress.start();
-            axios
-                .post("/api/exchange", formData)
-                .then(response => {
-                    this.content = "";
-                    this.parentComment = "";
-                    this.filesCount = "";                    
-                    $(document)
-                        .find(".comment-area")
-                        .stop(0)
-                        .slideUp("fast");
-                    $(document)
-                        .find(".comment-reply-btn")
-                        .stop(0)
-                        .slideDown("fast");
-                    NProgress.done();
-                    if (this.images.length > 0) {
-                        setTimeout(
-                            async function() {
-                                await parent.openShareDialog(response.data.data.id);
-                        }, 1000);
-                    }else {
-                        this.exchanges = response.data.data.exchanges;
-                        Vue.$toast.success(response.data.message);
-                    }
-                    $('input[type=file]').val(null);   
-                    this.images = "";                    
-                })
-                .catch(error => {
-                    NProgress.done();
-                    let response = error.response;
-                    this.formError = response.data.message;
-                });
+            try {
+                const response = await axios.post("/api/exchange", formData);
+                this.content = "";
+                this.parentComment = "";
+                this.filesCount = "";                    
+                $(document)
+                    .find(".comment-area")
+                    .stop(0)
+                    .slideUp("fast");
+                $(document)
+                    .find(".comment-reply-btn")
+                    .stop(0)
+                    .slideDown("fast");
+                NProgress.done();
+                if (this.images.length > 0) {
+                    this.openShareDialog(response.data.post.id, response.data.fb_image);
+                }else {
+                    this.exchanges = response.data.data.exchanges;
+                    Vue.$toast.success(response.data.message);
+                }
+            } catch (error) {
+                NProgress.done();
+                let response = error.response;
+                this.formError = response.data.message;
+            }
         },
         checkIfLoggedIn() {
             let isLoggedIn = this.isLoggedIn;
