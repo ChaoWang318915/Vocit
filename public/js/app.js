@@ -3416,31 +3416,42 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     this.handleImpression(this.post.id);
   },
   methods: {
-    openShareDialog: function openShareDialog(tmpId) {
+    openShareDialog: function openShareDialog(tmpId, fb_image) {
       var parent = this;
       FB.ui({
         method: 'share',
-        href: this.baseUrl + tmpId
+        href: fb_image
       }, function (response) {
         if (response && !response.error_message) {
           setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-            var formData;
+            var formData, images, i, file;
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
                     formData = new FormData();
+                    images = parent.images;
+
+                    for (i = 0; i < images.length; i++) {
+                      file = images[i];
+                      formData.append("images[" + i + "]", file);
+                    }
+
                     formData.append("postId", tmpId);
                     formData.append("origin_post", parent.post.id);
                     formData.append("parent_id", parent.post.id);
                     formData.append("business_id", parent.post.business_id);
-                    _context.next = 7;
+                    _context.next = 9;
                     return axios.post("/api/completeExchange", formData).then(function (response) {
                       parent.exchanges = response.data.data.exchanges;
                       vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
                     })["catch"](function (error) {});
 
-                  case 7:
+                  case 9:
+                    jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
+                    parent.images = "";
+
+                  case 11:
                   case "end":
                     return _context.stop();
                 }
@@ -3449,6 +3460,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
           })), 1000);
         } else {
           axios["delete"]('/api/posts/' + tmpId).then(function (response) {})["catch"](function (error) {});
+          jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
+          parent.images = "";
           vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success("Posting Canceled.");
         }
       });
@@ -3498,62 +3511,71 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
       this.initExchange(postId);
     },
     initExchange: function initExchange() {
-      var _this = this;
+      var _arguments = arguments,
+          _this = this;
 
-      var postId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-      var formData = new FormData();
-      var parent = this;
-      var images = this.images;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var postId, formData, parent, images, i, file, response, _response;
 
-      if (this.filesCount > 0) {
-        for (var i = 0; i < images.length; i++) {
-          var file = images[i];
-          formData.append("images[" + i + "]", file);
-        }
-      }
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                postId = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : "";
+                formData = new FormData();
+                parent = _this;
+                images = _this.images;
 
-      formData.append("parent_id", postId ? postId : this.post.id);
-      formData.append("origin_post", this.post.id);
-      formData.append("is_draft", 0);
-      formData.append("business_id", this.post.business_id);
-      formData.append("content", this.parentComment.length > 0 ? this.parentComment : this.content);
-      nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.start();
-      axios.post("/api/exchange", formData).then(function (response) {
-        _this.content = "";
-        _this.parentComment = "";
-        _this.filesCount = "";
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find(".comment-area").stop(0).slideUp("fast");
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find(".comment-reply-btn").stop(0).slideDown("fast");
-        nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
-
-        if (_this.images.length > 0) {
-          setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return parent.openShareDialog(response.data.data.id);
-
-                  case 2:
-                  case "end":
-                    return _context2.stop();
+                if (_this.filesCount > 0) {
+                  for (i = 0; i < images.length; i++) {
+                    file = images[i];
+                    formData.append("images[" + i + "]", file);
+                  }
                 }
-              }
-            }, _callee2);
-          })), 1000);
-        } else {
-          _this.exchanges = response.data.data.exchanges;
-          vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
-        }
 
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
-        _this.images = "";
-      })["catch"](function (error) {
-        nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
-        var response = error.response;
-        _this.formError = response.data.message;
-      });
+                formData.append("parent_id", postId ? postId : _this.post.id);
+                formData.append("origin_post", _this.post.id);
+                formData.append("is_draft", 0);
+                formData.append("business_id", _this.post.business_id);
+                formData.append("content", _this.parentComment.length > 0 ? _this.parentComment : _this.content);
+                nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.start();
+                _context2.prev = 11;
+                _context2.next = 14;
+                return axios.post("/api/exchange", formData);
+
+              case 14:
+                response = _context2.sent;
+                _this.content = "";
+                _this.parentComment = "";
+                _this.filesCount = "";
+                jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find(".comment-area").stop(0).slideUp("fast");
+                jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find(".comment-reply-btn").stop(0).slideDown("fast");
+                nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
+
+                if (_this.images.length > 0) {
+                  _this.openShareDialog(response.data.post.id, response.data.fb_image);
+                } else {
+                  _this.exchanges = response.data.data.exchanges;
+                  vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
+                }
+
+                _context2.next = 29;
+                break;
+
+              case 24:
+                _context2.prev = 24;
+                _context2.t0 = _context2["catch"](11);
+                nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
+                _response = _context2.t0.response;
+                _this.formError = _response.data.message;
+
+              case 29:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[11, 24]]);
+      }))();
     },
     checkIfLoggedIn: function checkIfLoggedIn() {
       var isLoggedIn = this.isLoggedIn;
