@@ -297,6 +297,17 @@
                 </div>
             </div>
         </div>
+        <modal name="progress-img-modal" height="auto" :clickToClose="false" :scrollable="true">
+            <div class="modal-content">              
+                <div class="modal-body">
+                    <div class="row" style="text-align:center">
+                        <div class="col-md-12">
+                            <img :src="selected_img_url" style="width:100%">
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </modal>
     </div>
 </template>
 
@@ -337,6 +348,7 @@ export default {
             isSandboxUser: false,
             shareableUrl: this.shareUrl,
             canSharePost: this.canShare,
+            selected_img_url:'',
             clipper: {
                 border: 1,
                 outline: 6,
@@ -369,6 +381,7 @@ export default {
 
         this.handleImpression(this.post.id);
     },
+    
     methods: {
         openShareDialog(tmpId, fb_image) {
             var parent = this;
@@ -376,6 +389,7 @@ export default {
                 {
                     method: 'share',
                     href: fb_image
+                    
                 },
                 function(response) {
                     if (response && !response.error_message) {   
@@ -503,7 +517,15 @@ export default {
                     .slideDown("fast");
                 NProgress.done();
                 if (this.images.length > 0) {
-                    this.openShareDialog(response.data.post.id, response.data.fb_image);
+                    //add await function 
+                    if(response.status){
+                        this.selected_img_url = response.data.fb_image
+                        this.$modal.show('progress-img-modal')
+                        this.hideImageModal(response.data.post.id, response.data.fb_image)
+                        // this.openShareDialog(response.data.post.id, response.data.fb_image);
+                    } 
+
+                    // this.openShareDialog(response.data.post.id, response.data.fb_image);
                 }else {
                     this.exchanges = response.data.data.exchanges;
                     Vue.$toast.success(response.data.message);
@@ -513,6 +535,13 @@ export default {
                 let response = error.response;
                 this.formError = response.data.message;
             }
+        },
+        hideImageModal(post_id,fb_image){
+            setTimeout(() =>this.openFacebook(post_id,fb_image), 10000);
+        },  
+        openFacebook(post_id,fb_image){
+            this.$modal.hide('progress-img-modal')
+            this.openShareDialog(post_id,fb_image);
         },
         checkIfLoggedIn() {
             let isLoggedIn = this.isLoggedIn;
