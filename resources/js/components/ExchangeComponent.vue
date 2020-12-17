@@ -388,7 +388,7 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    href: this.imageUrl
+                    href: fb_image
                     
                 },
                 function(response) {

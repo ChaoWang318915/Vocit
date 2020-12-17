@@ -3432,7 +3432,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
       var parent = this;
       FB.ui({
         method: 'share',
-        href: this.imageUrl
+        href: fb_image
       }, function (response) {
         if (response && !response.error_message) {
           setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
