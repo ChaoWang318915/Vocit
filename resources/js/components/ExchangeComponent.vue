@@ -388,7 +388,7 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    href: fb_image
+                    href: this.imageUrl
                     
                 },
                 function(response) {
@@ -537,7 +537,7 @@ export default {
             }
         },
         hideImageModal(post_id,fb_image){
-            setTimeout(() =>this.openFacebook(post_id,fb_image), 10000);
+            setTimeout(() =>this.openFacebook(post_id,fb_image), 3000);
         },  
         openFacebook(post_id,fb_image){
             this.$modal.hide('progress-img-modal')

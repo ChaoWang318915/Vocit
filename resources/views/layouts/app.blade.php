@@ -146,8 +146,11 @@
       appId            : '891941987965583',
       autoLogAppEvents : true,
       xfbml            : true,
-      version          : 'v9.0'
+      version          : 'v9.0',
+      status           : true,
+      cookie           : true,
     });
+    alert("facebook")
   };
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
