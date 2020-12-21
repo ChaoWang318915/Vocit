@@ -386,10 +386,11 @@ export default {
     methods: {
         openShareDialog(tmpId) {
             var parent = this;
+            console.log(parent.facebook_post)
             FB.ui(
                 {
                     method: 'share',
-                    href: 'https://vocit.io/post/?'+this.facebook_post,                                                        
+                    href: 'https://vocit.io/post/'+parent.facebook_post,                                                        
                     // method: 'share_open_graph',
                     // action_type: 'og.shares',
                     // display: 'popup',
