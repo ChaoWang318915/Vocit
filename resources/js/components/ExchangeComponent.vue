@@ -387,19 +387,19 @@ export default {
             var parent = this;
             FB.ui(
                 {
-                    method: 'share',
-                    href: this.imageUrl,                                                        
-                    // method: 'share_open_graph',
-                    // action_type: 'og.shares',
-                    // display: 'popup',
-                    // action_properties: JSON.stringify({
-                    //     object: {
-                    //     'og:url': 'vocit.io',
-                    //     'og:title': 'Title to show',
-                    //     'og:description': 'The description',
-                    //     'og:image': fb_image
-                    //     }
-                    // })                                       
+                    // method: 'share',
+                    // href: fb_image,                                                        
+                    method: 'share_open_graph',
+                    action_type: 'og.likes',
+                    display: 'popup',
+                    action_properties: JSON.stringify({
+                        object: {
+                        'og:url': 'vocit.io',
+                        'og:title': 'Title to show',
+                        'og:description': 'The description',
+                        'og:image': fb_image
+                        }
+                    })                                       
                 },
                 function(response) {
                     if (response && !response.error_message) {   
