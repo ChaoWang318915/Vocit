@@ -125,12 +125,12 @@
 
         <div class="ui mini modal info-modal">
             <div class="content">
-                <p>You are giving the marketing rights of your picture to said business. This picture will also get posted on Voict Home Page and your facebook page.You must agree to this to get started reward. Do you agree ?</p>
+                <p>You are giving the marketing rights of this picture to the business in exchange for their reward. The picture will also be posted on Vocit Home Page and your Facebook page. Do you Agee?</p>
             </div>
             <div class="actions">
                 <div class="ui approve green button">Yes</div>
                 <div class="ui reject green button">No</div> 
-                <a class="ui orange button" href="/terms">Learn more</a>              
+                <a class="ui orange button" target="_blank" href="/terms">Learn more</a>              
             </div>            
         </div>
 

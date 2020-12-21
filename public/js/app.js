@@ -3370,6 +3370,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -3385,6 +3389,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     return {
       post: "",
       facebook_post: '',
+      temp_post: '',
       imageUrl: "",
       cropImageUrl: "",
       business: "",
@@ -3429,8 +3434,10 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     this.handleImpression(this.post.id);
   },
   methods: {
-    openShareDialog: function openShareDialog(tmpId) {
+    openShareDialog: function openShareDialog() {
       var parent = this;
+      console.log(parent.temp_post);
+      console.log(parent.facebook_post);
       FB.ui({
         method: 'share',
         href: 'https://vocit.io/post/' + parent.facebook_post
@@ -3450,7 +3457,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                       formData.append("images[" + i + "]", file);
                     }
 
-                    formData.append("postId", tmpId);
+                    formData.append("postId", parent.temp_post);
                     formData.append("origin_post", parent.post.id);
                     formData.append("parent_id", parent.post.id);
                     formData.append("business_id", parent.post.business_id);
@@ -3473,7 +3480,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
             }, _callee);
           })), 1000);
         } else {
-          axios["delete"]('/api/posts/' + tmpId + '?facebook_post=' + parent.facebook_post).then(function (response) {})["catch"](function (error) {});
+          axios["delete"]('/api/posts/' + parent.temp_post + '?facebook_post=' + parent.facebook_post).then(function (response) {})["catch"](function (error) {});
           jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
           parent.images = "";
           vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success("Posting Canceled.");
@@ -3571,10 +3578,9 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                   if (response.status) {
                     _this.selected_img_url = response.data.fb_image;
                     _this.facebook_post = response.data.facebook_post;
+                    _this.temp_post = response.data.post.id;
 
                     _this.$modal.show('progress-img-modal');
-
-                    _this.hideImageModal(response.data.post.id);
                   }
                 } else {
                   _this.exchanges = response.data.data.exchanges;
@@ -3599,16 +3605,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
         }, _callee2, null, [[11, 24]]);
       }))();
     },
-    hideImageModal: function hideImageModal(post_id) {
-      var _this2 = this;
-
-      setTimeout(function () {
-        return _this2.openFacebook(post_id);
-      }, 3000);
-    },
-    openFacebook: function openFacebook(post_id) {
+    hideImageModal: function hideImageModal() {
       this.$modal.hide('progress-img-modal');
-      this.openShareDialog(post_id);
     },
     checkIfLoggedIn: function checkIfLoggedIn() {
       var isLoggedIn = this.isLoggedIn;
@@ -4878,15 +4876,17 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_toast_notification__WEBPACK_I
 
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(".action-button").removeClass("disabled");
     },
-    checkShortDescriptionLimit: function checkShortDescriptionLimit($this) {// this.shortDescLimit = this.shortDescription.length;
-      // if (120 - this.shortDescription.length === 0) {
-      //     $this.preventDefault();
-      // }
+    checkShortDescriptionLimit: function checkShortDescriptionLimit($this) {
+      this.shortDescLimit = this.shortDescription.length;
+
+      if (120 - this.shortDescription.length === 0) {// $this.preventDefault();
+      }
     },
-    checkLongDescriptionLimit: function checkLongDescriptionLimit($this) {// this.longDescLimit = this.content.length;
-      // if (400 - this.content.length === 0) {
-      //     $this.preventDefault();
-      // }
+    checkLongDescriptionLimit: function checkLongDescriptionLimit($this) {
+      this.longDescLimit = this.content.length;
+
+      if (400 - this.content.length === 0) {// $this.preventDefault();
+      }
     },
     disbalePostButton: function disbalePostButton(file, xhr, formData) {
       formData.append("request_type", this.request_type);
@@ -5299,6 +5299,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -48532,6 +48533,26 @@ var render = function() {
                   ])
                 ]
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "ui approve green button",
+                  on: { click: _vm.openShareDialog }
+                },
+                [_vm._v("Yes")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "ui reject red button",
+                  on: { click: _vm.hideImageModal }
+                },
+                [_vm._v("No")]
+              )
             ])
           ])
         ]
@@ -50755,7 +50776,8 @@ var render = function() {
                     key: coupon.id,
                     staticClass: "ui card",
                     attrs: {
-                      href: "post/" + coupon.post.id + "#" + coupon.exchange_id
+                      target: "_blank",
+                      href: "/coupons/" + coupon.id + "/pdf"
                     }
                   },
                   [

@@ -3,74 +3,76 @@
     <div class="ui container">
         <div class="ui grid">
             <div class="column">
-                <div class="ui large header primary-header">PRIVACY POLICY</div>
-                <p class="text-fade">is the owner and, therefore, responsible for the projects indicated below, including any of their subdomains or sections (hereinafter, "Website" as corresponds):</p>
+                <div class="ui large header primary-header">PRIVACY POLICY</div> 
+                <p>Vocit remains fully and always committed to respecting its users and their privacy when users log on to and use our website/app.</p>
+                <p>To assure you of this commitment, we have designed and present this privacy policy to you. This will allow you to fully understand how we use any information that you provide to us or that becomes available to us in the course of your use of this website/app.</p>
+                <p>When you access or use the Vocit website/app in any way or manner, it means that you are in agreement with the way that we use and disclose your personal information as detailed in this privacy policy. You must immediately stop using this website/app if you find even one of the terms of this privacy policy unacceptable.</p>              
             </div>
         </div>
-        <div class="ui small header">April 2020</div>
+        <div class="ui small header">REVIEWS/REVISIONS</div>
         <div class="ui grid">
             <div class="column">
-                <p>Vocit considers your privacy and the security of your personal information to be very important. We, therefore, will do our utmost best to preserve your privacy. This Privacy Policy has been designed to describe the way in which any personal information that is made available to us through your use of our website will be used and/or shared.
-                    By accessing or/and using the www.vocit.io website, you agree to be legally constrained by the terms of this Privacy Policy. If you do not fully agree with our privacy policy, your only option is not to use this website.
-                    Your acceptance of this Privacy Policy means that you consent to the way we use and disclose your personal information in agreement with the policy.
-                    Vocit has the exclusive right and may, at any time, exercise such a right to adjust this privacy policy without sending any notice to users. It is therefore imperative that you occasionally check back on this page for reviews and changes to this policy, as your use of the website after any review of policy shall be taken as your acceptance of those changes. </p>
-                <div class="ui small header">PERSONALLY-IDENTIFIABLE DETAILS</div>
-                <p>When you become a user of our website and its services, we will obtain from you certain personally-identifiable details such as full name and email address. This kind of information directly identities you and is required in order to provide our services to you. It may include but is not limited to:
+                <p>As we deem fit, we may occasionally, with or without notice to you, review or change some or all of the terms of this Privacy Policy to better reflect our use, disclosure, and protection of your personal information. </p>
+                <p>Your continued use of the website/app after we have made and uploaded any changes shall be taken to mean your continued acceptance of our privacy policy</p>
 
-                    Your full name
-                    Your e-mail address
-                    Phone number
-                    Contact address</p>
-                <div class="ui small header">PAYMENT INFORMATION</div>
-                <p>We will require all registered business users to provide us with relevant credit card information or other payment information to enable us receive their subscription fees.</p>
-                <div class="ui small header">STANDARD AUTOMATICALLY-COLLECTED INFORMATION</div>
-                <p>We use a range of smart technologies to extract information from your computer about your actions on our website in order to provide more custom-made services to better suit your needs.
 
-                    This information may include your computer or browsing device’s browser information as well as its IP address, preference and usage, clickstream data, transaction, location, operating system, time, device information, server log information, call and SMS data, and contacts. Vocit may also gather browser and website-related information through your access to our website through our deployment of cookies and/or web beacons. </p>
-                <div class="ui small header">USE OF INFORMATION</div>
+                <div class="ui small header">INFORMATION COLLECTION – PERSONALLY IDENTIFIABLE DETAILS</div>
+                <p>At the point of registration on the Vocit website/app, we will prompt you to provide certain personally-identifiable details, and this may include your full name and email address. In some circumstances, you may log on to the website/app with your Facebook Id.</p>
+                <p>Here are the various categories of information we collect from and about you:</p>
+                <p>Your personal information that you provide: These include your full name, phone number, contact address, e-mail address, gender and age, activities, and interests. Where you log into the website/app with your FacebookId, we will also collect this information.</p>
+                <p>Information about others that we gather from your use of the service: When you use our services to send friends, colleagues, and family message or where you engage in communication with a business user or individual user, we may collect personal information about such people/businesses. This may include but is in no way limited to their full names, physical addresses, and email addresses. </p>
+                <p>Exchanged pictures: Whenever you and another user exchange pictures (i.e., when a business user asks for and receives user-generated content from an individual user), we will store a copy of these pictures in our archive.</p>
 
-                Under no circumstances will we retail or make available for sale, transfer, or in any way attempt to share any of your personal information with a third party under any condition. The only condition under which we may release your private information is when we are directed to do so to comply with a legal subpoena /summons or other similar legal processes.
-                Vocit may also share your information when we believe that such revelation is central to protecting our rights, safeguarding your safety or the welfare of Vocit users, or for the detection and/or prevention of fraud.
+                <div class="ui small header">INFORMATION COLLECTION THROUGH COOKIES AND OTHER TECHNOLOGIES</div>
+                <p>The other way we collect information about individual users and businesses is through cookies, beacons, and other technologies. These technologies help us to determine the actions you take when you are on the website/app, and the information that we gather through this means includes but is in no way limited to your device’s browser information and IP address, time and date stamps, and exit and referring pages.</p>
 
-                The following are ways we use information obtain from you:
-                <div class="ui bulleted list">
-                    <div class="item">To facilitate the delivery of service offered and hired through our website;</div>
-                    <div class="item">For marketing purposes, and to inform you about other services which may be of interest to you;</div>
-                    <div class="item">To respond to any of your questions, complaints or requests;</div>
-                    <div class="item">For market survey, bookkeeping, and billing purposes;</div>
-                    <div class="item">To improve/enhance the content/layout of our website;</div>
-                    <div class="item">To communicate with other users/businesses;</div>
-                    <div class="item">To keep proper records;</div>
-                    <div class="item">To advise you about important changes and reviews to the website or service; and</div>
-                    <div class="item">With companies and other third parties that you authorize us to share with.</div>
-                </div>
 
-                <div class="ui small header">OUR COOKIES POLICY</div>
+                <div class="ui small header">USING YOUR INFORMATION</div>
+                <p>When you log on to the website/app as a registered user, we will use your information in the following ways:</p>
+                <p>To help us verify your identity as a bonafide Vocit.iouser; </p>
+                <p>To aid in the provision of our services to you and other users;</p>
+                <p>So that we can evaluate our service delivery and work on the areas where we need some improvement;</p>
+                <p>So that we can promptly inform you where there are any changes to the Vocit website/app and services;</p>
+                <p>To let you know about services, tasks, and/or events that may be of interest to you;</p>
+                <p>To help us find solutions to problems as well as to resolve disputes quickly; </p>
+                <p>To ensure that your experience on the website/app is customized for your optimal enjoyment; and/or </p>
+                <p>To discover and adequately defend ourselves and our users against error, fraudulent behavior, and other criminal activities.</p>
 
-                We use the cookies technology on Vocit for these reasons:
-                <div class="ui bulleted list">
-                    <div class="item">To facilitate a user-friendly registration for first time users;</div>
-                    <div class="item"> To facilitate a stress-free log in experience for returning users;</div>
-                    <div class="item"> To administer our website;</div>
-                    <div class="item"> In the analysis of trends and user behavior;</div>
-                    <div class="item"> To observe users’ actions around the website such as to collect information pertaining to viewed pages, clicked links and searches; and/or</div>
-                    <div class="item"> To collect general statistical data about our user base as in totality.</div>
-                    <div class="item"> Even though most browsers automatically accept cookies, you have the choice of accepting or denying cookies on your web browser. However, you will not be able to use some of the interactive features provided on our website if you deny cookies.</div>
-                </div>
 
-                <div class="ui small header"> USER OPTIONS</div>
-                All Vocit users have the right to and make at any time choose to update, modify, amend, or delete their Vocit accounts.
-                All independent users can do this by simply logging in to their accounts and carrying out the desired changes, including deleting the account.
-                Businesses can also update, modify, or amend their accounts by logging in to their accounts to carry out such changes. However, business users must notify us of their intention not to renew their subscription and not simply delete their accounts.
+                <div class="ui small header">WHY AND WITH WHOM WE MAY SHARE YOUR PERSONAL INFORMATION</div>
+                <p>Because the very nature of our website/app is to connect businesses needing user-generatedcontent with users willing to provide such content, we will, of course share individual users’ information with connected business users, and vice versa.</p>
+                <p>We may also allow third-parties such as our authorized service providers and ad companies to place their ads on our website/app. In certain circumstances, these companies may use tracking technologies such as cookies to garner information about users who click on their ads. In no way do we disclose your personally identifiable details to these third parties. </p>
+                <p>When you ask us to disclose your personal information to third parties approved by you, we will do so, provided that such a request is in written form and signed by you.</p>
+                <p>With or without your knowledge, we may also share your personal information with a governmental agency to respond to a government subpoena, a court order, or a similar investigative demand where we are legally compelled to do so.</p>
 
 
 
-                <div class="ui small header">SECURITY OF INFORMATION</div>
-                At www.vocit.io, we do out best to prevent illegal access to users’ personal information, and to ensure proper use of information.
-                We also do all we can to maintain data accuracy by deploying practical administrative practices and measures that secure and protect user information. Vocit however, assumes no liability for any unapproved access or the loss of private information that we have no control over because there is no full guarantee for the safety of information transportation over the Internet.
+                <div class="ui small header">NO SALE</div>
+                <p>Under no circumstances will we deliberately sell, exchange, or otherwise give your personal information to any third party.</p>
+                 
 
-                <div class="ui small header"> CHILDREN’S PRIVACY</div>
-                Our website is designed specifically for use by adults who are older than 18, and who are able to form legally binding contracts. Thus, we do not aim our services towards minors and will never knowingly collect private information from minors.
+                <div class="ui small header">COOKIES USAGE</div>
+                <p>As most websites and apps do, Vocit uses the "cookies" technology for different reasons, including providing our esteemed users with registration and log in experiences that are user-friendly. When we use cookies this way, we may be able to collect information about your activities on the website/app, including your viewed pages, your clicked links, and your searches.</p>
+                <p>t is up to you whether to accept or reject cookies on the website/app, but you understand that you will not be able to log in or to use some of the collaborative features provided on our website/appwhere you choose to reject cookies.</p>
+                 
+
+                <div class="ui small header">MINORS</div>
+                <p>Only persons who are 18 or older and who are able to form legally binding contracts are welcome to use our service. This is why we will never deliberately collect information from persons younger than 18.</p>
+                 
+
+
+                <div class="ui small header">SECURITY </div>
+                <p>We understand that the security of your information is of the utmost importance. We will thus do our best to protect your personal information from unauthorized access and ensure that your information with us is always appropriately used and only for the reasons we collected them.</p>
+                <p>To ensure data security, we employ world-renowned administrative measures and practices such as SSL encryption technology and ensure that only a handful of specialists can access your personal information.</p>
+                <p>Despite our care, you are not to hold us liable for any unauthorized use of your personal information simply because there is nocomplete guarantee and assurance of information safety for data transported over the internet.</p>
+
+
+                <div class="ui small header">ACCESSING YOUR INFORMATION</div>
+                <p>We want to ensure that your personal information in our possession is always accurate and current. We, therefore, ask that you sign in to your account and edit your profile to reflect any changes whenever there are any material changes to your personal information.</p>
+                <p>You may also,at any time, deactivate your user profile under the “Account Settings” for your account. All your information will no longer be available to other website/app users once you have deactivated your profile. </p>
+                <p>When you deactivate your profile, we may, however, still keep certain information associated with your account for analysis and recordkeeping integrity.</p>
+
+ 
             </div>
         </div>
     </div>

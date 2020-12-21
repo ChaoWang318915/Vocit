@@ -257,7 +257,7 @@ class FrontController extends Controller
         $mpdf = new mPDF(['tempDir' => storage_path() . '/tmp']);
 
         $html = '<div style="text-align: center">';
-        $html .= '<img style="margin: 0px 15px 15px 0px;" height="100" src="' . $business->logo . '" alt="">';
+        $html .= '<img style="margin: 0px 15px 15px 0px;" height="150" src="' . $business->logo . '" alt="">';
         $html .= '<div><b>'.$business->name.'</b>'.
                     ', '.$business->phone.
                     ', '.$business->address.'</div>';

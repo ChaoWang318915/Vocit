@@ -7,7 +7,8 @@
         <div class="ui column grid" v-if="activeCoupons.length > 0">
             <div class="column" >
                 <div class="ui stackable three cards">
-                    <a v-bind:href="'post/' +coupon.post.id + '#' + coupon.exchange_id " class="ui card" v-for="coupon in activeCoupons" :key="coupon.id" >
+                <!--  <a v-bind:href="'post/' +coupon.post.id + '#' + coupon.exchange_id " class="ui card" v-for="coupon in activeCoupons" :key="coupon.id" > -->
+                    <a  target="_blank" v-bind:href="'/coupons/' +coupon.id + '/pdf'" class="ui card" v-for="coupon in activeCoupons" :key="coupon.id" >
                         <div class="content">
                             <div class="coupon-container">
                                 <img class="business-logo" v-bind:src="coupon.business.logo">

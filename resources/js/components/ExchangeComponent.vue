@@ -305,7 +305,11 @@
                             <img :src="selected_img_url" style="width:100%">
                         </div>
                     </div>
-                </div>                
+                </div>     
+                <div class="modal-footer">
+                    <div class="ui approve green button" @click="openShareDialog">Yes</div>
+                    <div class="ui reject red button" @click="hideImageModal">No</div> 
+                </div>           
             </div>
         </modal>
     </div>
@@ -337,6 +341,7 @@ export default {
         return {
             post: "",
             facebook_post:'',
+            temp_post:'',
             imageUrl: "",
             cropImageUrl: "",
             business: "",
@@ -384,9 +389,10 @@ export default {
     },
     
     methods: {
-        openShareDialog(tmpId) {
+        openShareDialog() {
             var parent = this;
-           
+            console.log(parent.temp_post)
+            console.log(parent.facebook_post)
             FB.ui(
                 {
                     method: 'share',
@@ -403,7 +409,7 @@ export default {
                                     let file = images[i];
                                     formData.append("images[" + i + "]", file);
                                 }
-                                formData.append("postId", tmpId);
+                                formData.append("postId", parent.temp_post);
                                 formData.append("origin_post", parent.post.id);
                                 formData.append("parent_id", parent.post.id);
                                 formData.append("business_id", parent.post.business_id);
@@ -423,7 +429,7 @@ export default {
 
                         
                     } else {
-                        axios.delete('/api/posts/' + tmpId+'?facebook_post='+parent.facebook_post).then(response => {
+                        axios.delete('/api/posts/' +  parent.temp_post+'?facebook_post='+parent.facebook_post).then(response => {
                             
                         }).catch(error => {
 
@@ -522,8 +528,8 @@ export default {
                     if(response.status){
                         this.selected_img_url = response.data.fb_image
                         this.facebook_post = response.data.facebook_post
-                        this.$modal.show('progress-img-modal')
-                        this.hideImageModal(response.data.post.id)                      
+                        this.temp_post = response.data.post.id
+                        this.$modal.show('progress-img-modal')                                           
                     }                   
                 }else {
                     this.exchanges = response.data.data.exchanges;
@@ -535,13 +541,9 @@ export default {
                 this.formError = response.data.message;
             }
         },
-        hideImageModal(post_id){
-            setTimeout(() =>this.openFacebook(post_id), 3000);
-        },  
-        openFacebook(post_id){
-            this.$modal.hide('progress-img-modal')         
-            this.openShareDialog(post_id);
-        },
+        hideImageModal(){
+            this.$modal.hide('progress-img-modal')      
+        },          
         checkIfLoggedIn() {
             let isLoggedIn = this.isLoggedIn;
             if (!isLoggedIn) {

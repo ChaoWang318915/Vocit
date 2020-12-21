@@ -11,7 +11,7 @@
                 <li><a href="/">HOME</a></li>
                 <li><a href="{{url('about')}}">ABOUT</a></li>
                 <li><a href="{{url('help')}}">HELP</a></li>
-{{--                <li><a href="{{url('privacy')}}">PRIVACY</a></li>--}}
+                <li><a href="{{url('privacy')}}">PRIVACY</a></li>
                 <li><a href="{{url('terms')}}">TERMS & CONDITION</a></li>
             </ul>
         </div>

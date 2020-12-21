@@ -284,7 +284,7 @@ class PostController extends BaseController
             $data['is_request'] = 1;
             $data['is_auto'] =  1;
             $data['business_id'] = auth()->user()->active_business->id;
-            $data['content'] =  " ";       
+            $data['content'] =  "";       
             $data['short_description'] = $parent_post->short_description;
             $data['coupon'] = $parent_post->coupon;
             $data['is_image'] = 1;
@@ -315,7 +315,17 @@ class PostController extends BaseController
     }
 
     function completeExchange(Request $request) {
-        $this->deletePost($request->facebook_post);
+        if(!empty($request->facebook_post)) {
+            $post = Post::find($request->facebook_post);
+            if (!$post) {
+                throw new NotFoundHttpException('Post not found');
+            }
+
+            if ($post->delete()) {
+                Post::where('parent_post', $request->facebook_post)->delete();
+                Coupon::where('post_id', $request->facebook_post)->delete();
+            }
+        }
         $postId = $request->get('postId');
         $originPost = $request->get('origin_post');
         $parentPost = $request->get('parent_id');
@@ -443,8 +453,19 @@ class PostController extends BaseController
         }
     }
 
-    function deletePost($postId)
+    function deletePost(Request $request,$postId)
     {
+        if(!empty($request->facebook_post)) {
+            $post = Post::find($request->facebook_post);
+            if (!$post) {
+                throw new NotFoundHttpException('Post not found');
+            }
+
+            if ($post->delete()) {
+                Post::where('parent_post', $request->facebook_post)->delete();
+                Coupon::where('post_id', $request->facebook_post)->delete();
+            }
+        }
         $post = Post::find($postId);
         if (!$post) {
             throw new NotFoundHttpException('Post not found');
