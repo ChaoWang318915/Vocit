@@ -388,7 +388,7 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    href: fb_image+'?title=Title&description=Test',                                                        
+                    href: this.imageUrl,                                                        
                     // method: 'share_open_graph',
                     // action_type: 'og.shares',
                     // display: 'popup',

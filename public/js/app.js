@@ -3432,7 +3432,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
       var parent = this;
       FB.ui({
         method: 'share',
-        href: fb_image + '?title=Title&description=Test' // method: 'share_open_graph',
+        href: this.imageUrl // method: 'share_open_graph',
         // action_type: 'og.shares',
         // display: 'popup',
         // action_properties: JSON.stringify({
