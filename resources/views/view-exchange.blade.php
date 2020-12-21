@@ -4,7 +4,7 @@
     <meta property="og:title" content="{!! str_replace('Get', $post->parent_business_name.' received ', $post->parent_short_description )!!}" />
     <meta property="og:description" content="" />
     <meta property="og:type" content="image/jpeg">
-    <meta property="og:image:width" content="600"/>
+    <meta property="og:image:width" content="1000"/>
     <meta property="og:image:height" content="800"/>
     <meta property="og:url" content="{{$shareurl}}" />
     <meta property="og:image" content="{{$post->lg_url ? $post->lg_url : $post->attachments[0]->url}}" />
