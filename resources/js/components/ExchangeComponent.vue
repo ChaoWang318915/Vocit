@@ -388,7 +388,10 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    href: fb_image
+                    href: fb_image,                                                        
+                    caption: 'vocit.io',
+                    description: "Description Section",
+                    message: "Message Section"
                     
                 },
                 function(response) {

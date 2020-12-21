@@ -245,7 +245,7 @@ class PostController extends BaseController
                 Start to Make New image with business title and logo
             *****/
             $fileName = $images[0]->getClientOriginalName(); 
-            $s3file = IntImage::make($images[0])->resize(600, null, function ($constraint) {
+            $s3file = IntImage::make($images[0])->resize(600, 1000, function ($constraint) {
                 $constraint->aspectRatio();
             });
             // $s3file = IntImage::make($images[0]);          
