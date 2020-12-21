@@ -3384,6 +3384,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
   data: function data() {
     return {
       post: "",
+      facebook_post: '',
       imageUrl: "",
       cropImageUrl: "",
       business: "",
@@ -3428,22 +3429,22 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     this.handleImpression(this.post.id);
   },
   methods: {
-    openShareDialog: function openShareDialog(tmpId, fb_image) {
+    openShareDialog: function openShareDialog(tmpId) {
       var parent = this;
       FB.ui({
-        // method: 'share',
-        // href: fb_image,                                                        
-        method: 'share_open_graph',
-        action_type: 'og.likes',
-        display: 'popup',
-        action_properties: JSON.stringify({
-          object: {
-            'og:url': 'vocit.io',
-            'og:title': 'Title to show',
-            'og:description': 'The description',
-            'og:image': fb_image
-          }
-        })
+        method: 'share',
+        href: 'https://vocit.io/post/?' + this.facebook_post // method: 'share_open_graph',
+        // action_type: 'og.shares',
+        // display: 'popup',
+        // action_properties: JSON.stringify({
+        //     object: {
+        //     'og:url': 'https://vocit.io/post/251',
+        //     'og:title': 'Title to show',
+        //     'og:description': 'The description',
+        //     'og:image': fb_image
+        //     }
+        // })                                       
+
       }, function (response) {
         if (response && !response.error_message) {
           setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -3579,13 +3580,12 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                   //add await function 
                   if (response.status) {
                     _this.selected_img_url = response.data.fb_image;
+                    _this.facebook_post = response.data.facebook_post;
 
                     _this.$modal.show('progress-img-modal');
 
-                    _this.hideImageModal(response.data.post.id, response.data.fb_image); // this.openShareDialog(response.data.post.id, response.data.fb_image);
-
-                  } // this.openShareDialog(response.data.post.id, response.data.fb_image);
-
+                    _this.hideImageModal(response.data.post.id);
+                  }
                 } else {
                   _this.exchanges = response.data.data.exchanges;
                   vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
@@ -3609,16 +3609,16 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
         }, _callee2, null, [[11, 24]]);
       }))();
     },
-    hideImageModal: function hideImageModal(post_id, fb_image) {
+    hideImageModal: function hideImageModal(post_id) {
       var _this2 = this;
 
       setTimeout(function () {
-        return _this2.openFacebook(post_id, fb_image);
+        return _this2.openFacebook(post_id);
       }, 3000);
     },
-    openFacebook: function openFacebook(post_id, fb_image) {
+    openFacebook: function openFacebook(post_id) {
       this.$modal.hide('progress-img-modal');
-      this.openShareDialog(post_id, fb_image);
+      this.openShareDialog(post_id);
     },
     checkIfLoggedIn: function checkIfLoggedIn() {
       var isLoggedIn = this.isLoggedIn;

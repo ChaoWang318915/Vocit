@@ -245,7 +245,7 @@ class PostController extends BaseController
                 Start to Make New image with business title and logo
             *****/
             $fileName = $images[0]->getClientOriginalName(); 
-            $s3file = IntImage::make($images[0])->resize(600, 1000, function ($constraint) {
+            $s3file = IntImage::make($images[0])->resize(1250, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             // $s3file = IntImage::make($images[0]);          
@@ -268,17 +268,24 @@ class PostController extends BaseController
             $merge_image = IntImage::canvas($width,$s3file->height()+156);
             $merge_image->insert($top_bg,'top',0, 0);
             $merge_image->insert($s3file,'top',0,156);
-            $merge_image->save('storage/facebook/'.$fileName);
+            $merge_image->save('storage/facebook/'.$fileName)->encode('data-url');
             // End of new image maker
 
             /**** 
                 Save new made image on S3 storage
             *****/
-            $contents = Storage::disk('public')->get('facebook/'.$fileName);            
-            $path = 'facebook/' . time() . '/' . $fileName;
-            Storage::disk('s3')->put($path, $contents);
-            $url = Storage::disk('s3')->url($path);
+            // $contents = Storage::disk('public')->get('facebook/'.$fileName);            
+            // $path = 'facebook/' . time() . '/' . $fileName;
+            // Storage::disk('s3')->put($path, $contents);
+            // $url = Storage::disk('s3')->url($path);
             // End of saving
+            $facebook_post = Post::create($data);
+            // $facebook_post->addMedia($merge_image)
+            $facebook_post->addMediaFromBase64($merge_image)
+            ->sanitizingFileName(function ($fileName = 'tempfile.png') {
+                return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+            })
+            ->toMediaCollection('Posts');
 
         }else {
             $post->business_id = $request->get('business_id');
@@ -290,7 +297,8 @@ class PostController extends BaseController
         if ($hasImages) {
             return response()->json([
                 'post' => $post,
-                'fb_image' => $url,
+                'fb_image' => $facebook_post->lg_url,
+                'facebook_post'=>$facebook_post->id
             ]);
         }else {
             return $this->getResponse($post, 'Successfully Posted');

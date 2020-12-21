@@ -336,6 +336,7 @@ export default {
     data() {
         return {
             post: "",
+            facebook_post:'',
             imageUrl: "",
             cropImageUrl: "",
             business: "",
@@ -383,23 +384,23 @@ export default {
     },
     
     methods: {
-        openShareDialog(tmpId, fb_image) {
+        openShareDialog(tmpId) {
             var parent = this;
             FB.ui(
                 {
-                    // method: 'share',
-                    // href: fb_image,                                                        
-                    method: 'share_open_graph',
-                    action_type: 'og.likes',
-                    display: 'popup',
-                    action_properties: JSON.stringify({
-                        object: {
-                        'og:url': 'vocit.io',
-                        'og:title': 'Title to show',
-                        'og:description': 'The description',
-                        'og:image': fb_image
-                        }
-                    })                                       
+                    method: 'share',
+                    href: 'https://vocit.io/post/?'+this.facebook_post,                                                        
+                    // method: 'share_open_graph',
+                    // action_type: 'og.shares',
+                    // display: 'popup',
+                    // action_properties: JSON.stringify({
+                    //     object: {
+                    //     'og:url': 'https://vocit.io/post/251',
+                    //     'og:title': 'Title to show',
+                    //     'og:description': 'The description',
+                    //     'og:image': fb_image
+                    //     }
+                    // })                                       
                 },
                 function(response) {
                     if (response && !response.error_message) {   
@@ -530,12 +531,10 @@ export default {
                     //add await function 
                     if(response.status){
                         this.selected_img_url = response.data.fb_image
+                        this.facebook_post = response.data.facebook_post
                         this.$modal.show('progress-img-modal')
-                        this.hideImageModal(response.data.post.id, response.data.fb_image)
-                        // this.openShareDialog(response.data.post.id, response.data.fb_image);
-                    } 
-
-                    // this.openShareDialog(response.data.post.id, response.data.fb_image);
+                        this.hideImageModal(response.data.post.id)                      
+                    }                   
                 }else {
                     this.exchanges = response.data.data.exchanges;
                     Vue.$toast.success(response.data.message);
@@ -546,12 +545,12 @@ export default {
                 this.formError = response.data.message;
             }
         },
-        hideImageModal(post_id,fb_image){
-            setTimeout(() =>this.openFacebook(post_id,fb_image), 3000);
+        hideImageModal(post_id){
+            setTimeout(() =>this.openFacebook(post_id), 3000);
         },  
-        openFacebook(post_id,fb_image){
+        openFacebook(post_id){
             this.$modal.hide('progress-img-modal')
-            this.openShareDialog(post_id,fb_image);
+            this.openShareDialog(post_id);
         },
         checkIfLoggedIn() {
             let isLoggedIn = this.isLoggedIn;
