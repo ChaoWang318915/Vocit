@@ -542,7 +542,16 @@ export default {
             }
         },
         hideImageModal(){
-            this.$modal.hide('progress-img-modal')      
+            var _this = this 
+            _this.$modal.hide('progress-img-modal')      
+            axios.delete('/api/posts/' +  _this.temp_post+'?facebook_post='+_this.facebook_post).then(response => {
+                
+            }).catch(error => {
+
+            });
+            $('input[type=file]').val(null);   
+            _this.images = "";  
+            Vue.$toast.success("Posting Canceled.");
         },          
         checkIfLoggedIn() {
             let isLoggedIn = this.isLoggedIn;

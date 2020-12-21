@@ -3533,7 +3533,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     },
     initExchange: function initExchange() {
       var _arguments = arguments,
-          _this = this;
+          _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var postId, formData, parent, images, i, file, response, _response;
@@ -3544,21 +3544,21 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
               case 0:
                 postId = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : "";
                 formData = new FormData();
-                parent = _this;
-                images = _this.images;
+                parent = _this2;
+                images = _this2.images;
 
-                if (_this.filesCount > 0) {
+                if (_this2.filesCount > 0) {
                   for (i = 0; i < images.length; i++) {
                     file = images[i];
                     formData.append("images[" + i + "]", file);
                   }
                 }
 
-                formData.append("parent_id", postId ? postId : _this.post.id);
-                formData.append("origin_post", _this.post.id);
+                formData.append("parent_id", postId ? postId : _this2.post.id);
+                formData.append("origin_post", _this2.post.id);
                 formData.append("is_draft", 0);
-                formData.append("business_id", _this.post.business_id);
-                formData.append("content", _this.parentComment.length > 0 ? _this.parentComment : _this.content);
+                formData.append("business_id", _this2.post.business_id);
+                formData.append("content", _this2.parentComment.length > 0 ? _this2.parentComment : _this2.content);
                 nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.start();
                 _context2.prev = 11;
                 _context2.next = 14;
@@ -3566,24 +3566,24 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
 
               case 14:
                 response = _context2.sent;
-                _this.content = "";
-                _this.parentComment = "";
-                _this.filesCount = "";
+                _this2.content = "";
+                _this2.parentComment = "";
+                _this2.filesCount = "";
                 jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find(".comment-area").stop(0).slideUp("fast");
                 jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find(".comment-reply-btn").stop(0).slideDown("fast");
                 nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
 
-                if (_this.images.length > 0) {
+                if (_this2.images.length > 0) {
                   //add await function 
                   if (response.status) {
-                    _this.selected_img_url = response.data.fb_image;
-                    _this.facebook_post = response.data.facebook_post;
-                    _this.temp_post = response.data.post.id;
+                    _this2.selected_img_url = response.data.fb_image;
+                    _this2.facebook_post = response.data.facebook_post;
+                    _this2.temp_post = response.data.post.id;
 
-                    _this.$modal.show('progress-img-modal');
+                    _this2.$modal.show('progress-img-modal');
                   }
                 } else {
-                  _this.exchanges = response.data.data.exchanges;
+                  _this2.exchanges = response.data.data.exchanges;
                   vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
                 }
 
@@ -3595,7 +3595,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                 _context2.t0 = _context2["catch"](11);
                 nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
                 _response = _context2.t0.response;
-                _this.formError = _response.data.message;
+                _this2.formError = _response.data.message;
 
               case 29:
               case "end":
@@ -3606,7 +3606,14 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
       }))();
     },
     hideImageModal: function hideImageModal() {
-      this.$modal.hide('progress-img-modal');
+      var _this = this;
+
+      _this.$modal.hide('progress-img-modal');
+
+      axios["delete"]('/api/posts/' + _this.temp_post + '?facebook_post=' + _this.facebook_post).then(function (response) {})["catch"](function (error) {});
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
+      _this.images = "";
+      vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success("Posting Canceled.");
     },
     checkIfLoggedIn: function checkIfLoggedIn() {
       var isLoggedIn = this.isLoggedIn;
