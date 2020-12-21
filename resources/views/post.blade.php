@@ -5,8 +5,8 @@
     <meta property="og:title" content="{!! $post->is_request ? $post->short_description : $post->parent_short_description !!} from {{$post->business->name}}" />
     <meta property="og:description" content="{!!  $post->content !!}" />
     <meta property="og:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200"/>
-    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:width" content="600"/>
+    <meta property="og:image:height" content="1000"/>
     <meta property="og:url" content="{{$shareurl}}" />
     <meta property="og:image" content="{{$post->lg_url ? $post->lg_url : $post->attachments[0]->url}}" />
 @endsection

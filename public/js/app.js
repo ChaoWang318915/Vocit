@@ -3433,18 +3433,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
       var parent = this;
       FB.ui({
         method: 'share',
-        href: 'https://vocit.io/post/' + parent.facebook_post // method: 'share_open_graph',
-        // action_type: 'og.shares',
-        // display: 'popup',
-        // action_properties: JSON.stringify({
-        //     object: {
-        //     'og:url': 'https://vocit.io/post/251',
-        //     'og:title': 'Title to show',
-        //     'og:description': 'The description',
-        //     'og:image': fb_image
-        //     }
-        // })                                       
-
+        href: 'https://vocit.io/post/' + parent.facebook_post
       }, function (response) {
         if (response && !response.error_message) {
           setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -3465,17 +3454,18 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                     formData.append("origin_post", parent.post.id);
                     formData.append("parent_id", parent.post.id);
                     formData.append("business_id", parent.post.business_id);
-                    _context.next = 9;
+                    formData.append("facebook_post", parent.facebook_post);
+                    _context.next = 10;
                     return axios.post("/api/completeExchange", formData).then(function (response) {
                       parent.exchanges = response.data.data.exchanges;
                       vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
                     })["catch"](function (error) {});
 
-                  case 9:
+                  case 10:
                     jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
                     parent.images = "";
 
-                  case 11:
+                  case 12:
                   case "end":
                     return _context.stop();
                 }
@@ -3483,7 +3473,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
             }, _callee);
           })), 1000);
         } else {
-          axios["delete"]('/api/posts/' + tmpId).then(function (response) {})["catch"](function (error) {});
+          axios["delete"]('/api/posts/' + tmpId + '?facebook_post=' + parent.facebook_post).then(function (response) {})["catch"](function (error) {});
           jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
           parent.images = "";
           vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success("Posting Canceled.");
@@ -3618,7 +3608,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     },
     openFacebook: function openFacebook(post_id) {
       this.$modal.hide('progress-img-modal');
-      console.log(this.facebook_post);
       this.openShareDialog(post_id);
     },
     checkIfLoggedIn: function checkIfLoggedIn() {

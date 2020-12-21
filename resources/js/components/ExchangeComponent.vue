@@ -390,18 +390,7 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    href: 'https://vocit.io/post/'+parent.facebook_post,                                                        
-                    // method: 'share_open_graph',
-                    // action_type: 'og.shares',
-                    // display: 'popup',
-                    // action_properties: JSON.stringify({
-                    //     object: {
-                    //     'og:url': 'https://vocit.io/post/251',
-                    //     'og:title': 'Title to show',
-                    //     'og:description': 'The description',
-                    //     'og:image': fb_image
-                    //     }
-                    // })                                       
+                    href: 'https://vocit.io/post/'+parent.facebook_post,                                                                                                               
                 },
                 function(response) {
                     if (response && !response.error_message) {   
@@ -418,7 +407,7 @@ export default {
                                 formData.append("origin_post", parent.post.id);
                                 formData.append("parent_id", parent.post.id);
                                 formData.append("business_id", parent.post.business_id);
-
+                                formData.append("facebook_post", parent.facebook_post);
                                 await axios
                                     .post("/api/completeExchange", formData)
                                     .then(response => {                         
@@ -434,7 +423,7 @@ export default {
 
                         
                     } else {
-                        axios.delete('/api/posts/' + tmpId).then(response => {
+                        axios.delete('/api/posts/' + tmpId+'?facebook_post='+parent.facebook_post).then(response => {
                             
                         }).catch(error => {
 
@@ -550,8 +539,7 @@ export default {
             setTimeout(() =>this.openFacebook(post_id), 3000);
         },  
         openFacebook(post_id){
-            this.$modal.hide('progress-img-modal')
-             console.log(this.facebook_post)
+            this.$modal.hide('progress-img-modal')         
             this.openShareDialog(post_id);
         },
         checkIfLoggedIn() {

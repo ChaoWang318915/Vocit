@@ -315,7 +315,7 @@ class PostController extends BaseController
     }
 
     function completeExchange(Request $request) {
-
+        $this->deletePost($request->facebook_post);
         $postId = $request->get('postId');
         $originPost = $request->get('origin_post');
         $parentPost = $request->get('parent_id');
@@ -340,7 +340,7 @@ class PostController extends BaseController
         $this->createIntegration($postId, $originPost);
 
         $post = Post::find($parentPost);
-
+        
         return $this->getResponse($post, 'Successfully Posted');
     }
 
