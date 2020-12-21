@@ -284,7 +284,7 @@ class PostController extends BaseController
             $data['is_request'] = 1;
             $data['is_auto'] =  1;
             $data['business_id'] = auth()->user()->active_business->id;
-            $data['content'] =  $request->get('content');          
+            $data['content'] =  " ";       
             $data['short_description'] = $parent_post->short_description;
             $data['coupon'] = $parent_post->coupon;
             $data['is_image'] = 1;
