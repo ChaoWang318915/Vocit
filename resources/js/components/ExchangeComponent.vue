@@ -386,7 +386,7 @@ export default {
     methods: {
         openShareDialog(tmpId) {
             var parent = this;
-            console.log(parent.facebook_post)
+           
             FB.ui(
                 {
                     method: 'share',
@@ -551,6 +551,7 @@ export default {
         },  
         openFacebook(post_id){
             this.$modal.hide('progress-img-modal')
+             console.log(this.facebook_post)
             this.openShareDialog(post_id);
         },
         checkIfLoggedIn() {

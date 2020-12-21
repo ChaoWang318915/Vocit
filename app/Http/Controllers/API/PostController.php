@@ -279,6 +279,15 @@ class PostController extends BaseController
             // Storage::disk('s3')->put($path, $contents);
             // $url = Storage::disk('s3')->url($path);
             // End of saving
+            $data['user_id'] = auth()->id();           
+            $data['is_draft'] = 0;
+            $data['is_request'] = 1;
+            $data['is_auto'] =  1;
+            $data['business_id'] = auth()->user()->active_business->id;
+            $data['content'] =  $request->get('content');          
+            $data['short_description'] = $parent_post->short_description;
+            $data['coupon'] = $parent_post->coupon;
+            $data['is_image'] = 1;
             $facebook_post = Post::create($data);
             // $facebook_post->addMedia($merge_image)
             $facebook_post->addMediaFromBase64($merge_image)

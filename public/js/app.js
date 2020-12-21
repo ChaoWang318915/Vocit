@@ -3431,7 +3431,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
   methods: {
     openShareDialog: function openShareDialog(tmpId) {
       var parent = this;
-      console.log(parent.facebook_post);
       FB.ui({
         method: 'share',
         href: 'https://vocit.io/post/' + parent.facebook_post // method: 'share_open_graph',
@@ -3619,6 +3618,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     },
     openFacebook: function openFacebook(post_id) {
       this.$modal.hide('progress-img-modal');
+      console.log(this.facebook_post);
       this.openShareDialog(post_id);
     },
     checkIfLoggedIn: function checkIfLoggedIn() {
