@@ -239,11 +239,11 @@ class PostController extends BaseController
         $data['is_request'] = 0;
         $data['is_auto'] =  1;
         $data['business_id'] = auth()->user()->active_business->id;
-        $data['short_description'] = $parent_post->short_description;
+        $data['short_description'] = "";
  
         $post = Post::create($data);
         if ($hasImages) {            
-            
+
             $parent_post = Post::find($parentPost);
             /**** 
                 Start to Make New image with business title and logo

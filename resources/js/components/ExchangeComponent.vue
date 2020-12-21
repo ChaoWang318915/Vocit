@@ -390,6 +390,7 @@ export default {
     
     methods: {
         openShareDialog() {
+            this.$modal.hide('progress-img-modal')   
             var parent = this;
             console.log(parent.temp_post)
             console.log(parent.facebook_post)
