@@ -391,7 +391,8 @@ export default {
     methods: {
         openShareDialog() {
             this.$modal.hide('progress-img-modal')   
-            var parent = this;            
+            var parent = this;         
+            console.log(parent.temp_post);   
             FB.ui(
                 {
                     method: 'share',

@@ -3437,6 +3437,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     openShareDialog: function openShareDialog() {
       this.$modal.hide('progress-img-modal');
       var parent = this;
+      console.log(parent.temp_post);
       FB.ui({
         method: 'share',
         href: 'https://vocit.io/post/' + parent.temp_post
