@@ -298,17 +298,18 @@
             </div>
         </div>
         <modal name="progress-img-modal" height="auto" :clickToClose="false" :scrollable="true">
-            <div class="modal-content">              
+            <div class="modal-content">     
+               <h4 class="modal-header">Post to Facebook and Vocit to receive reward?</h4>  
                 <div class="modal-body">
                     <div class="row" style="text-align:center">
                         <div class="col-md-12">
-                            <img :src="selected_img_url" style="width:100%">
+                            <img :src="selected_img_url">
                         </div>
                     </div>
                 </div>     
-                <div class="modal-footer">
-                    <div class="ui approve green button" @click="openShareDialog">Yes</div>
-                    <div class="ui reject red button" @click="hideImageModal">No</div> 
+                <div class="modal-footer">                                        
+                    <div class="ui approve green button" @click="openShareDialog">Yes</div>                     
+                    <div class="ui reject red button" @click="hideImageModal">No</div>
                 </div>           
             </div>
         </modal>
@@ -339,8 +340,7 @@ export default {
     ],
     data() {
         return {
-            post: "",
-            facebook_post:'',
+            post: "",          
             temp_post:'',
             imageUrl: "",
             cropImageUrl: "",
@@ -391,13 +391,11 @@ export default {
     methods: {
         openShareDialog() {
             this.$modal.hide('progress-img-modal')   
-            var parent = this;
-            console.log(parent.temp_post)
-            console.log(parent.facebook_post)
+            var parent = this;            
             FB.ui(
                 {
                     method: 'share',
-                    href: 'https://vocit.io/post/'+parent.facebook_post,                                                                                                               
+                    href: 'https://vocit.io/post/'+parent.temp_post,                                                                                                               
                 },
                 function(response) {
                     if (response && !response.error_message) {   
@@ -413,8 +411,7 @@ export default {
                                 formData.append("postId", parent.temp_post);
                                 formData.append("origin_post", parent.post.id);
                                 formData.append("parent_id", parent.post.id);
-                                formData.append("business_id", parent.post.business_id);
-                                formData.append("facebook_post", parent.facebook_post);
+                                formData.append("business_id", parent.post.business_id);                               
                                 await axios
                                     .post("/api/completeExchange", formData)
                                     .then(response => {                         
@@ -430,7 +427,7 @@ export default {
 
                         
                     } else {
-                        axios.delete('/api/posts/' +  parent.temp_post+'?facebook_post='+parent.facebook_post).then(response => {
+                        axios.delete('/api/posts/' +  parent.temp_post).then(response => {
                             
                         }).catch(error => {
 
@@ -527,8 +524,7 @@ export default {
                 if (this.images.length > 0) {
                     //add await function 
                     if(response.status){
-                        this.selected_img_url = response.data.fb_image
-                        this.facebook_post = response.data.facebook_post
+                        this.selected_img_url = response.data.fb_image                     
                         this.temp_post = response.data.post.id
                         this.$modal.show('progress-img-modal')                                           
                     }                   
@@ -545,7 +541,7 @@ export default {
         hideImageModal(){
             var _this = this 
             _this.$modal.hide('progress-img-modal')      
-            axios.delete('/api/posts/' +  _this.temp_post+'?facebook_post='+_this.facebook_post).then(response => {
+            axios.delete('/api/posts/' +  _this.temp_post).then(response => {
                 
             }).catch(error => {
 

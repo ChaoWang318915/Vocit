@@ -227,7 +227,7 @@ class PostController extends BaseController
 
         $parentPost = $request->get('parent_id');
         $data['user_id'] = auth()->id();
-        $data['parent_post'] = $request->get('parent_id');        
+        $data['parent_post'] = 1;        
         $data['content'] = $request->get('content');
         if ($hasImages) {
             $data['is_image'] = 1;
@@ -239,66 +239,59 @@ class PostController extends BaseController
         $data['is_request'] = 0;
         $data['is_auto'] =  1;
         $data['business_id'] = auth()->user()->active_business->id;
-        $data['short_description'] = "";
- 
+        $data['short_description'] = "";        
         $post = Post::create($data);
-        if ($hasImages) {            
+        if ($hasImages) {     
+            
+            foreach ($images as $image) {
+                $post->addMedia($image)
+                    ->sanitizingFileName(function ($fileName) {
+                        return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+                    })
+                    ->toMediaCollection('Posts');
+            }        
+            $post->save();
 
+            $fileName = $post->media()->first()->file_name;             
             $parent_post = Post::find($parentPost);
             /**** 
                 Start to Make New image with business title and logo
             *****/
-            $fileName = $images[0]->getClientOriginalName(); 
-            $s3file = IntImage::make($images[0])->resize(1250, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            // $s3file = IntImage::make($images[0]);          
+            //$fileName = $images[0]->getClientOriginalName();
+            $s3file = IntImage::make($post->attachments[0]->thumb_url);                      
             //step 1 - getting top bg 
             $top_bg = IntImage::make('storage/top-bg.jpg');   
             $top_mask = IntImage::make('storage/mask.png');    
             //step 2 - get the width of the parent post image and resize the top image
-            $width = $s3file->width();
-            $top_bg->resize($width,156);
+            $width = $s3file->width();            
+            $top_bg->resize($width,78);
             //step 3 - insert logo ,business name
-            $logo_image = IntImage::make($parent_post->business->logo)->resize(150,150)->mask($top_mask);
+            $logo_image = IntImage::make($parent_post->business->logo)->resize(75,75)->mask($top_mask);
             $business_name = $parent_post->business->name;
             $top_bg->insert($logo_image,'left',30,3);        
             $fonts = ['anydore', 'gladifilthefte', 'momentus', 'roboto-regular'];
-            $top_bg->text($business_name, 220, 90, function ($font) use ($fonts) {     
+            $top_bg->text($business_name, 110, 45, function ($font) use ($fonts) {     
                 $index = rand(0, 3);
                 $font->file(public_path("fonts/{$fonts[0]}.ttf"));
-                $font->size(40);
+                $font->size(20);
             });           
-            $merge_image = IntImage::canvas($width,$s3file->height()+156);
+            $merge_image = IntImage::canvas($width,$s3file->height()+78);
             $merge_image->insert($top_bg,'top',0, 0);
-            $merge_image->insert($s3file,'top',0,156);
+            $merge_image->insert($s3file,'top',0,78);
             $merge_image->save('storage/facebook/'.$fileName)->encode('data-url');
             // End of new image maker
 
             /**** 
                 Save new made image on S3 storage
             *****/
-            // $contents = Storage::disk('public')->get('facebook/'.$fileName);            
-            // $path = 'facebook/' . time() . '/' . $fileName;
-            // Storage::disk('s3')->put($path, $contents);
-            // $url = Storage::disk('s3')->url($path);
+            $contents = Storage::disk('public')->get('facebook/'.$fileName);            
+            $path = 'facebook/' . time() . '/' . $fileName;
+            Storage::disk('s3')->put($path, $contents);
+            $url = Storage::disk('s3')->url($path);
             // End of saving
-            $data['user_id'] = auth()->id();           
-            $data['is_draft'] = 0;
-            $data['is_request'] = 1;
-            $data['is_auto'] =  1;
-            $data['business_id'] = auth()->user()->active_business->id;
-            $data['content'] =  "";       
-            $data['short_description'] = $parent_post->short_description;
-            $data['coupon'] = $parent_post->coupon;
-            $data['is_image'] = 1;
-            $facebook_post = Post::create($data);
-            // $facebook_post->addMedia($merge_image)
-            $facebook_post->addMediaFromBase64($merge_image)
-            ->sanitizingFileName(function ($fileName = 'tempfile.png') {
-                return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-            })
-            ->toMediaCollection('Posts');
+           
+            $post->facebook_url = $url;
+            $post->save();
 
         }else {
             $post->business_id = $request->get('business_id');
@@ -310,8 +303,7 @@ class PostController extends BaseController
         if ($hasImages) {
             return response()->json([
                 'post' => $post,
-                'fb_image' => $facebook_post->lg_url,
-                'facebook_post'=>$facebook_post->id
+                'fb_image' => $post->facebook_url,
             ]);
         }else {
             return $this->getResponse($post, 'Successfully Posted');
@@ -319,17 +311,7 @@ class PostController extends BaseController
     }
 
     function completeExchange(Request $request) {
-        if(!empty($request->facebook_post)) {
-            $post = Post::find($request->facebook_post);
-            if (!$post) {
-                throw new NotFoundHttpException('Post not found');
-            }
-
-            if ($post->delete()) {
-                Post::where('parent_post', $request->facebook_post)->delete();
-                Coupon::where('post_id', $request->facebook_post)->delete();
-            }
-        }
+         
         $postId = $request->get('postId');
         $originPost = $request->get('origin_post');
         $parentPost = $request->get('parent_id');
@@ -348,6 +330,7 @@ class PostController extends BaseController
                     ->toMediaCollection('Posts');
             }
         }
+        $post->facebook_url = '';
         $post->save();
         
         $this->createCoupon($businessId, $originPost, $postId);
@@ -459,17 +442,7 @@ class PostController extends BaseController
 
     function deletePost(Request $request,$postId)
     {
-        if(!empty($request->facebook_post)) {
-            $post = Post::find($request->facebook_post);
-            if (!$post) {
-                throw new NotFoundHttpException('Post not found');
-            }
-
-            if ($post->delete()) {
-                Post::where('parent_post', $request->facebook_post)->delete();
-                Coupon::where('post_id', $request->facebook_post)->delete();
-            }
-        }
+         
         $post = Post::find($postId);
         if (!$post) {
             throw new NotFoundHttpException('Post not found');

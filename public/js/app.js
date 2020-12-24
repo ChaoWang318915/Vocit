@@ -3374,6 +3374,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -3388,7 +3389,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
   data: function data() {
     return {
       post: "",
-      facebook_post: '',
       temp_post: '',
       imageUrl: "",
       cropImageUrl: "",
@@ -3437,11 +3437,9 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     openShareDialog: function openShareDialog() {
       this.$modal.hide('progress-img-modal');
       var parent = this;
-      console.log(parent.temp_post);
-      console.log(parent.facebook_post);
       FB.ui({
         method: 'share',
-        href: 'https://vocit.io/post/' + parent.facebook_post
+        href: 'https://vocit.io/post/' + parent.temp_post
       }, function (response) {
         if (response && !response.error_message) {
           setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -3462,18 +3460,17 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                     formData.append("origin_post", parent.post.id);
                     formData.append("parent_id", parent.post.id);
                     formData.append("business_id", parent.post.business_id);
-                    formData.append("facebook_post", parent.facebook_post);
-                    _context.next = 10;
+                    _context.next = 9;
                     return axios.post("/api/completeExchange", formData).then(function (response) {
                       parent.exchanges = response.data.data.exchanges;
                       vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
                     })["catch"](function (error) {});
 
-                  case 10:
+                  case 9:
                     jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
                     parent.images = "";
 
-                  case 12:
+                  case 11:
                   case "end":
                     return _context.stop();
                 }
@@ -3481,7 +3478,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
             }, _callee);
           })), 1000);
         } else {
-          axios["delete"]('/api/posts/' + parent.temp_post + '?facebook_post=' + parent.facebook_post).then(function (response) {})["catch"](function (error) {});
+          axios["delete"]('/api/posts/' + parent.temp_post).then(function (response) {})["catch"](function (error) {});
           jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
           parent.images = "";
           vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success("Posting Canceled.");
@@ -3578,7 +3575,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                   //add await function 
                   if (response.status) {
                     _this2.selected_img_url = response.data.fb_image;
-                    _this2.facebook_post = response.data.facebook_post;
                     _this2.temp_post = response.data.post.id;
 
                     _this2.$modal.show('progress-img-modal');
@@ -3611,7 +3607,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
 
       _this.$modal.hide('progress-img-modal');
 
-      axios["delete"]('/api/posts/' + _this.temp_post + '?facebook_post=' + _this.facebook_post).then(function (response) {})["catch"](function (error) {});
+      axios["delete"]('/api/posts/' + _this.temp_post).then(function (response) {})["catch"](function (error) {});
       jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
       _this.images = "";
       vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success("Posting Canceled.");
@@ -48528,16 +48524,17 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "modal-content" }, [
+            _c("h4", { staticClass: "modal-header" }, [
+              _vm._v("Post to Facebook and Vocit to receive reward?")
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c(
                 "div",
                 { staticClass: "row", staticStyle: { "text-align": "center" } },
                 [
                   _c("div", { staticClass: "col-md-12" }, [
-                    _c("img", {
-                      staticStyle: { width: "100%" },
-                      attrs: { src: _vm.selected_img_url }
-                    })
+                    _c("img", { attrs: { src: _vm.selected_img_url } })
                   ])
                 ]
               )

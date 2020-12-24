@@ -46,7 +46,8 @@ class Post extends Model implements HasMedia
         'is_paid',
         'expires_in',
         'request_type',
-        'is_auto'
+        'is_auto',
+        'facebook_url'
     ];
 
     protected $with = [

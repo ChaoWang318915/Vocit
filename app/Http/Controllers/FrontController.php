@@ -59,13 +59,14 @@ class FrontController extends Controller
             } else {
                 $data['canShare'] = auth()->check() ? (auth()->id() == $data['post']->user_id ? true : false) : false;
             }
-        }            
+        }    
+     
         return view('post', $data);
     }
 
     function getExchange($exchangeId)
     {
-        $data['post'] = Post::findorFail($exchangeId);            
+        $data['post'] = Post::findorFail($exchangeId);                  
         return view('view-exchange', $data);
     }
 

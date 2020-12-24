@@ -125,7 +125,7 @@
 
         <div class="ui mini modal info-modal">
             <div class="content">
-                <p>You are giving the marketing rights of this picture to the business in exchange for their reward. The picture will also be posted on Vocit Home Page and your Facebook page. Do you Agee?</p>
+                <p>You are giving the marketing rights of this picture to the business in exchange for a reward. The picture will also be posted on Vocit Home Page and your Facebook page. Do you agee?</p>
             </div>
             <div class="actions">
                 <div class="ui approve green button">Yes</div>
