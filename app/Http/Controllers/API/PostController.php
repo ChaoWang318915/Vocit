@@ -234,12 +234,12 @@ class PostController extends BaseController
         } else {
             $data['is_image'] = 0;
         }
-
+        $parent_post = Post::find($parentPost);
         $data['is_draft'] = 0;
         $data['is_request'] = 1;
         $data['is_auto'] =  1;
         $data['business_id'] = auth()->user()->active_business->id;
-        $data['short_description'] = "";        
+        $data['short_description'] = $parent_post->parent_short_description;        
         $post = Post::create($data);
         if ($hasImages) {     
             
@@ -253,7 +253,7 @@ class PostController extends BaseController
             $post->save();
 
             $fileName = $post->media()->first()->file_name;             
-            $parent_post = Post::find($parentPost);
+           
             /**** 
                 Start to Make New image with business title and logo
             *****/
@@ -321,15 +321,15 @@ class PostController extends BaseController
 
         $post = Post::find($postId);
         $post->business_id = $businessId;
-        if ($hasImages) {
-            foreach ($images as $image) {
-                $post->addMedia($image)
-                    ->sanitizingFileName(function ($fileName) {
-                        return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-                    })
-                    ->toMediaCollection('Posts');
-            }
-        }
+        // if ($hasImages) {
+        //     foreach ($images as $image) {
+        //         $post->addMedia($image)
+        //             ->sanitizingFileName(function ($fileName) {
+        //                 return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+        //             })
+        //             ->toMediaCollection('Posts');
+        //     }
+        // }
         $post->facebook_url = '';
         $post->save();
         
