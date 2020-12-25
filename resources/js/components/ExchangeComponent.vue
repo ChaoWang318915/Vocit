@@ -392,12 +392,12 @@ export default {
         openShareDialog() {
             this.$modal.hide('progress-img-modal')   
             var parent = this;         
-            console.log(parent.temp_post);   
+            // console.log(parent.temp_post);   
             FB.ui(
                 {
                     method: 'share',
                     // href: 'localhost:8000/post/'+parent.temp_post,               
-                    href: 'https://vocit.io/post/'+391,                                                                                                               
+                    href: 'https://vocit.io/post/'+parent.temp_post,                                                                                                               
                 },
                 function(response) {
                     if (response && !response.error_message) {   

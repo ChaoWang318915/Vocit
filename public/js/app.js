@@ -3436,12 +3436,12 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
   methods: {
     openShareDialog: function openShareDialog() {
       this.$modal.hide('progress-img-modal');
-      var parent = this;
-      console.log(parent.temp_post);
+      var parent = this; // console.log(parent.temp_post);   
+
       FB.ui({
         method: 'share',
         // href: 'localhost:8000/post/'+parent.temp_post,               
-        href: 'https://vocit.io/post/' + 391
+        href: 'https://vocit.io/post/' + parent.temp_post
       }, function (response) {
         if (response && !response.error_message) {
           setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
