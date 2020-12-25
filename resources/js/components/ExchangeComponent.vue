@@ -396,7 +396,8 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    href: 'https://vocit.io/post/'+parent.temp_post,                                                                                                               
+                    // href: 'localhost:8000/post/'+parent.temp_post,               
+                    href: 'https://vocit.io/post/'+391,                                                                                                               
                 },
                 function(response) {
                     if (response && !response.error_message) {   

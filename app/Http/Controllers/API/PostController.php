@@ -227,7 +227,7 @@ class PostController extends BaseController
 
         $parentPost = $request->get('parent_id');
         $data['user_id'] = auth()->id();
-        $data['parent_post'] = 1;        
+        $data['parent_post'] = $parentPost;        
         $data['content'] = $request->get('content');
         if ($hasImages) {
             $data['is_image'] = 1;
@@ -236,7 +236,7 @@ class PostController extends BaseController
         }
 
         $data['is_draft'] = 0;
-        $data['is_request'] = 0;
+        $data['is_request'] = 1;
         $data['is_auto'] =  1;
         $data['business_id'] = auth()->user()->active_business->id;
         $data['short_description'] = "";        
