@@ -397,7 +397,7 @@ export default {
                 {
                     method: 'share',
                     // href: 'localhost:8000/post/'+parent.temp_post,               
-                    href: 'https://vocit.io/post/'+parent.temp_post,                                                                                                               
+                    href: 'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
                 },
                 function(response) {
                     if (response && !response.error_message) {   
