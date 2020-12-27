@@ -6,7 +6,7 @@
     <meta property="og:type" content="image/jpeg">
     <meta property="og:image:width" content="1000"/>
     <meta property="og:image:height" content="800"/>
-    <meta property="og:url" content="{{$shareurl}}" />
+    <meta property="og:url" content="{{$shareurl}}" /> 
     <meta property="og:image" content="{{$post->lg_url ? $post->lg_url : $post->attachments[0]->url}}" />
 @endsection
 @section('content')

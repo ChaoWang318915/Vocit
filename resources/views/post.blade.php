@@ -2,7 +2,7 @@
 @section('seo')
     @php $shareurl = $post->is_request ? (url('post').'/'. $post->id) : (url('exchange') .'/'. $post->id) @endphp
     @php $shareurl = $post->facebook_url ? $post->facebook_url : $shareurl @endphp
-    @php $baseURL = (url('exchange') .'/') @endphp
+    @php $baseURL = (url('exchange') .'/') @endphp 
     <meta property="og:title" content="{!! $post->is_request ? $post->short_description : $post->parent_short_description !!} from {{$post->business->name}}" />
     <meta property="og:description" content="{{$post->content ? $post->content:'.'}}" />
     <meta property="og:type" content="image/jpeg">
