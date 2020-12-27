@@ -330,7 +330,7 @@ class PostController extends BaseController
         //             ->toMediaCollection('Posts');
         //     }
         // }
-        // $post->facebook_url = '';
+        $post->facebook_url = '';
         $post->save();
         
         $this->createCoupon($businessId, $originPost, $postId);
