@@ -96,7 +96,7 @@
                     <div class="sixteen wide tablet twelve wide computer column text-right res-text-left">
                         <div class="ui white buttons shadow exchanges-filter">
                             <button class="ui active button" @click="getExchanges('active')" data-value="active">Active</button>
-                            <button class="ui button" @click="getExchanges('redeemed')" data-value="redeemed">Accept Coupon</button>
+                            <button class="ui button" @click="getExchanges('redeemed')" data-value="redeemed">Accepted</button>
                         </div>
                         <div class="ui icon white button open-camera shadow ml-2 mr-2">
                             <i class="qrcode icon"></i>

@@ -297,22 +297,23 @@
                 </div>
             </div>
         </div>
-        <modal name="progress-img-modal" height="auto" :clickToClose="false" :scrollable="true">
+        <modal name="progress-img-modal" width="400" height="auto" :clickToClose="false" :scrollable="true">
             <div class="modal-content">     
                <h4 class="modal-header">Post to Facebook and Vocit to receive reward?</h4>  
                 <div class="modal-body">
                     <div class="row" style="text-align:center">
-                        <div class="col-md-12">
-                            <img :src="selected_img_url">
+                        <div class="col-sm-12">
+                            <img :src="selected_img_url">                            
                         </div>
                     </div>
-                </div>     
-                <div class="modal-footer">                                        
-                    <div class="ui approve green button" @click="openShareDialog">Yes</div>                     
-                    <div class="ui reject red button" @click="hideImageModal">No</div>
-                </div>           
+                </div>                     
+                <div class="modal-body">                                        
+                    <div class="ui approve green button btn_left" @click="openShareDialog">Yes</div>                     
+                    <div class="ui reject red button btn_right" @click="hideImageModal">No</div>
+                </div>                 
             </div>
         </modal>
+         
     </div>
 </template>
 
@@ -413,10 +414,7 @@ export default {
                                 formData.append("postId", parent.temp_post);
                                 formData.append("origin_post", parent.post.id);
                                 formData.append("parent_id", parent.post.id);
-                                formData.append("business_id", parent.post.business_id);  
-                                console.log(parent.temp_post)
-                                console.log(parent.post.id)
-                                console.log(parent.post.business_id)  
+                                formData.append("business_id", parent.post.business_id);                                  
                                 NProgress.start();                           
                                 await axios
                                     .post("/api/completeExchange", formData)
@@ -532,7 +530,7 @@ export default {
                     //add await function 
                     if(response.status){
                         this.selected_img_url = response.data.fb_image                     
-                        this.temp_post = response.data.post.id
+                        this.temp_post = response.data.post.id                      
                         this.$modal.show('progress-img-modal')                                           
                     }                   
                 }else {
@@ -547,7 +545,7 @@ export default {
         },
         hideImageModal(){
             var _this = this 
-            _this.$modal.hide('progress-img-modal')      
+            _this.$modal.hide('progress-img-modal')                
             axios.delete('/api/posts/' +  _this.temp_post).then(response => {
                 
             }).catch(error => {
@@ -624,5 +622,14 @@ img.avatar{
      font-size: 15px;
      font-weight: bold !important;
      color: #0f0f10 !important;
+ }
+ .center_txt{
+     text-align: center;
+ }
+ .btn_left{
+     float: left;
+ }
+ .btn_right{
+     float: right;
  }
 </style>

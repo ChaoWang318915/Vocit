@@ -3375,6 +3375,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -3462,22 +3463,19 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                     formData.append("origin_post", parent.post.id);
                     formData.append("parent_id", parent.post.id);
                     formData.append("business_id", parent.post.business_id);
-                    console.log(parent.temp_post);
-                    console.log(parent.post.id);
-                    console.log(parent.post.business_id);
                     nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.start();
-                    _context.next = 13;
+                    _context.next = 10;
                     return axios.post("/api/completeExchange", formData).then(function (response) {
                       nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
                       parent.exchanges = response.data.data.exchanges;
                       vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
                     })["catch"](function (error) {});
 
-                  case 13:
+                  case 10:
                     jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
                     parent.images = "";
 
-                  case 15:
+                  case 12:
                   case "end":
                     return _context.stop();
                 }
@@ -12347,7 +12345,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.centered[data-v-2a0a163f] {\r\n    position: absolute;\r\n    top: 80%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\n}\nimg.avatar[data-v-2a0a163f]{\r\n    width: 4em !important;\r\n    height: 4em !important;\r\n    border-radius: 500rem !important;\n}\n.logo_title[data-v-2a0a163f]{\r\n     font-size: 15px;\r\n     font-weight: bold !important;\r\n     color: #0f0f10 !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.centered[data-v-2a0a163f] {\r\n    position: absolute;\r\n    top: 80%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\n}\nimg.avatar[data-v-2a0a163f]{\r\n    width: 4em !important;\r\n    height: 4em !important;\r\n    border-radius: 500rem !important;\n}\n.logo_title[data-v-2a0a163f]{\r\n     font-size: 15px;\r\n     font-weight: bold !important;\r\n     color: #0f0f10 !important;\n}\n.center_txt[data-v-2a0a163f]{\r\n     text-align: center;\n}\n.btn_left[data-v-2a0a163f]{\r\n     float: left;\n}\n.btn_right[data-v-2a0a163f]{\r\n     float: right;\n}\r\n", ""]);
 
 // exports
 
@@ -47331,7 +47329,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Accept Coupon")]
+                        [_vm._v("Accepted")]
                       )
                     ]
                   ),
@@ -48524,6 +48522,7 @@ var render = function() {
         {
           attrs: {
             name: "progress-img-modal",
+            width: "400",
             height: "auto",
             clickToClose: false,
             scrollable: true
@@ -48540,18 +48539,18 @@ var render = function() {
                 "div",
                 { staticClass: "row", staticStyle: { "text-align": "center" } },
                 [
-                  _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "col-sm-12" }, [
                     _c("img", { attrs: { src: _vm.selected_img_url } })
                   ])
                 ]
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
+            _c("div", { staticClass: "modal-body" }, [
               _c(
                 "div",
                 {
-                  staticClass: "ui approve green button",
+                  staticClass: "ui approve green button btn_left",
                   on: { click: _vm.openShareDialog }
                 },
                 [_vm._v("Yes")]
@@ -48560,7 +48559,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "ui reject red button",
+                  staticClass: "ui reject red button btn_right",
                   on: { click: _vm.hideImageModal }
                 },
                 [_vm._v("No")]

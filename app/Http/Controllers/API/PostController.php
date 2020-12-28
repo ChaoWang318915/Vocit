@@ -335,7 +335,7 @@ class PostController extends BaseController
         $post->facebook_url = '';
         $post->save();
         
-        $this->createCoupon($businessId, $originPost, $postId);
+        $this->createCoupon($businessId, $postId, $postId);
         $this->createIntegration($postId, $originPost);
 
         $post = Post::find($parentPost);

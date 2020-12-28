@@ -22,7 +22,7 @@
                         <a href="{{url('/wallet')}}" class="item">My Rewards</a>
                         @if($user->active_business)
                             <a href="{{url($user->active_business->subdomain .'/profile')}}" class="item">{{ucwords($user->active_business->name)}} Account</a>
-                            <a href="{{url($user->active_business->subdomain .'/posts')}}" class="item">Posts and Coupons</a>
+                            <a href="{{url($user->active_business->subdomain .'/posts')}}" class="item">UGC Requests and Exchanges</a>
                         @else
                             <a href="{{url('/business/join')}}" class="item">Create Business Account</a>
                         @endif
@@ -71,7 +71,7 @@
                             <a href="{{url('/wallet')}}" class="item">My Rewards</a>
                             @if($user->active_business)
                                 <a href="{{url($user->active_business->subdomain .'/profile')}}" class="item">{{ucwords($user->active_business->name)}} Account</a>
-                                <a href="{{url($user->active_business->subdomain .'/posts')}}" class="item">Posts and Coupons</a>
+                                <a href="{{url($user->active_business->subdomain .'/posts')}}" class="item">UGC Requests and Exchanges</a>
                             @else
                                 <a href="{{url('/business/join')}}" class="item">Create Business Account</a>
                             @endif
