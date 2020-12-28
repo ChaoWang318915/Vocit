@@ -413,10 +413,15 @@ export default {
                                 formData.append("postId", parent.temp_post);
                                 formData.append("origin_post", parent.post.id);
                                 formData.append("parent_id", parent.post.id);
-                                formData.append("business_id", parent.post.business_id);                               
+                                formData.append("business_id", parent.post.business_id);  
+                                console.log(parent.temp_post)
+                                console.log(parent.post.id)
+                                console.log(parent.post.business_id)  
+                                NProgress.start();                           
                                 await axios
                                     .post("/api/completeExchange", formData)
-                                    .then(response => {                         
+                                    .then(response => {       
+                                        NProgress.done();                  
                                         parent.exchanges = response.data.data.exchanges;
                                         Vue.$toast.success(response.data.message);
                                     })

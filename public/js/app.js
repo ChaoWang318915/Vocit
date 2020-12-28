@@ -3462,17 +3462,22 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                     formData.append("origin_post", parent.post.id);
                     formData.append("parent_id", parent.post.id);
                     formData.append("business_id", parent.post.business_id);
-                    _context.next = 9;
+                    console.log(parent.temp_post);
+                    console.log(parent.post.id);
+                    console.log(parent.post.business_id);
+                    nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.start();
+                    _context.next = 13;
                     return axios.post("/api/completeExchange", formData).then(function (response) {
+                      nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
                       parent.exchanges = response.data.data.exchanges;
                       vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
                     })["catch"](function (error) {});
 
-                  case 9:
+                  case 13:
                     jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
                     parent.images = "";
 
-                  case 11:
+                  case 15:
                   case "end":
                     return _context.stop();
                 }
