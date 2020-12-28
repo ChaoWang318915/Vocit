@@ -37,12 +37,13 @@ class PostController extends BaseController
 
     function getPosts(Request $request)
     {
+        
         DB::table('posts')->whereNull('business_id')->delete();
         $request = collect($request->all());
         if ($request->get('is_business')) {
             $request->put('is_business', true);
         }
-
+         
         $posts = $this->service->getRequests($request);
 
         return $this->getResponse($posts, 'Posts available');
@@ -61,6 +62,7 @@ class PostController extends BaseController
         if (!$post) {
             throw new NotFoundHttpException($this->getMessage('not_found', 'Post'));
         }        
+         
         return $this->getResponse($post);
     }
 
