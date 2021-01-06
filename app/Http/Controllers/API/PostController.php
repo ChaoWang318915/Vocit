@@ -259,40 +259,40 @@ class PostController extends BaseController
             /**** 
                 Start to Make New image with business title and logo
             *****/
-            // //$fileName = $images[0]->getClientOriginalName();
-            // $s3file = IntImage::make($post->attachments[0]->lg_url);                      
-            // //step 1 - getting top bg 
-            // $top_bg = IntImage::make('storage/top-bg.jpg');   
-            // $top_mask = IntImage::make('storage/mask.png');    
-            // //step 2 - get the width of the parent post image and resize the top image
-            // $width = $s3file->width();            
-            // $top_bg->resize($width,78);
-            // //step 3 - insert logo ,business name
-            // $logo_image = IntImage::make($parent_post->business->logo)->resize(75,75)->mask($top_mask);
-            // $business_name = $parent_post->business->name;
-            // $top_bg->insert($logo_image,'left',30,3);        
-            // $fonts = ['anydore', 'gladifilthefte', 'momentus', 'roboto-regular'];
-            // $top_bg->text($business_name, 110, 45, function ($font) use ($fonts) {     
-            //     $index = rand(0, 3);
-            //     $font->file(public_path("fonts/{$fonts[0]}.ttf"));
-            //     $font->size(20);
-            // });           
-            // $merge_image = IntImage::canvas($width,$s3file->height()+78);
-            // $merge_image->insert($top_bg,'top',0, 0);
-            // $merge_image->insert($s3file,'top',0,78);
-            // $merge_image->save('storage/facebook/'.$fileName)->encode('data-url');
+            //$fileName = $images[0]->getClientOriginalName();
+            $s3file = IntImage::make($post->attachments[0]->lg_url);                      
+            //step 1 - getting top bg 
+            $top_bg = IntImage::make('storage/top-bg.jpg');   
+            $top_mask = IntImage::make('storage/mask.png');    
+            //step 2 - get the width of the parent post image and resize the top image
+            $width = $s3file->width();            
+            $top_bg->resize($width,150);
+            //step 3 - insert logo ,business name
+            $logo_image = IntImage::make($parent_post->business->logo)->resize(150,150)->mask($top_mask);
+            $business_name = $parent_post->business->name;
+            $top_bg->insert($logo_image,'left',60,3);        
+            $fonts = ['anydore', 'gladifilthefte', 'momentus', 'roboto-regular'];
+            $top_bg->text($business_name, 250, 90, function ($font) use ($fonts) {     
+                $index = rand(0, 3);
+                $font->file(public_path("fonts/{$fonts[0]}.ttf"));
+                $font->size(30);
+            });           
+            $merge_image = IntImage::canvas($width,$s3file->height()+150);
+            $merge_image->insert($top_bg,'top',0, 0);
+            $merge_image->insert($s3file,'top',0,150);
+            $merge_image->save('storage/facebook/'.$fileName);//->encode('data-url');
             // End of new image maker
 
             /**** 
                 Save new made image on S3 storage
             *****/
-            // $contents = Storage::disk('public')->get('facebook/'.$fileName);            
-            // $path = 'facebook/' . time() . '/' . $fileName;
-            // Storage::disk('s3')->put($path, $contents);
-            // $url = Storage::disk('s3')->url($path);
-            // End of saving
+            $contents = Storage::disk('public')->get('facebook/'.$fileName);            
+            $path = 'facebook/' . time() . '/' . $fileName;
+            Storage::disk('s3')->put($path, $contents);
+            $url = Storage::disk('s3')->url($path);
+            // // End of saving
            
-            $post->facebook_url = $post->lg_url;
+            $post->facebook_url = $url;
             $post->save();
 
         }else {

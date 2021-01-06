@@ -302,9 +302,11 @@
                <h4 class="modal-header">Post to Facebook and Vocit to receive reward?</h4>  
                 <div class="modal-body">
                     <div class="row" style="text-align:center">
+                   
                         <div class="col-sm-12">
-                            <img :src="selected_img_url">                            
+                            <img style="width:100%" :src="selected_img_url">                            
                         </div>
+                       
                     </div>
                 </div>                     
                 <div class="modal-body">                                        
@@ -531,7 +533,8 @@ export default {
                     if(response.status){
                         this.selected_img_url = response.data.fb_image                     
                         this.temp_post = response.data.post.id                      
-                        this.$modal.show('progress-img-modal')                                           
+                        this.$modal.show('progress-img-modal')
+                                                                  
                     }                   
                 }else {
                     this.exchanges = response.data.data.exchanges;

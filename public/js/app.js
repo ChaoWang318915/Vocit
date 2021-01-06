@@ -3376,6 +3376,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -48540,7 +48542,10 @@ var render = function() {
                 { staticClass: "row", staticStyle: { "text-align": "center" } },
                 [
                   _c("div", { staticClass: "col-sm-12" }, [
-                    _c("img", { attrs: { src: _vm.selected_img_url } })
+                    _c("img", {
+                      staticStyle: { width: "100%" },
+                      attrs: { src: _vm.selected_img_url }
+                    })
                   ])
                 ]
               )
