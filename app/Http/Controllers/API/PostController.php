@@ -298,6 +298,7 @@ class PostController extends BaseController
 
         }else {
             $post->business_id = $request->get('business_id');
+            $post->facebook_url = $post->lg_url;
             $post->save();
             $this->createIntegration($post->id, $originPost);
             $post = Post::find($parentPost);
@@ -333,7 +334,7 @@ class PostController extends BaseController
         //             ->toMediaCollection('Posts');
         //     }
         // }
-        $post->facebook_url = '';
+        // $post->facebook_url = '';
         $post->save();
         
         $this->createCoupon($businessId, $postId, $postId);

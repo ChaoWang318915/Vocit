@@ -7,7 +7,7 @@
     <!-- <meta property="og:image:width" content="500"/>
     <meta property="og:image:height" content="300"/> -->
     <meta property="og:url" content="{{$shareurl}}" /> 
-    <meta property="og:image" content="{{$post->facebook_url ? $post->facebook_url : $post->lg_url}}" />
+    <meta property="og:image" content="{{$post->facebook_url}}" />
 @endsection
 @section('content')
     <div class="ui container post-details" id="stickyContainer">
