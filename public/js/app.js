@@ -3443,7 +3443,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
 
       FB.ui({
         method: 'share',
-        href: 'https://vocit.io/facebookpost' // href: this.selected_img_url //'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
+        href: "https://s3.us-east-2.amazonaws.com/cdn.vocit/facebook/1610097280/conference-room-768441_1920.jpg" // href: 'https://vocit.io/facebookpost',               
+        // href: this.selected_img_url //'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
         // href: 'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
 
       }, function (response) {
