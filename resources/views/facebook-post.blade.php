@@ -1,4 +1,4 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app') -->
 @section('seo')
     <meta name="viewport" content="width=device-width, minimum-scale=0.1">
     <meta property="og:title" />
