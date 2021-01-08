@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('seo')
     <meta name="viewport" content="width=device-width, minimum-scale=0.1">
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
+    <meta property="og:title" />
+    <meta property="og:description" />
     <meta property="og:type" content="image/jpeg">
     <!-- <meta property="og:image:width" content="800"/> -->
     <!-- <meta property="og:image:height" content="600"/> -->
