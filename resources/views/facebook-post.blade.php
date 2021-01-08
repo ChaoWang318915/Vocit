@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('seo')
-<meta property="og:title" content="Test Title" />
-    <meta property="og:description" content="Test Description" />
+<!-- <meta property="og:title" content="Test Title" /> -->
+    <!-- <meta property="og:description" content="Test Description" /> -->
     <meta property="og:type" content="image/jpeg">
     <meta property="og:image:width" content="800"/>
     <meta property="og:image:height" content="600"/>
