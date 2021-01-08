@@ -70,6 +70,10 @@ class FrontController extends Controller
         return view('view-exchange', $data);
     }
 
+    function facebookPost() {
+        return view('facebook-post');
+    }
+
 
     function portfolio(Request $request)
     {

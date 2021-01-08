@@ -399,8 +399,9 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    // href: 'localhost:8000/post/'+parent.temp_post,               
-                    href: 'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
+                    href: 'https://vocit.io/facebookpost',               
+                    // href: this.selected_img_url //'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
+                    // href: 'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
                 },
                 function(response) {
                     if (response && !response.error_message) {   
@@ -532,7 +533,10 @@ export default {
                     //add await function 
                     if(response.status){
                         this.selected_img_url = response.data.fb_image                     
-                        this.temp_post = response.data.post.id                      
+                        this.temp_post = response.data.post.id
+                        localStorage.setItem("fbUrl", this.selected_img_url);
+                        localStorage.setItem("businessName", this.post.business.name);
+                        localStorage.setItem("serviceName", this.post.short_description);                      
                         this.$modal.show('progress-img-modal')
                                                                   
                     }                   

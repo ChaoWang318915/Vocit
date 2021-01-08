@@ -42,6 +42,7 @@ Vue.component('settings-component', require('./components/SettingsComponent').de
 Vue.component('payment-component', require('./components/PaymentComponent').default);
 Vue.component('subscription-component', require('./components/SubscriptionComponent').default);
 Vue.component('integration-component', require('./components/IntegrationComponent').default);
+Vue.component('facebook-post-component', require("./components/FacebookPostComponent.vue").default);
 
 //Admin
 
