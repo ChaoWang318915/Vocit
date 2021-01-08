@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('seo')
-    @php $shareurl = (url('exchange') .'/'. $post->id) @endphp
     <meta property="og:title" content="I got free connection" />
     <meta property="og:description" content="You can also get yours" />
     <!-- <meta property="og:type" content="image/jpeg"> -->
