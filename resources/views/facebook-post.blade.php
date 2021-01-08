@@ -5,8 +5,8 @@
     <!-- <meta property="og:type" content="image/jpeg"> -->
     <!-- <meta property="og:image:width" content="500"/>
     <meta property="og:image:height" content="300"/> -->
-    <meta property="og:url" content="https://vocit.io/facebookpost" /> 
-    <meta property="og:image" content="https://vocit.io/facebookpost" />
+    <meta property="og:url" content="https://vocit.io/post/251" /> 
+    <meta property="og:image" content="https://vocit.io/post/251" />
 @endsection
 @section('content')
     <facebook-post-component></facebook-post-component>

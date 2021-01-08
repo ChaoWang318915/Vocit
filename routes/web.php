@@ -170,7 +170,7 @@ Route::group([], function(){
     Route::get('/facebookpost', [
         FrontController::class,
         'facebookPost'
-    ]);
+    ])->name('viewPost');
 
 
 //Route::get('impersonate/account', function(\Illuminate\Http\Request $request){
