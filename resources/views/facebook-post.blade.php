@@ -1,6 +1,5 @@
 @extends('layouts.facebook')
 @section('seo')
-    <meta property="og:type" content="website">
     <meta property="og:site_name" content="Vocit" />
     <meta property="og:title" content="FB test title" />
     <meta property="og:description" content="FB test description" />            
