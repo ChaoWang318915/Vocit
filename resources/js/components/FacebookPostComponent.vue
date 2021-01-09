@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <!-- <div> -->
         <img :src="fbUrl" />
-        <br />
+        <!-- <br />
         <span> {{ "I received a '" + serviceName + "' from '" + businessName + "'"}} </span>
-    </div>
+    </div> -->
 </template>
 
 <script>
