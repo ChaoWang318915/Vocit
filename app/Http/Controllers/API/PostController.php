@@ -262,6 +262,8 @@ class PostController extends BaseController
             *****/
             //$fileName = $images[0]->getClientOriginalName();
             $s3file = IntImage::make($post->attachments[0]->lg_url);                      
+            $multi = $s3file->width() / 1200 > $s3file->height() / 480 ? $s3file->width() / 1200 : $s3file->height() / 480;
+            $s3file->resize($s3file->width() / $multi, $s3file->height() / $multi);
             //step 1 - getting top bg 
             $top_bg = IntImage::make('storage/top-bg.jpg');   
             $top_mask = IntImage::make('storage/mask.png');    
@@ -278,7 +280,8 @@ class PostController extends BaseController
                 $font->file(public_path("fonts/{$fonts[0]}.ttf"));
                 $font->size(30);
             });           
-            $merge_image = IntImage::canvas($width,$s3file->height()+150);
+            // $merge_image = IntImage::canvas($width,$s3file->height()+150);
+            $merge_image = IntImage::canvas(1200, 630);
             $merge_image->insert($top_bg,'top',0, 0);
             $merge_image->insert($s3file,'top',0,150);
             $merge_image->save('storage/facebook/'.$fileName);//->encode('data-url');
