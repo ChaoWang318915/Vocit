@@ -3442,8 +3442,9 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
       var parent = this;
       FB.ui({
         method: 'share',
-        href: 'https://vocit.io/facebookpost' // href: 'http://localhost:8000/facebookpost',
-        // href: 'https://s3.us-east-2.amazonaws.com/cdn.vocit/facebook/1610097280/conference-room-768441_1920.jpg'
+        // href: "https://s3.us-east-2.amazonaws.com/cdn.vocit/facebook/1610097280/conference-room-768441_1920.jpg"
+        href: 'https://vocit.io/facebookpost/' + this.post.business.name + '/' + this.post.short_description // href: this.selected_img_url //'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
+        // href: 'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
 
       }, function (response) {
         if (response && !response.error_message) {
@@ -3584,8 +3585,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                     _this2.selected_img_url = response.data.fb_image;
                     _this2.temp_post = response.data.post.id;
                     localStorage.setItem("fbUrl", _this2.selected_img_url);
-                    localStorage.setItem("businessName", _this2.post.business.name);
-                    localStorage.setItem("serviceName", _this2.post.short_description);
 
                     _this2.$modal.show('progress-img-modal');
                   }
@@ -3671,21 +3670,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    businessName: {
+      type: String,
+      "default": ""
+    },
+    serviceName: {
+      type: String,
+      "default": ""
+    }
+  },
   data: function data() {
     return {
-      fbUrl: null,
-      serviceName: '',
-      businessName: false
+      fbUrl: null
     };
   },
   mounted: function mounted() {
     this.fbUrl = localStorage.getItem('fbUrl');
-    this.serviceName = localStorage.getItem('serviceName');
-    this.businessName = localStorage.getItem('businessName');
-    var desc = "I received a " + this.serviceName + " from " + this.businessName;
-    $("head").append('<meta property="og:title" content="' + this.businessName + '">');
-    $("head").append('<meta property="og:description" content="' + desc + '">');
-    $("head").append('<meta property="og:image" content="' + this.fbUrl + '">');
   }
 });
 
