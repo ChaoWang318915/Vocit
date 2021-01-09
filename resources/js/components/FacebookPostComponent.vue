@@ -8,23 +8,21 @@
 
 <script>
 export default {
-    props: {
-        businessName: {
-            type: String,
-            default: ""
-        },
-        serviceName: {
-            type: String,
-            default: ""
-        }
-    },
     data: function() {
             return {
-                fbUrl: null
+                fbUrl: null,
+                serviceName: '',
+                businessName: false
             }
         },
     mounted() {
         this.fbUrl = localStorage.getItem('fbUrl');
+        this.serviceName = localStorage.getItem('serviceName');
+        this.businessName = localStorage.getItem('businessName');
+        var desc = "I received a " + this.serviceName + " from " + this.businessName;
+        $("head").append('<meta property="og:title" content="' + this.businessName + '">');
+        $("head").append('<meta property="og:description" content="' + desc + '">');
+        $("head").append('<meta property="og:image" content="' + this.fbUrl + '">');
     }
 }
 </script>
