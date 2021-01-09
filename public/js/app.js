@@ -3685,6 +3685,10 @@ __webpack_require__.r(__webpack_exports__);
     var desc = "I received a " + this.serviceName + " from " + this.businessName;
     $("head").append('<meta property="og:title" content="' + this.businessName + '">');
     $("head").append('<meta property="og:description" content="' + desc + '">');
+    $("head").append("<meta property='og:type' content='image/jpeg'>");
+    $("head").append("<meta property='og:image:width' content='1250'/>");
+    $("head").append("<meta property='og:image:height' content='1250'/>");
+    $("head").append("<meta property='og:url' content='https://vocit.io/facebookpost' />");
     $("head").append('<meta property="og:image" content="' + this.fbUrl + '">');
   }
 });
