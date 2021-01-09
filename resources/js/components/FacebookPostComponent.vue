@@ -8,17 +8,23 @@
 
 <script>
 export default {
+    props: {
+        businessName: {
+            type: String,
+            default: ""
+        },
+        serviceName: {
+            type: String,
+            default: ""
+        }
+    },
     data: function() {
             return {
-                fbUrl: null,
-                serviceName: '',
-                businessName: false
+                fbUrl: null
             }
         },
     mounted() {
         this.fbUrl = localStorage.getItem('fbUrl');
-        this.serviceName = localStorage.getItem('serviceName');
-        this.businessName = localStorage.getItem('businessName');
     }
 }
 </script>

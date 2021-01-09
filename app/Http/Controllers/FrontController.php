@@ -70,8 +70,10 @@ class FrontController extends Controller
         return view('view-exchange', $data);
     }
 
-    function facebookPost() {
-        return view('facebook-post');
+    function facebookPost($businessName, $serviceName) {
+        $data["businessName"] = $businessName;
+        $data["serviceName"] = $serviceName;
+        return view('facebook-post', $data);
     }
 
 
