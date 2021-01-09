@@ -167,7 +167,7 @@ Route::group([], function(){
         'getExchange'
     ])->name('viewPost');
 
-    Route::get('/facebookpost/{businessName}/{serviceName}', [
+    Route::get('/facebookpost', [
         FrontController::class,
         'facebookPost'
     ])->name('viewPost');

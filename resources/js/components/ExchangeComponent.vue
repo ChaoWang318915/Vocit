@@ -398,10 +398,9 @@ export default {
             FB.ui(
                 {
                     method: 'share',
-                    // href: "https://s3.us-east-2.amazonaws.com/cdn.vocit/facebook/1610097280/conference-room-768441_1920.jpg"
-                    href: 'https://vocit.io/facebookpost/'+this.post.business.name+'/'+this.post.short_description,               
-                    // href: this.selected_img_url //'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
-                    // href: 'https://vocit.io/exchange/'+parent.temp_post,                                                                                                               
+                    href: 'https://vocit.io/facebookpost',               
+                    // href: 'http://localhost:8000/facebookpost',
+                    // href: 'https://s3.us-east-2.amazonaws.com/cdn.vocit/facebook/1610097280/conference-room-768441_1920.jpg'
                 },
                 function(response) {
                     if (response && !response.error_message) {   
@@ -535,6 +534,8 @@ export default {
                         this.selected_img_url = response.data.fb_image                     
                         this.temp_post = response.data.post.id
                         localStorage.setItem("fbUrl", this.selected_img_url);                                            
+                        localStorage.setItem("businessName", this.post.business.name);
+                        localStorage.setItem("serviceName", this.post.short_description);
                         this.$modal.show('progress-img-modal')
                                                                   
                     }                   
