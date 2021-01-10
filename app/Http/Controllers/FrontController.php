@@ -77,6 +77,7 @@ class FrontController extends Controller
         $business = Business::findorFail($parent->business_id); 
         $data["businessName"] = $business->name;
         $data["serviceName"] = $parent->short_description;
+        $data["postId"] = $post_id;
         return view('facebook-post', $data);
     }
 

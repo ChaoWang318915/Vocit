@@ -5,7 +5,7 @@
     <meta property="og:type" content="website">
     <meta property="og:description" content="{{$desc}}" />    
     <meta property="og:image" content="{{$facebookUrl}}" />
-    <meta property="og:url" content="https://vocit.io/facebookpost" />    
+    <meta property="og:url" content="{{'https://vocit.io/facebookpost/'.$postId}}" />    
 @endsection
 @section('content')
     <div id="app">
