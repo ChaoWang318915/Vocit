@@ -240,7 +240,7 @@ class PostController extends BaseController
         $data['is_draft'] = 0;
         $data['is_request'] = 0;
         $data['is_auto'] =  1;
-        $data['business_id'] = $request->business_id;
+        // $data['business_id'] = $request->business_id;
         // $data['business_id'] = auth()->user()->active_business->id;
         // $data['short_description'] = $parent_post->parent_short_description;        
         $post = Post::create($data);
