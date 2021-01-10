@@ -167,11 +167,6 @@ Route::group([], function(){
         'getExchange'
     ])->name('viewPost');
 
-    Route::get('/facebookpost/{post_id}', [
-        FrontController::class,
-        'facebookPost'
-    ])->name('viewPost');
-
 
 //Route::get('impersonate/account', function(\Illuminate\Http\Request $request){
 //    $userId = $request->get('user');

@@ -66,21 +66,14 @@ class FrontController extends Controller
 
     function getExchange($exchangeId)
     {
-        $data['post'] = Post::findorFail($exchangeId);                  
-        return view('view-exchange', $data);
-    }
-
-    function facebookPost($post_id) {
-        $post = Post::findorFail($post_id); 
+        $post = Post::findorFail($exchangeId);  
+        $data['post'] = $post;   
         $parent = Post::findorFail($post->parent_post);
-        $data["facebookUrl"] = $post->facebook_url;
         $business = Business::findorFail($parent->business_id); 
         $data["businessName"] = $business->name;
         $data["serviceName"] = $parent->short_description;
-        $data["postId"] = $post_id;
-        return view('facebook-post', $data);
+        return view('view-exchange', $data);
     }
-
 
     function portfolio(Request $request)
     {
