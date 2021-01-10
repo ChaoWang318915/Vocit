@@ -532,9 +532,6 @@ export default {
                     if(response.status){
                         this.selected_img_url = response.data.fb_image                     
                         this.temp_post = response.data.post.id
-                        localStorage.setItem("fbUrl", this.selected_img_url);                                            
-                        localStorage.setItem("businessName", this.post.business.name);
-                        localStorage.setItem("serviceName", this.post.short_description);
                         this.$modal.show('progress-img-modal')
                                                                   
                     }                   

@@ -3582,9 +3582,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                   if (response.status) {
                     _this2.selected_img_url = response.data.fb_image;
                     _this2.temp_post = response.data.post.id;
-                    localStorage.setItem("fbUrl", _this2.selected_img_url);
-                    localStorage.setItem("businessName", _this2.post.business.name);
-                    localStorage.setItem("serviceName", _this2.post.short_description);
 
                     _this2.$modal.show('progress-img-modal');
                   }
