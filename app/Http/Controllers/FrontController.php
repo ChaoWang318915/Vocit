@@ -70,8 +70,14 @@ class FrontController extends Controller
         return view('view-exchange', $data);
     }
 
-    function facebookPost() {
-        return view('facebook-post');
+    function facebookPost($post_id) {
+        $post = Post::findorFail($post_id); 
+        $parent = Post::findorFail($post->parent_post);
+        $data["facebookUrl"] = $post->facebook_url;
+        $business = Business::findorFail($parent->business_id); 
+        $data["businessName"] = $business->name;
+        $data["serviceName"] = $parent->short_description;
+        return view('facebook-post', $data);
     }
 
 

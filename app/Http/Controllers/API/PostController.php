@@ -296,7 +296,7 @@ class PostController extends BaseController
             $url = Storage::disk('s3')->url($path);
             // // End of saving
            
-            // $post->facebook_url = $url;
+            $post->facebook_url = $url;
             $post->save();
 
         }else {
@@ -310,8 +310,8 @@ class PostController extends BaseController
         if ($hasImages) {
             return response()->json([
                 'post' => $post,
-                // 'fb_image' => $post->facebook_url,
-                'fb_image' => $url, //$post->facebook_url,
+                'fb_image' => $post->facebook_url,
+                // 'fb_image' => $url, //$post->facebook_url,
             ]);
         }else {
             return $this->getResponse($post, 'Successfully Posted');

@@ -395,12 +395,11 @@ export default {
         openShareDialog() {
             this.$modal.hide('progress-img-modal')   
             var parent = this;         
+            console.log('https://vocit.io/facebookpost/' + this.temp_post);
             FB.ui(
                 {
                     method: 'share',
-                    href: 'https://vocit.io/facebookpost',               
-                    // href: 'http://localhost:8000/facebookpost',
-                    // href: 'https://s3.us-east-2.amazonaws.com/cdn.vocit/facebook/1610097280/conference-room-768441_1920.jpg'
+                    href: 'https://vocit.io/facebookpost/' + this.temp_post,               
                 },
                 function(response) {
                     if (response && !response.error_message) {   
