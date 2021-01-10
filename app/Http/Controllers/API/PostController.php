@@ -281,7 +281,8 @@ class PostController extends BaseController
                 $font->size(25);
             });           
             // $merge_image = IntImage::canvas($width,$s3file->height()+150);
-            $merge_image = IntImage::canvas($width, $s3file->height() + 70);
+            $canvas_width = $s3file->width() > $s3file->height() ? 2 * ($s3file->height() + 70) : $width;
+            $merge_image = IntImage::canvas($canvas_width, $s3file->height() + 70);
             $merge_image->insert($top_bg,'top',0, 0);
             $merge_image->insert($s3file,'top',0,70);
             $merge_image->save('storage/facebook/'.$fileName);//->encode('data-url');
