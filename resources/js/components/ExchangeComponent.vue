@@ -393,7 +393,8 @@ export default {
     
     methods: {
         openShareDialog() {
-            this.$modal.hide('progress-img-modal')   
+            this.$modal.hide('progress-img-modal');
+            $(".vm--container").css("display", "none");
             var parent = this;         
             FB.ui(
                 {
@@ -512,6 +513,7 @@ export default {
                     : this.content
             );      
             NProgress.start();
+            $(".vm--container").css("display", "block");
             try {
                 const response = await axios.post("/api/exchange", formData);
                 this.content = "";
@@ -545,8 +547,8 @@ export default {
             }
         },
         hideImageModal(){
-            var _this = this 
-            _this.$modal.hide('progress-img-modal')                
+            var _this = this; 
+            _this.$modal.hide('progress-img-modal');                
             axios.delete('/api/posts/' +  _this.temp_post).then(response => {
                 
             }).catch(error => {

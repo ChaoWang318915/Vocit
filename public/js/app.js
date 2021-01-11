@@ -3439,6 +3439,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
   methods: {
     openShareDialog: function openShareDialog() {
       this.$modal.hide('progress-img-modal');
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()(".vm--container").css("display", "none");
       var parent = this;
       FB.ui({
         method: 'share',
@@ -3563,11 +3564,12 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                 formData.append("business_id", _this2.post.business_id);
                 formData.append("content", _this2.parentComment.length > 0 ? _this2.parentComment : _this2.content);
                 nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.start();
-                _context2.prev = 11;
-                _context2.next = 14;
+                jquery__WEBPACK_IMPORTED_MODULE_1___default()(".vm--container").css("display", "block");
+                _context2.prev = 12;
+                _context2.next = 15;
                 return axios.post("/api/exchange", formData);
 
-              case 14:
+              case 15:
                 response = _context2.sent;
                 _this2.content = "";
                 _this2.parentComment = "";
@@ -3589,22 +3591,22 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                   vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
                 }
 
-                _context2.next = 29;
+                _context2.next = 30;
                 break;
 
-              case 24:
-                _context2.prev = 24;
-                _context2.t0 = _context2["catch"](11);
+              case 25:
+                _context2.prev = 25;
+                _context2.t0 = _context2["catch"](12);
                 nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
                 _response = _context2.t0.response;
                 _this2.formError = _response.data.message;
 
-              case 29:
+              case 30:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[11, 24]]);
+        }, _callee2, null, [[12, 25]]);
       }))();
     },
     hideImageModal: function hideImageModal() {
