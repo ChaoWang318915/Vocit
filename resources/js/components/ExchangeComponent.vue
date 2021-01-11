@@ -297,7 +297,7 @@
                 </div>
             </div>
         </div>
-        <modal name="progress-img-modal" width="400" height="auto" :clickToClose="false" :scrollable="true">
+        <modal name="progress-img-modal" width="370" height="auto" :clickToClose="false" :scrollable="true">
             <div class="modal-content">     
                <h4 class="modal-header">Post to Facebook and Vocit to receive reward?</h4>  
                 <div class="modal-body">
@@ -607,7 +607,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .centered {
     position: absolute;
     top: 80%;
@@ -615,12 +615,12 @@ export default {
     transform: translate(-50%, -50%);
 }
 img.avatar{
-    width: 4em !important;
-    height: 4em !important;
+    width: 5em !important;
+    height: 5em !important;
     border-radius: 500rem !important;
  }
  .logo_title{
-     font-size: 15px;
+     font-size: 17px;
      font-weight: bold !important;
      color: #0f0f10 !important;
  }

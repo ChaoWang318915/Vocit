@@ -1,11 +1,11 @@
 <style scoped>
 img.avatar{
-    width: 4em !important;
-    height: 4em !important;
+    width: 5em !important;
+    height: 5em !important;
     border-radius: 500rem !important;
  }
  .logo_title{
-     font-size: 15px;
+     font-size: 17px;
  }
 </style>
 <template>
