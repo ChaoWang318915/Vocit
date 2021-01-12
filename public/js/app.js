@@ -3439,6 +3439,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
   methods: {
     openShareDialog: function openShareDialog() {
       this.$modal.hide('progress-img-modal');
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()("body").css("overflow", "auto");
       jquery__WEBPACK_IMPORTED_MODULE_1___default()(".vm--container").css("display", "none");
       var parent = this;
       FB.ui({
@@ -3571,6 +3572,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
 
               case 15:
                 response = _context2.sent;
+                jquery__WEBPACK_IMPORTED_MODULE_1___default()("body").css("overflow", "hidden");
                 _this2.content = "";
                 _this2.parentComment = "";
                 _this2.filesCount = "";
@@ -3591,22 +3593,22 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                   vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.success(response.data.message);
                 }
 
-                _context2.next = 30;
+                _context2.next = 31;
                 break;
 
-              case 25:
-                _context2.prev = 25;
+              case 26:
+                _context2.prev = 26;
                 _context2.t0 = _context2["catch"](12);
                 nprogress__WEBPACK_IMPORTED_MODULE_5___default.a.done();
                 _response = _context2.t0.response;
                 _this2.formError = _response.data.message;
 
-              case 30:
+              case 31:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[12, 25]]);
+        }, _callee2, null, [[12, 26]]);
       }))();
     },
     hideImageModal: function hideImageModal() {
@@ -3614,6 +3616,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
 
       _this.$modal.hide('progress-img-modal');
 
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()("body").css("overflow", "auto");
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()(".vm--container").css("display", "none");
       axios["delete"]('/api/posts/' + _this.temp_post).then(function (response) {})["catch"](function (error) {});
       jquery__WEBPACK_IMPORTED_MODULE_1___default()('input[type=file]').val(null);
       _this.images = "";
@@ -48525,9 +48529,10 @@ var render = function() {
           attrs: {
             name: "progress-img-modal",
             width: "370",
-            height: "auto",
-            clickToClose: false,
-            scrollable: true
+            height: "450",
+            maxWidth: "370",
+            maxHeight: "450",
+            clickToClose: false
           }
         },
         [
@@ -48543,7 +48548,7 @@ var render = function() {
                 [
                   _c("div", { staticClass: "col-sm-12" }, [
                     _c("img", {
-                      staticStyle: { width: "100%" },
+                      staticStyle: { height: "300px", width: "340px" },
                       attrs: { src: _vm.selected_img_url }
                     })
                   ])

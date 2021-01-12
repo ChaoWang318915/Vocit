@@ -297,14 +297,14 @@
                 </div>
             </div>
         </div>
-        <modal name="progress-img-modal" width="370" height="auto" :clickToClose="false" :scrollable="true">
+        <modal name="progress-img-modal" width="370" height="450" maxWidth="370" maxHeight="450" :clickToClose="false">
             <div class="modal-content">     
                <h4 class="modal-header">Post to Facebook and Vocit to receive reward?</h4>  
                 <div class="modal-body">
                     <div class="row" style="text-align:center">
                    
                         <div class="col-sm-12">
-                            <img style="width:100%" :src="selected_img_url">                            
+                            <img style="height:300px;width:340px;" :src="selected_img_url">                            
                         </div>
                        
                     </div>
@@ -394,6 +394,7 @@ export default {
     methods: {
         openShareDialog() {
             this.$modal.hide('progress-img-modal');
+            $("body").css("overflow", "auto");
             $(".vm--container").css("display", "none");
             var parent = this;         
             FB.ui(
@@ -513,9 +514,10 @@ export default {
                     : this.content
             );      
             NProgress.start();
-            $(".vm--container").css("display", "block");
+            $(".vm--container").css("display", "block");            
             try {
                 const response = await axios.post("/api/exchange", formData);
+                $("body").css("overflow", "hidden");
                 this.content = "";
                 this.parentComment = "";
                 this.filesCount = "";                    
@@ -548,7 +550,9 @@ export default {
         },
         hideImageModal(){
             var _this = this; 
-            _this.$modal.hide('progress-img-modal');                
+            _this.$modal.hide('progress-img-modal');  
+            $("body").css("overflow", "auto");
+            $(".vm--container").css("display", "none");              
             axios.delete('/api/posts/' +  _this.temp_post).then(response => {
                 
             }).catch(error => {
