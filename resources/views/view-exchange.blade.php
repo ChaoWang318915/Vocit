@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('seo')
     @php $shareurl = (url('exchange') .'/'. $post->id) @endphp
-    @php $desc = "I received a '" . $serviceName . "' from '" . $businessName . "'" @endphp 
+    @php $desc = "I received a " . $serviceName . " from " . $businessName @endphp 
     <meta property="og:title" content="{{$businessName}}" />
     <meta property="og:type" content="website">
     <meta property="og:description" content="{{$desc}}" />    
