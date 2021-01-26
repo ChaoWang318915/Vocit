@@ -330,16 +330,7 @@ class PostController extends BaseController
 
         $post = Post::find($postId);
         $post->business_id = $businessId;
-        // if ($hasImages) {
-        //     foreach ($images as $image) {
-        //         $post->addMedia($image)
-        //             ->sanitizingFileName(function ($fileName) {
-        //                 return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-        //             })
-        //             ->toMediaCollection('Posts');
-        //     }
-        // }
-        // $post->facebook_url = '';
+
         $post->save();
         
         $this->createCoupon($businessId, $postId, $postId);
