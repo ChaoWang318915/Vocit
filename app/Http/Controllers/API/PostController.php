@@ -324,16 +324,13 @@ class PostController extends BaseController
         $postId = $request->get('postId');
         $originPost = $request->get('origin_post');
         $parentPost = $request->get('parent_id');
-        $businessId = $request->get('business_id');
-        $hasImages = $request->hasFile('images');
-        $images = $request->file('images');                
+        $businessId = $request->get('business_id');            
 
         $post = Post::find($postId);
         $post->business_id = $businessId;
-
         $post->save();
         
-        $this->createCoupon($businessId, $postId, $postId);
+        $this->createCoupon($businessId, $originPost, $postId);
         $this->createIntegration($postId, $originPost);
 
         $post = Post::find($parentPost);
@@ -358,14 +355,14 @@ class PostController extends BaseController
     }
 
     protected function createCoupon($businessId, $originPost, $exchangeId)
-    {
+    {      
         $post = Post::find($originPost);
         $business = Business::find($businessId);
-        $existingCouponCount = Coupon::where('user_id', auth()->id())->where('post_id', $post->id)->count();
+        $existingCouponCount = Coupon::where('user_id', auth()->id())->where('post_id', $post->id)->count();                
 
         if ($existingCouponCount > 0) {
             return false;
-        }
+        }        
 
         $coupon = $post->coupon ? ($post->coupon . $this->getCouponCode(4)) : $this->getCouponCode(8);
         $data = [
@@ -379,6 +376,7 @@ class PostController extends BaseController
         $coupon = Coupon::create($data);
         $user = new User();
         $user->email = auth()->user()->email;
+
         $user->notify(new CouponNotification(auth()->user()->first_name, $business, $coupon, $post));
         $this->sendCouponNotificationToAdmin($businessId, $post->id, $coupon, $exchangeId);
     }

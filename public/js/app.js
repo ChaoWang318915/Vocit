@@ -5363,24 +5363,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['receivedCoupons'],
   data: function data() {
     return {
-      activeCoupons: '',
-      redeemedCoupons: ''
+      activeCoupons: [],
+      redeemedCoupons: []
     };
   },
   mounted: function mounted() {
     this.activeCoupons = this.receivedCoupons.filter(function (coupon) {
-      return !coupon.is_redeemed;
+      return coupon.is_redeemed == 0;
     });
     this.redeemedCoupons = this.receivedCoupons.filter(function (coupon) {
-      return coupon.is_redeemed;
+      return coupon.is_redeemed == 1;
     });
   },
   methods: {
@@ -48530,8 +48527,6 @@ var render = function() {
             name: "progress-img-modal",
             width: "370",
             height: "450",
-            maxWidth: "370",
-            maxHeight: "450",
             clickToClose: false
           }
         },
@@ -50803,18 +50798,20 @@ var render = function() {
                   },
                   [
                     _c("div", { staticClass: "content" }, [
-                      _c("div", { staticClass: "coupon-container" }, [
-                        _c("img", {
-                          staticClass: "business-logo",
-                          attrs: { src: coupon.business.logo }
-                        }),
-                        _vm._v(" "),
-                        _c("h1", [
-                          _vm._v(_vm._s(coupon.post.short_description))
-                        ]),
-                        _vm._v(" "),
-                        _c("img", { attrs: { src: coupon.qr_code } })
-                      ])
+                      coupon.post != null
+                        ? _c("div", { staticClass: "coupon-container" }, [
+                            _c("img", {
+                              staticClass: "business-logo",
+                              attrs: { src: coupon.business.logo }
+                            }),
+                            _vm._v(" "),
+                            _c("h1", [
+                              _vm._v(_vm._s(coupon.post.short_description))
+                            ]),
+                            _vm._v(" "),
+                            _c("img", { attrs: { src: coupon.qr_code } })
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c(
@@ -50876,18 +50873,22 @@ var render = function() {
                               [_vm._v("Redeemed")]
                             ),
                             _vm._v(" "),
-                            _c("div", { staticClass: "coupon-container" }, [
-                              _c("img", {
-                                staticClass: "business-logo",
-                                attrs: { src: coupon.business.logo }
-                              }),
-                              _vm._v(" "),
-                              _c("h1", [
-                                _vm._v(_vm._s(coupon.post.short_description))
-                              ]),
-                              _vm._v(" "),
-                              _c("img", { attrs: { src: coupon.qr_code } })
-                            ])
+                            coupon.post != null
+                              ? _c("div", { staticClass: "coupon-container" }, [
+                                  _c("img", {
+                                    staticClass: "business-logo",
+                                    attrs: { src: coupon.business.logo }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("h1", [
+                                    _vm._v(
+                                      _vm._s(coupon.post.short_description)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("img", { attrs: { src: coupon.qr_code } })
+                                ])
+                              : _vm._e()
                           ])
                         ]
                       )

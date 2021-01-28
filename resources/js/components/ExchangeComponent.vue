@@ -297,7 +297,7 @@
                 </div>
             </div>
         </div>
-        <modal name="progress-img-modal" width="370" height="450" maxWidth="370" maxHeight="450" :clickToClose="false">
+        <modal name="progress-img-modal" width=370 height=450 :clickToClose="false">
             <div class="modal-content">     
                <h4 class="modal-header">Post to Facebook and Vocit to receive reward?</h4>  
                 <div class="modal-body">

@@ -7,12 +7,10 @@
         <div class="ui column grid" v-if="activeCoupons.length > 0">
             <div class="column" >
                 <div class="ui stackable three cards">
-                <!--  <a v-bind:href="'post/' +coupon.post.id + '#' + coupon.exchange_id " class="ui card" v-for="coupon in activeCoupons" :key="coupon.id" > -->
                     <a  target="_blank" v-bind:href="'/coupons/' +coupon.id + '/pdf'" class="ui card" v-for="coupon in activeCoupons" :key="coupon.id" >
                         <div class="content">
-                            <div class="coupon-container">
+                            <div class="coupon-container" v-if="coupon.post != null">
                                 <img class="business-logo" v-bind:src="coupon.business.logo">
-                                <!--                            <h2>{{coupon.business.name}}</h2>-->
                                 <h1>{{coupon.post.short_description}}</h1>
                                 <img v-bind:src="coupon.qr_code">
                             </div>
@@ -33,9 +31,8 @@
                         <a v-bind:href="'post/' +coupon.post.id + '#' + coupon.exchange_id " class="ui card" v-for="coupon in redeemedCoupons" :key="coupon.id" >
                             <div class="content">
                                 <a class="ui orange right ribbon label">Redeemed</a>
-                                <div class="coupon-container">
+                                <div class="coupon-container" v-if="coupon.post != null">
                                     <img class="business-logo" v-bind:src="coupon.business.logo">
-                                    <!--                                <h2>{{coupon.business.name}}</h2>-->
                                     <h1>{{coupon.post.short_description}}</h1>
                                     <img v-bind:src="coupon.qr_code">
                                 </div>
@@ -57,16 +54,16 @@
         props: ['receivedCoupons'],
         data() {
             return  {
-                activeCoupons: '',
-                redeemedCoupons: ''
+                activeCoupons: [],
+                redeemedCoupons: []
             }
         },
         mounted() {
             this.activeCoupons = this.receivedCoupons.filter((coupon) => {
-                return !coupon.is_redeemed;
+                return coupon.is_redeemed == 0;
             });
             this.redeemedCoupons = this.receivedCoupons.filter((coupon) => {
-                return coupon.is_redeemed;
+                return coupon.is_redeemed == 1;
             });
         },
         methods: {
